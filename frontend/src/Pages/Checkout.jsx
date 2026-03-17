@@ -54,14 +54,14 @@ const Checkout = () => {
         if (processing) return;
 
         setProcessing(true);
-        // Here we integrate Stripe
+        // Here we integrate Razorpay
         const orderRes = await placeOrder(shippingData, total);
 
         if (orderRes?.checkout_url) {
             window.location.href = orderRes.checkout_url;
         } else if (orderRes?._id || orderRes?.id) {
-            // This happens if Stripe keys are missing in .env
-            alert("Order created in database, but Stripe payment failed. Please check if you have pasted your real STRIPE_SECRET_KEY in the .env file.");
+            // This happens if Razorpay keys are missing in .env
+            alert("Order created in database, but Razorpay payment failed. Please check if you have pasted your real RAZORPAY_KEY_ID in the .env file.");
             navigate('/');
         } else {
             console.error("Order Placement Result:", orderRes);
@@ -154,9 +154,9 @@ const Checkout = () => {
                                 </div>
                                 <button onClick={() => setStep(1)} className="edit-addr-btn">Edit Shipping Info</button>
 
-                                <div className="stripe-placeholder">
+                                <div className="razorpay-placeholder">
                                     <i className="bi bi-credit-card-2-front"></i>
-                                    <p>Secure payment via Stripe</p>
+                                    <p>Secure payment via Razorpay</p>
                                     <button
                                         onClick={handlePayment}
                                         className="pay-now-btn"
@@ -166,7 +166,7 @@ const Checkout = () => {
                                             cursor: (processing || total <= 0) ? 'not-allowed' : 'pointer'
                                         }}
                                     >
-                                        {processing ? 'Connecting to Stripe...' : (total <= 0 ? 'Add Items to Pay' : 'Pay Now with Stripe')}
+                                        {processing ? 'Connecting to Razorpay...' : (total <= 0 ? 'Add Items to Pay' : 'Pay Now with Razorpay')}
                                     </button>
                                 </div>
                             </div>

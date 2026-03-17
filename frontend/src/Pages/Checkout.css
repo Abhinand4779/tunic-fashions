@@ -202,7 +202,7 @@
     padding: 0;
 }
 
-.stripe-placeholder {
+.razorpay-placeholder {
     margin-top: 3rem;
     padding: 3rem;
     border: 2px dashed #eee;
@@ -210,10 +210,10 @@
     border-radius: 8px;
 }
 
-.stripe-placeholder i {
+.razorpay-placeholder i {
     font-size: 3rem;
-    color: #6772e5;
-    /* Stripe Purple */
+    color: #3395ff;
+    /* Razorpay Blue */
     margin-bottom: 1rem;
     display: block;
 }
