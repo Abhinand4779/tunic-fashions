@@ -158,59 +158,59 @@ export const SiteProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     const fetchAll = async () => {
-        // OPTIMIZATION: Check for local config immediately
+        // OPTIMIZATION: Check for local config immediately and show UI faster
+        let hasLocalData = false;
         const stored = localStorage.getItem('astra_site_config_v2');
         if (stored) {
             try {
                 const parsed = JSON.parse(stored);
                 setConfig(prev => mergeConfig(prev, parsed));
-                // if (parsed.products) setProducts(parsed.products); // Products are now fetched separately
-            } catch (err) { console.error("Error parsing local config", err); }
+                hasLocalData = true;
+            } catch (err) { }
         }
 
-        const lastProds = localStorage.getItem('astra_last_products');
-        const lastProdsLite = localStorage.getItem('astra_last_products_lite');
+        const lastProds = localStorage.getItem('astra_last_products') || localStorage.getItem('astra_last_products_lite');
         if (lastProds) {
             try {
                 setProducts(JSON.parse(lastProds));
-            } catch (err) { }
-        } else if (lastProdsLite) {
-            try {
-                setProducts(JSON.parse(lastProdsLite));
+                hasLocalData = true;
             } catch (err) { }
         }
 
+        // If we have local data, we can stop showing the spinner immediately
+        // while we fetch fresh data in the background
+        if (hasLocalData) {
+            setLoading(false);
+        }
 
         try {
-            // 1. Fetch Config
-            const configRes = await fetch(`${API_BASE_URL}/settings/`);
+            // Parallelize fetching for faster load
+            const [configRes, prodRes] = await Promise.all([
+                fetch(`${API_BASE_URL}/settings/`),
+                fetch(`${API_BASE_URL}/products/`)
+            ]);
+
             if (configRes.ok) {
                 const data = await configRes.json();
                 if (data && data.config) {
                     setConfig(prev => mergeConfig(prev, data.config));
                     localStorage.setItem('astra_site_config_v2', JSON.stringify(data.config));
                 }
-            } else {
-                console.warn("Failed to fetch config from backend.");
             }
 
-            // 2. Fetch Products
-            const prodRes = await fetch(`${API_BASE_URL}/products/`);
             if (prodRes.ok) {
                 const prodData = await prodRes.json();
                 setProducts(prodData);
-                // Sync to localStorage for speed, with quota safety
                 try {
                     localStorage.setItem('astra_last_products', JSON.stringify(prodData));
                 } catch (e) {
-                    console.warn("Local storage quota exceeded for products. Browsing will continue using live data.");
+                    // Quota safety is already handled in updateSection, but good to have here
+                    const lite = prodData.map(({ images, ...rest }) => rest);
+                    localStorage.setItem('astra_last_products_lite', JSON.stringify(lite));
                 }
-            } else {
-                console.warn("Failed to fetch products from backend.");
             }
         } catch (e) {
-            console.warn("Backend sync failed, using local/cached data.", e);
-            // If backend fails, and no local products were found initially, products will remain initialProducts
+            console.warn("Background sync failed, using local/cached data.", e);
         } finally {
             setLoading(false);
         }

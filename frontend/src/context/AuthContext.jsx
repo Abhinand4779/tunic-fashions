@@ -40,6 +40,8 @@ export const AuthProvider = ({ children }) => {
 
     const updateOrderStatus = async (orderId, statusData) => {
         const token = localStorage.getItem('adminToken');
+        if (!token) return false;
+
         const { status, trackingId, trackingUrl } = statusData;
 
         try {
@@ -52,6 +54,13 @@ export const AuthProvider = ({ children }) => {
                 method: 'PUT',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
+
+            if (res.status === 401) {
+                alert("Session expired. Please login again.");
+                logout();
+                return false;
+            }
+
             if (res.ok) {
                 await syncAdminData(); // Refresh admin list
                 return true;
@@ -65,12 +74,18 @@ export const AuthProvider = ({ children }) => {
     // Synchronize User Specific Orders
     const syncUserOrders = useCallback(async () => {
         const token = localStorage.getItem('astra_token');
-        if (!token) return;
+        if (!token || token === 'null' || token === 'undefined') return;
 
         try {
             const res = await fetch(`${API_BASE_URL}/orders/my-orders`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
+
+            if (res.status === 401) {
+                logout();
+                return;
+            }
+
             if (res.ok) {
                 const data = await res.json();
                 setUserOrders(data);
@@ -84,13 +99,21 @@ export const AuthProvider = ({ children }) => {
     // Synchronize Admin Data
     const syncAdminData = useCallback(async () => {
         const token = localStorage.getItem('adminToken');
-        if (!token) return;
+        // Filter out junk/placeholder strings that might persist in storage
+        if (!token || token === 'null' || token === 'undefined') return;
 
         try {
             // Fetch Orders
             const ordRes = await fetch(`${API_BASE_URL}/orders/all`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
+            
+            if (ordRes.status === 401) {
+                console.warn("Admin token expired or invalid. Logging out.");
+                logout();
+                return;
+            }
+
             if (ordRes.ok) {
                 const ordData = await ordRes.json();
                 setAdminOrders(ordData);

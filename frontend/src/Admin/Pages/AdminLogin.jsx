@@ -33,11 +33,21 @@ const AdminLogin = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                // We logic to fetch user details or just set as admin for now
-                adminLogin({ email: credentials.email, role: 'admin' }, data.access_token);
+                
+                // Fetch full admin profile to get ID and other details
+                const profileRes = await fetch(`${API_BASE_URL}/auth/me`, {
+                    headers: { 'Authorization': `Bearer ${data.access_token}` }
+                });
+                
+                let adminData = { email: credentials.email, role: 'admin' };
+                if (profileRes.ok) {
+                    adminData = await profileRes.json();
+                }
+
+                adminLogin(adminData, data.access_token);
                 navigate('/admin/dashboard');
             } else {
-                const errData = await response.json();
+                const errData = await response.json().catch(() => ({}));
                 setError(errData.detail || 'Invalid Admin Credentials');
             }
         } catch (err) {

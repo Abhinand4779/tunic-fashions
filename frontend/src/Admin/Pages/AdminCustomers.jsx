@@ -74,6 +74,13 @@ const AdminCustomers = () => {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
+
+                if (res.status === 401) {
+                    alert("Admin session expired. Please login again.");
+                    syncAdminData(); // This will trigger the internal logout logic in syncAdminData
+                    return;
+                }
+
                 if (res.ok) {
                     alert("Customer record deleted successfully.");
                     syncAdminData(); // Refresh list automatically
