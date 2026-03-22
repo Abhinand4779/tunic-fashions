@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - ASTRA Control</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/admin/admin-login.css">
+</head>
+
+<body class="admin-login-body">
+    <div class="admin-login-container">
+        <div class="admin-login-card">
+            <div class="admin-login-header">
+                <img src="../assets/Logo/original.png" alt="Astra Logo">
+                <h1>Admin Control</h1>
+                <p>Sign in to manage your empire</p>
+            </div>
+
+            <form id="admin-login-form" class="admin-login-form">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="bi bi-envelope"></i>
+                        <input type="email" id="email" placeholder="admin@astra.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="bi bi-lock"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="admin-submit-btn" id="login-btn">
+                    Access Dashboard
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>&copy; 2026 ASTRA by Ash. Secure Portal.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.getElementById('admin-login-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('login-btn');
+            btn.innerText = 'Verifying...';
+            btn.disabled = true;
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/auth/admin/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    Auth.adminLogin(data.user, data.access_token);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    const err = await res.json();
+                    alert(err.detail || 'Login Failed. Invalid Admin Credentials.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Connection to backend failed.');
+            } finally {
+                btn.innerText = 'Access Dashboard';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+/**
+ * ASTRA - Unified Admin Styles
+ */
+
+.admin-body {
+    background-color: #f8fafc;
+    color: #334155;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 260px;
+    background: #0f172a;
+    color: #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 1.5rem 0;
+}
+
+.admin-sidebar-header {
+    padding: 0 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.admin-sidebar-header img {
+    height: 32px;
+}
+
+.admin-sidebar-header span {
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.admin-nav-link {
+    padding: 0.8rem 1.5rem;
+    color: #94a3b8;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.admin-nav-link i {
+    font-size: 1.2rem;
+}
+
+.admin-nav-link:hover,
+.admin-nav-link.active {
+    color: #fff;
+    background: #1e293b;
+}
+
+.admin-nav-link.active {
+    border-right: 4px solid #b59b5a;
+}
+
+.admin-nav-spacer {
+    flex-grow: 1;
+}
+
+.admin-main {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.premium-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.page-title {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.stat-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+/* Modals */
+.admin-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.admin-modal {
+    background: #fff;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+}
+
+/* Badges */
+.badge.processing,
+.badge.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge.shipped {
+    background: #e0f2fe;
+    color: #075985;
+}
+
+.badge.delivered,
+.badge.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge.cancelled,
+.badge.danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge.women {
+    background: #fdf2f8;
+    color: #9d174d;
+}
+
+.badge.men {
+    background: #f0f9ff;
+    color: #075985;
+}
+
+.badge.kids {
+    background: #f0fdf4;
+    color: #166534;
+}

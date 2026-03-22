@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bag - ASTRA by Ash</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Static Navbar -->
+        <nav class="navbar-container" id="main-nav">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a href="index.html" class="navbar-logo-link">
+                        <img src="assets/Logo/original.png" alt="Astra by Ash">
+                        <span class="logo-subtitle">ASTRA</span>
+                    </a>
+                </div>
+                <div class="navbar-links" id="navbar-links">
+                    <div class="nav-item"><a href="shop.html?slug=women" class="nav-link">Women</a></div>
+                    <div class="nav-item"><a href="shop.html?slug=men" class="nav-link">Men</a></div>
+                    <div class="nav-item"><a href="shop.html?slug=kids" class="nav-link">Kids</a></div>
+                </div>
+                <div class="navbar-icons">
+                    <a href="profile.html" class="icon-link"><i class="bi bi-person"></i></a>
+                    <button class="icon-button" id="search-toggle"><i class="bi bi-search"></i></button>
+                    <a href="wishlist.html" class="icon-link"><i class="bi bi-heart"></i></a>
+                    <a href="cart.html" class="icon-link cart-icon">
+                        <i class="bi bi-handbag"></i>
+                        <span class="cart-badge" id="cart-count">0</span>
+                    </a>
+                    <button class="mobile-toggle" id="mobile-toggle"><i class="bi bi-list"></i></button>
+                </div>
+            </div>
+        </nav>
+
+        <main id="cart-page-wrap">
+            <!-- Dynamic Content -->
+        </main>
+
+        <!-- Static Footer -->
+        <footer class="footer" id="main-footer">
+            <div class="footer-top">
+                <div class="footer-column footer-store">
+                    <h3 class="footer-heading-logo">ASTRA by Ash</h3>
+                    <p class="footer-description">Timeless jewelry that tells your unique story. Handcrafted with
+                        passion and precision.</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Quick links</h3>
+                    <ul class="footer-links">
+                        <li><a href="profile.html">My account</a></li>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Information</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy-policy.html">Privacy policy</a></li>
+                        <li><a href="shipping-return.html">Refund & Returns Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-newsletter">
+                    <h3 class="footer-heading footer-heading-large">Let's get in touch</h3>
+                    <p class="footer-newsletter-text">Subscribe to receive updates, access to exclusive deals, and more.
+                    </p>
+                    <form class="footer-email-form">
+                        <input type="email" placeholder="Enter your email address..." class="footer-email-input"
+                            required>
+                        <button type="submit" class="footer-email-btn">&rarr;</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024, ASTRA by Ash. All Rights Reserved.</p>
+                <a href="#" target="_blank" class="footer-instagram"><i class="bi bi-instagram"></i></a>
+                <p class="footer-credit">Handcrafted with Love</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/site.js" defer></script>
+    <script src="js/components.js" defer></script>
+    <script src="js/cart.js" defer></script>
+</body>
+
+</html>
