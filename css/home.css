@@ -1,6 +1,6 @@
 .home-container {
     padding-bottom: 5rem;
-    background-color: #fdfcf8;
+    background-color: transparent;
 }
 
 /* Hero Section: 3/4 Banner, 1/4 Coupon */
@@ -8,7 +8,7 @@
     display: flex;
     width: 100%;
     min-height: 60vh;
-    background-color: #000;
+    background-color: rgb(15, 34, 48);
     overflow: hidden;
 }
 
@@ -70,7 +70,7 @@
 
 .coupon-area {
     flex: 1;
-    background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+    background: rgb(15, 34, 48);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -198,7 +198,7 @@
 /* Highlights/Offers Section */
 .highlights-section {
     padding: 4rem 5%;
-    background-color: #fdfcf8;
+    background-color: transparent;
 }
 
 .highlights-grid {
@@ -378,7 +378,7 @@
 
 /* ── PROMO CAROUSEL ── */
 .promo-carousel-section {
-    background: #fdfcf8;
+    background: transparent;
     padding: 5rem 5%;
     overflow: hidden;
 }
@@ -604,7 +604,7 @@
 /* ── TESTIMONIALS CAROUSEL ── */
 .testimonials-section {
     padding: 6rem 5%;
-    background-color: #fdfcf8;
+    background-color: transparent;
     overflow: hidden;
 }
 
@@ -766,4 +766,16 @@
     .testimonial-text {
         font-size: 1rem;
     }
+}
+
+font-size: 1.8rem;
+}
+
+.testimonial-card {
+    padding: 1.5rem;
+}
+
+.testimonial-text {
+    font-size: 1rem;
+}
 }

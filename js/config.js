@@ -7,14 +7,14 @@ const API_BASE_URL = 'http://127.0.0.1:8085/api';
 
 const DEFAULT_CONFIG = {
     hero: {
-        bannerImg: 'assets/About/Banner.jpg',
-        title: 'Elegance in Every Detail',
-        subtitle: 'Explore the exclusive collection from HUE.',
-        btnText: 'Shop Collection',
+        bannerImg: 'assets/About/hero_navy.png',
+        title: 'ELEGANCE IN<br>EVERY DETAIL',
+        subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.',
+        btnText: 'SHOP COLLECTION',
         btnLink: 'shop.html'
     },
     heroSliders: [
-        { id: 1, image: 'assets/About/Banner.jpg', title: 'Elegance in Every Detail', subtitle: 'Explore the exclusive collection from HUE.' }
+        { id: 1, image: 'assets/About/hero_navy.png', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.' }
     ],
     coupon: {
         label: 'Special Offer',
@@ -23,14 +23,14 @@ const DEFAULT_CONFIG = {
         code: 'HUE15'
     },
     highlights: [
-        { id: 1, title: 'Summer Sale', image: 'assets/Ornaments_Categories/bangle.jpg', subtitle: 'Flat 20% Off', link: 'shop.html' },
-        { id: 2, title: 'New Arrivals', image: 'assets/Ornaments_Categories/earings.jpg', subtitle: 'Signature Collection', link: 'shop.html' },
-        { id: 3, title: 'Best Sellers', image: 'assets/Ornaments_Categories/chain.jpg', subtitle: 'Trending Now', link: 'shop.html' },
+        { id: 1, title: 'Summer Sale', image: 'assets/Ornaments_Categories/dress_navy.png', subtitle: 'Designer Dresses', link: 'shop.html' },
+        { id: 2, title: 'New Arrivals', image: 'assets/Ornaments_Categories/jewelry_navy.png', subtitle: 'Signature Jewelry', link: 'shop.html' },
+        { id: 3, title: 'Best Sellers', image: 'assets/Ornaments_Categories/saree_navy.png', subtitle: 'Ethnic Wear', link: 'shop.html' },
     ],
     promoCarousel: [
         {
             id: 1,
-            image: 'assets/Ornaments_Categories/bangle.jpg',
+            image: 'assets/Ornaments_Categories/dress_navy.png',
             badge: 'New Arrival',
             title: 'Gold Bangles Collection',
             subtitle: 'Handcrafted with 22K gold plating — timeless elegance for every occasion.',
@@ -40,17 +40,17 @@ const DEFAULT_CONFIG = {
         },
         {
             id: 2,
-            image: 'assets/Ornaments_Categories/earings.jpg',
+            image: 'assets/Ornaments_Categories/jewelry_navy.png',
             badge: 'Trending',
-            title: 'Signature Earrings',
-            subtitle: 'Lightweight, bold and beautiful — statement pieces that tell your story.',
+            title: 'Signature Jewelry',
+            subtitle: 'Elegant statement pieces that perfectly complement your outfit.',
             link: 'shop.html',
             btnText: 'Explore',
             align: 'right'
         },
         {
             id: 3,
-            image: 'assets/Ornaments_Categories/chain.jpg',
+            image: 'assets/Ornaments_Categories/saree_navy.png',
             badge: 'Best Seller',
             title: 'Layered Chain Sets',
             subtitle: 'Stack them, layer them, own them. Our chains are crafted for royalty.',

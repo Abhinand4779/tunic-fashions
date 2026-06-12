@@ -46,7 +46,7 @@ const AdminProducts = {
                                 ${products.map(p => `
                                     <tr>
                                         <td class="product-cell d-flex align-items-center">
-                                            <img src="${p.images?.[0] || '../assets/Logo/original.png'}" style="width:40px;height:40px;object-fit:cover;border-radius:4px" class="me-3">
+                                            <img src="${p.images?.[0] || '../assets/Logo/hue%20logo.png'}" style="width:40px;height:40px;object-fit:cover;border-radius:4px" class="me-3">
                                             <span>${p.name}</span>
                                         </td>
                                         <td><span class="badge ${p.section?.toLowerCase()}">${p.section}</span></td>

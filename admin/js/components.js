@@ -9,7 +9,7 @@
             <!-- Primary Icon Sidebar -->
             <aside class="admin-sidebar">
                 <div class="admin-sidebar-header">
-                    <img src="../assets/Logo/original.png" alt="HUE">
+                    <img src="../assets/Logo/hue%20logo.png" alt="HUE">
                 </div>
                 
                 <nav class="admin-nav">

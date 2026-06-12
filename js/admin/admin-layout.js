@@ -33,7 +33,7 @@ const AdminLayout = {
 
         sidebar.innerHTML = `
             <div class="sidebar-brand">
-                <img src="../assets/Logo/original.png" alt="HUE Logo">
+                <img src="../assets/Logo/hue%20logo.png" alt="HUE Logo">
                 <h2>HUE UI</h2>
             </div>
 

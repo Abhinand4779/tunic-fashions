@@ -57,7 +57,7 @@ const ProductDetailHandler = {
         }
 
         const inWishlist = Auth.isInWishlist(product._id || product.id);
-        const images = product.images && product.images.length > 0 ? product.images : ['assets/Logo/original.png'];
+        const images = product.images && product.images.length > 0 ? product.images : ['assets/Logo/hue%20logo.png'];
 
         wrap.innerHTML = `
             <div class="detail-container">

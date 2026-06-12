@@ -164,7 +164,7 @@ const ShopHandler = {
                                 <div class="premium-product-card" onclick="window.location.href='product.html?id=${pid}'">
                                     <div class="p-card-image">
                                         ${p.discount ? `<span class="discount-badge">-${p.discount}</span>` : ''}
-                                        <img src="${p.images?.[0] || 'assets/Logo/original.png'}" alt="${p.name}" loading="lazy">
+                                        <img src="${p.images?.[0] || 'assets/Logo/hue%20logo.png'}" alt="${p.name}" loading="lazy">
                                         <button class="quick-view">Quick View</button>
                                     </div>
                                     <div class="p-card-info">
