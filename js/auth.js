@@ -1,5 +1,5 @@
 /**
- * ASTRA - Authentication and State Management
+ * HUE - Authentication and State Management
  * Replaces AuthContext.jsx logic
  */
 
@@ -8,7 +8,7 @@ const Auth = {
     admin: JSON.parse(localStorage.getItem('astra_admin')) || null,
     cart: JSON.parse(localStorage.getItem('astra_cart')) || [],
     wishlist: JSON.parse(localStorage.getItem('astra_wishlist')) || [],
-    userOrders: JSON.parse(localStorage.getItem('astra_orders')) || [],
+    userOrders: [],
     adminOrders: [],
     customers: [],
 
@@ -46,16 +46,9 @@ const Auth = {
             const res = await fetch(`${API_BASE_URL}/orders/my-orders`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-
-            if (res.status === 401) {
-                this.logout();
-                return;
-            }
-
             if (res.ok) {
                 const data = await res.json();
                 this.userOrders = data;
-                localStorage.setItem('astra_orders', JSON.stringify(data));
                 window.dispatchEvent(new CustomEvent('userOrdersUpdated'));
             }
         } catch (err) {
@@ -176,20 +169,18 @@ const Auth = {
         const orderData = {
             items: this.cart.map(item => ({
                 product_id: (item._id || item.id).toString(),
-                name: item.name,
-                price: item.price,
-                quantity: item.quantity,
-                image: (item.images && item.images[0]) || item.image || null
+                quantity: item.quantity
             })),
-            total_amount: `₹${finalTotal.toLocaleString()}`,
-            shipping_address: {
-                ...shippingInfo,
-                email: this.user?.email || shippingInfo.email
-            }
+            customer_name: shippingInfo.firstName + ' ' + shippingInfo.lastName,
+            customer_email: shippingInfo.email || (this.user ? this.user.email : 'guest@example.com'),
+            shipping_address: `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state} ${shippingInfo.zipCode}`,
+            phone: shippingInfo.phone,
+            total_amount: finalTotal,
+            status: 'Processing'
         };
 
         try {
-            const rawToken = localStorage.getItem('astra_token') || localStorage.getItem('adminToken');
+            const rawToken = localStorage.getItem('astra_token');
             const token = (rawToken && rawToken !== 'null' && rawToken !== 'undefined') ? rawToken : null;
 
             const res = await fetch(`${API_BASE_URL}/orders/`, {
@@ -205,26 +196,16 @@ const Auth = {
                 const createdOrder = await res.json();
                 if (!createdOrder.checkout_url) {
                     this.userOrders.unshift(createdOrder);
-                    localStorage.setItem('astra_orders', JSON.stringify(this.userOrders));
                 }
                 this.clearCart();
                 return createdOrder;
+            } else {
+                throw new Error("Failed to place order via backend.");
             }
         } catch (err) {
             console.error("Place Order Failed", err);
+            throw err;
         }
-
-        // Fallback: Local Only
-        const newOrder = {
-            id: `ORD-${Date.now()}`,
-            ...orderData,
-            status: 'Processing',
-            date: new Date().toLocaleDateString()
-        };
-        this.userOrders.unshift(newOrder);
-        localStorage.setItem('astra_orders', JSON.stringify(this.userOrders));
-        this.clearCart();
-        return newOrder;
     },
 
     async updateOrderStatus(orderId, statusData) {
@@ -256,3 +237,4 @@ const Auth = {
 // Initial Sync
 if (Auth.user) setTimeout(() => Auth.syncUserOrders(), 100);
 if (Auth.admin) setTimeout(() => Auth.syncAdminData(), 100);
+

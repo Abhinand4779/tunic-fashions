@@ -1,6 +1,6 @@
 /**
- * ASTRA - Site Management
- * Replaces SiteContext.jsx logic
+ * HUE - Site Management
+ * Connects frontend to Laravel backend
  */
 
 const Site = {
@@ -8,16 +8,9 @@ const Site = {
     products: [],
     loading: true,
 
-    // Deep merge helper (from React SiteContext.jsx)
+    // Deep merge helper
     mergeConfig(base, override) {
         if (!override) return base;
-
-        // Skip if server config is older than local version
-        if (base.lastUpdated && override.lastUpdated && override.lastUpdated < base.lastUpdated) {
-            console.warn("Server config is older than local config. Skipping.");
-            return base;
-        }
-
         const merged = { ...base };
         Object.keys(override).forEach(key => {
             if (override[key] && typeof override[key] === 'object' && !Array.isArray(override[key]) && base[key]) {
@@ -30,75 +23,77 @@ const Site = {
     },
 
     async fetchAll() {
-        // Step 1: Initialize with DEFAULT_CONFIG (merged with local)
-        const stored = localStorage.getItem('astra_site_config_v2');
-        if (stored) {
-            try { this.config = this.mergeConfig(this.config, JSON.parse(stored)); } catch (e) { }
-        }
-
-        const lastProds = localStorage.getItem('astra_last_products') || localStorage.getItem('astra_last_products_lite');
-        if (lastProds) {
-            try { this.products = JSON.parse(lastProds); } catch (e) { }
-        }
-
-        // We have at least DEFAULT_CONFIG or CACHE, so stop loading
-        this.loading = false;
-        window.dispatchEvent(new CustomEvent('siteDataLoaded'));
-
-        // Step 2: Background Refresh (Non-blocking)
         try {
-            const configReq = fetch(`${API_BASE_URL}/settings/`).then(r => r.ok ? r.json() : null);
-            const prodReq = fetch(`${API_BASE_URL}/products/`).then(r => r.ok ? r.json() : null);
+            // 1. Fetch data from backend concurrently
+            const configReq = fetch(`${API_BASE_URL}/settings`).then(r => r.ok ? r.json() : null).catch(() => null);
+            const prodReq = fetch(`${API_BASE_URL}/products`).then(r => r.ok ? r.json() : null).catch(() => null);
+            const catReq = fetch(`${API_BASE_URL}/categories`).then(r => r.ok ? r.json() : null).catch(() => null);
 
-            const [data, prodData] = await Promise.all([configReq, prodReq]);
+            const [data, prodData, catData] = await Promise.all([configReq, prodReq, catReq]);
 
-            if (data && data.config) {
-                this.config = this.mergeConfig(this.config, data.config);
-                localStorage.setItem('astra_site_config_v2', JSON.stringify(data.config));
-                window.dispatchEvent(new CustomEvent('siteDataLoaded'));
+            // 2. Map Settings
+            if (data) {
+                const mappedData = {};
+                if (data.announcement_bar) {
+                    try { mappedData.coupon = { label: 'OFFER', discount: '', text: JSON.parse(data.announcement_bar), code: 'HUE10' }; } 
+                    catch(e) { mappedData.coupon = { label: 'OFFER', discount: '', text: data.announcement_bar, code: 'HUE10' }; }
+                }
+                if (data.hero_title || data.hero_subtitle) {
+                    mappedData.hero = { ...this.config.hero };
+                    if (data.hero_title) mappedData.hero.title = data.hero_title;
+                    if (data.hero_subtitle) mappedData.hero.subtitle = data.hero_subtitle;
+                }
+                this.config = this.mergeConfig(this.config, { ...data, ...mappedData });
             }
 
+            // 3. Map Products
             if (prodData) {
                 this.products = prodData;
-                try { localStorage.setItem('astra_last_products', JSON.stringify(prodData)); } catch (e) { }
-                window.dispatchEvent(new CustomEvent('siteDataLoaded'));
             }
+
+            // 4. Map Categories to Navbar
+            if (catData && Array.isArray(catData)) {
+                // catData contains top-level categories with their 'children'
+                const dynamicNav = catData.filter(c => c.status !== 'inactive').map(cat => {
+                    const relatedSubCats = (cat.children || []).filter(sc => sc.status !== 'inactive').map(sc => sc.name);
+                    return {
+                        name: cat.name,
+                        path: `shop.html?category=${encodeURIComponent(cat.name.toLowerCase())}`,
+                        dropdown: relatedSubCats
+                    };
+                });
+                this.config.navCategories = dynamicNav;
+            }
+
         } catch (e) {
-            console.warn("Background sync failed", e);
+            console.warn("Backend sync failed", e);
+        } finally {
+            this.loading = false;
+            window.dispatchEvent(new CustomEvent('siteDataLoaded'));
         }
     },
 
     async updateSection(section, data) {
         if (section === 'products') {
             this.products = data;
-            try {
-                localStorage.setItem('astra_last_products', JSON.stringify(data));
-                localStorage.removeItem('astra_last_products_lite');
-            } catch (e) {
-                const lite = data.map(({ images, ...rest }) => rest);
-                localStorage.setItem('astra_last_products_lite', JSON.stringify(lite));
-                localStorage.removeItem('astra_last_products');
-            }
         } else {
-            const configWithTime = { ...this.config, [section]: data, lastUpdated: Date.now() };
+            const configWithTime = { ...this.config, [section]: data };
             this.config = configWithTime;
-            localStorage.setItem('astra_site_config_v2', JSON.stringify(configWithTime));
 
             // Sync to backend if admin
             const token = localStorage.getItem('adminToken');
             if (token) {
                 try {
                     const settingsToSave = { ...configWithTime };
-                    // Never save products inside config to avoid large payloads
                     delete settingsToSave.products;
 
-                    await fetch(`${API_BASE_URL}/settings/`, {
+                    await fetch(`${API_BASE_URL}/settings`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`
                         },
-                        body: JSON.stringify(settingsToSave)
+                        body: JSON.stringify({ settings: settingsToSave })
                     });
                 } catch (err) {
                     console.error("Failed to sync backend", err);
@@ -111,10 +106,3 @@ const Site = {
 
 // Start Fetching on Load
 Site.fetchAll();
-
-// Sync across tabs
-window.addEventListener('storage', (e) => {
-    if ((e.key === 'astra_site_config_v2' || e.key === 'astra_last_products') && e.newValue) {
-        Site.fetchAll();
-    }
-});

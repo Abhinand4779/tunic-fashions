@@ -1,5 +1,5 @@
 /**
- * ASTRA - Shared Components Loader
+ * HUE - Shared Components Loader
  * Handles dynamic navigation and footer injection
  */
 
@@ -19,7 +19,7 @@ const Components = {
         if (navLinks && Site.config.navCategories) {
             // We still update links dynamically to ensure they match config
             const navCategories = Site.config.navCategories;
-            navLinks.innerHTML = navCategories.map(cat => {
+            const newHtml = navCategories.map(cat => {
                 const sectionKey = cat.name.toLowerCase();
                 const items = Site.config.sectionCategories[sectionKey] || cat.dropdown || [];
                 const hasDropdown = items.length > 0;
@@ -33,6 +33,10 @@ const Components = {
                 }
                 return `<div class="nav-item"><a href="${cat.path}" class="nav-link">${cat.name} ${hasDropdown ? '<i class="bi bi-chevron-down ms-1" style="font-size: 0.7em"></i>' : ''}</a>${dropdownHtml}</div>`;
             }).join('');
+            
+            if (navLinks.innerHTML !== newHtml) {
+                navLinks.innerHTML = newHtml;
+            }
         }
     },
 
@@ -51,47 +55,6 @@ const Components = {
 
         const copy = footerElem.querySelector('.footer-copyright');
         if (copy) copy.textContent = footer.copyright;
-    },
-
-    renderAdminSidebar() {
-        const sidebar = document.getElementById('admin-sidebar');
-        if (!sidebar) return;
-
-        const activePage = window.location.pathname.split('/').pop() || 'dashboard.html';
-
-        sidebar.innerHTML = `
-            <div class="admin-sidebar-header">
-                <img src="../assets/Logo/original.png" alt="Astra Admin">
-                <span>ASTRA ADMIN</span>
-            </div>
-            <nav class="admin-nav">
-                <a href="dashboard.html" class="admin-nav-link ${activePage === 'dashboard.html' ? 'active' : ''}">
-                    <i class="bi bi-speedometer2"></i> Dashboard
-                </a>
-                <a href="orders.html" class="admin-nav-link ${activePage === 'orders.html' ? 'active' : ''}">
-                    <i class="bi bi-cart3"></i> Orders
-                </a>
-                <a href="products.html" class="admin-nav-link ${activePage === 'products.html' ? 'active' : ''}">
-                    <i class="bi bi-gem"></i> Products
-                </a>
-                <a href="categories.html" class="admin-nav-link ${activePage === 'categories.html' ? 'active' : ''}">
-                    <i class="bi bi-grid-3x3-gap"></i> Categories
-                </a>
-                <a href="cms.html" class="admin-nav-link ${activePage === 'cms.html' ? 'active' : ''}">
-                    <i class="bi bi-window-sidebar"></i> CMS
-                </a>
-                <a href="sliders.html" class="admin-nav-link ${activePage === 'sliders.html' ? 'active' : ''}">
-                    <i class="bi bi-images"></i> Sliders
-                </a>
-                <div class="admin-nav-spacer"></div>
-                <a href="../index.html" class="admin-nav-link">
-                    <i class="bi bi-globe"></i> View Site
-                </a>
-                <button onclick="Auth.logout(); window.location.href='../profile.html';" class="admin-nav-link logout-link">
-                    <i class="bi bi-box-arrow-left"></i> Logout
-                </button>
-            </nav>
-        `;
     },
 
     attachNavbarEvents() {
@@ -115,6 +78,21 @@ const Components = {
         searchClose?.addEventListener('click', () => {
             searchOverlay.classList.remove('active');
         });
+    },
+
+    attachAdminNavbarEvents() {
+        const hamburgerBtn = document.querySelector('.hamburger-btn');
+        const secondarySidebar = document.getElementById('admin-secondary-sidebar');
+        
+        if (hamburgerBtn && secondarySidebar) {
+            hamburgerBtn.addEventListener('click', () => {
+                if (secondarySidebar.style.display === 'none') {
+                    secondarySidebar.style.display = 'flex';
+                } else {
+                    secondarySidebar.style.display = 'none';
+                }
+            });
+        }
     }
 };
 
@@ -122,7 +100,7 @@ const Components = {
 window.addEventListener('siteDataLoaded', () => {
     Components.renderNavbar();
     Components.renderFooter();
-    Components.renderAdminSidebar();
+    Components.attachAdminNavbarEvents();
 });
 
 window.addEventListener('cartUpdated', () => Components.renderNavbar());
@@ -132,5 +110,6 @@ window.addEventListener('wishlistUpdated', () => Components.renderNavbar());
 if (!Site.loading) {
     Components.renderNavbar();
     Components.renderFooter();
-    Components.renderAdminSidebar();
+    setTimeout(() => Components.attachAdminNavbarEvents(), 100);
 }
+

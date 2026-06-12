@@ -1,5 +1,5 @@
 /**
- * ASTRA - Wishlist Page Logic
+ * HUE - Wishlist Page Logic
  * Replaces Wishlist.jsx logic
  */
 
@@ -81,3 +81,4 @@ window.addEventListener('wishlistUpdated', () => WishlistHandler.render());
 window.addEventListener('siteDataLoaded', () => WishlistHandler.render());
 if (!Site.loading) WishlistHandler.render();
 else setTimeout(() => WishlistHandler.render(), 500);
+

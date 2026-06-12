@@ -1,5 +1,5 @@
 /**
- * ASTRA - Profile & Auth Page Logic
+ * HUE - Profile & Auth Page Logic
  * Replaces Profile.jsx logic
  */
 
@@ -38,7 +38,7 @@ const ProfileHandler = {
                         <p class="auth-subtitle">
                             ${this.isGuestMode
                 ? 'Provide your email to receive order updates'
-                : (this.isLogin ? 'Enter your credentials to access your account' : 'Join the Astra community and start your style journey')}
+                : (this.isLogin ? 'Enter your credentials to access your account' : 'Join the HUE community and start your style journey')}
                         </p>
                         ${this.error ? `<div class="error-alert mb-3">${this.error}</div>` : ''}
                     </div>
@@ -250,3 +250,4 @@ const ProfileHandler = {
 
 ProfileHandler.init();
 window.addEventListener('siteDataLoaded', () => ProfileHandler.init());
+

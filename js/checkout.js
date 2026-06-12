@@ -1,5 +1,5 @@
 /**
- * ASTRA - Checkout Page Logic
+ * HUE - Checkout Page Logic
  * Replaces Checkout.jsx logic
  */
 
@@ -147,7 +147,7 @@ const CheckoutHandler = {
     updateShip(el) { this.shippingData[el.name] = el.value; },
 
     applyCoupon(subtotal) {
-        if (this.couponCode.toUpperCase() === 'ASTRA15') {
+        if (this.couponCode.toUpperCase() === 'HUE15') {
             this.discount = subtotal * 0.15;
             this.couponMessage = { text: 'Coupon applied successfully! (15% OFF)', type: 'success' };
         } else if (!this.couponCode.trim()) {
@@ -185,3 +185,4 @@ const CheckoutHandler = {
 };
 
 CheckoutHandler.init();
+

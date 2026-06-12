@@ -1,5 +1,5 @@
 /**
- * ASTRA - Product Detail Logic
+ * HUE - Product Detail Logic
  * Replaces ProductDetail.jsx logic
  */
 
@@ -7,23 +7,43 @@ const ProductDetailHandler = {
     productId: new URLSearchParams(window.location.search).get('id'),
     selectedImg: 0,
     quantity: 1,
+    product: null,
 
-    init() {
+    async init() {
         if (!this.productId) {
             window.location.href = 'shop.html';
             return;
         }
+
+        await this.fetchProduct();
         this.render();
-        window.addEventListener('siteDataLoaded', () => this.render());
         window.addEventListener('authChanged', () => this.render());
     },
 
-    render() {
-        if (Site.loading) return;
+    async fetchProduct() {
+        try {
+            const res = await fetch('http://localhost:8085/api/products/' + this.productId);
+            if (res.ok) {
+                this.product = await res.json();
+            } else {
+                // Fallback to static config
+                if (window.Site) {
+                    this.product = window.Site.products.find(p => (p._id || p.id)?.toString() === this.productId);
+                }
+            }
+        } catch (err) {
+            console.error('Failed to fetch from DB', err);
+            if (window.Site) {
+                this.product = window.Site.products.find(p => (p._id || p.id)?.toString() === this.productId);
+            }
+        }
+    },
 
-        const product = Site.products.find(p => (p._id || p.id)?.toString() === this.productId);
+    render() {
         const wrap = document.getElementById('product-detail-wrap');
         if (!wrap) return;
+
+        const product = this.product;
 
         if (!product) {
             wrap.innerHTML = `
@@ -37,6 +57,7 @@ const ProductDetailHandler = {
         }
 
         const inWishlist = Auth.isInWishlist(product._id || product.id);
+        const images = product.images && product.images.length > 0 ? product.images : ['assets/Logo/original.png'];
 
         wrap.innerHTML = `
             <div class="detail-container">
@@ -50,7 +71,7 @@ const ProductDetailHandler = {
                     <!-- Left: Image Gallery -->
                     <div class="image-gallery-section">
                         <div class="thumbnail-list">
-                            ${product.images.map((img, idx) => `
+                            ${images.map((img, idx) => `
                                 <div class="thumbnail-item ${this.selectedImg === idx ? 'active' : ''}" onclick="ProductDetailHandler.setImg(${idx})">
                                     <img src="${img}" alt="Thumb ${idx}">
                                 </div>
@@ -58,13 +79,13 @@ const ProductDetailHandler = {
                         </div>
                         <div class="main-image-wrapper">
                             ${product.discount ? `<span class="detail-discount-badge">-${product.discount}</span>` : ''}
-                            <img src="${product.images[this.selectedImg]}" alt="${product.name}" class="main-display-img">
+                            <img src="${images[this.selectedImg]}" alt="${product.name}" class="main-display-img">
                         </div>
                     </div>
 
                     <!-- Right: Product Info -->
                     <div class="product-info-section">
-                        <span class="detail-category">${product.category}</span>
+                        <span class="detail-category">${product.category || 'Jewelry'}</span>
                         <h1 class="detail-title">${product.name}</h1>
 
                         <div class="detail-price-wrapper">
@@ -77,7 +98,7 @@ const ProductDetailHandler = {
                         <div class="product-specs">
                             <h5>Product Specification:</h5>
                             <ul>
-                                ${(product.details || []).map(spec => `<li>${spec}</li>`).join('')}
+                                ${(product.details || ['Premium Quality', 'Handcrafted', 'Elegant Design']).map(spec => `<li>${spec}</li>`).join('')}
                             </ul>
                         </div>
 
@@ -122,7 +143,7 @@ const ProductDetailHandler = {
     },
 
     handleAction(action) {
-        const product = Site.products.find(p => (p._id || p.id)?.toString() === this.productId);
+        const product = this.product;
         if (!Auth.user) {
             alert(`Please login to ${action === 'cart' ? 'add items to cart' : 'buy this item'}.`);
             window.location.href = `profile.html?from=product.html?id=${this.productId}`;
@@ -138,7 +159,7 @@ const ProductDetailHandler = {
     },
 
     handleWishlist() {
-        const product = Site.products.find(p => (p._id || p.id)?.toString() === this.productId);
+        const product = this.product;
         if (!Auth.user) {
             alert('Please login to add items to your wishlist.');
             window.location.href = `profile.html?from=product.html?id=${this.productId}`;
@@ -149,4 +170,7 @@ const ProductDetailHandler = {
     }
 };
 
-ProductDetailHandler.init();
+document.addEventListener('DOMContentLoaded', () => {
+    ProductDetailHandler.init();
+});
+

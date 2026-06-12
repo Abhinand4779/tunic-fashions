@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers - HUE Admin</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/admin-global.css">
+</head>
+
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+        <div class="admin-main-wrapper">
+            <main class="admin-main">
+                <div id="admin-content">
+                    <div class="admin-dashboard-premium">
+                        <header style="margin-bottom: 2rem;">
+                            <h2 style="font-weight:800;font-size:1.8rem;color:#0f172a;margin-bottom:0.2rem;">Customers</h2>
+                            <p style="color:var(--admin-text-muted);font-size:0.95rem;font-weight:500;">
+                                Manage your growing community
+                            </p>
+                        </header>
+                        <div class="premium-card">
+                            <div class="table-responsive">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>CUSTOMER</th>
+                                            <th>EMAIL</th>
+                                            <th>JOIN DATE</th>
+                                            <th>ACTIONS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-customers-list"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/site.js"></script>
+    <script src="../js/components.js"></script>
+    <script>
+        const renderCustomers = () => {
+            const list = document.getElementById('admin-customers-list');
+            if (!Auth.customers || Auth.customers.length === 0) {
+                list.innerHTML = '<tr><td colspan="4" class="text-center">No customers found.</td></tr>';
+                return;
+            }
+            list.innerHTML = Auth.customers.map(cust => `
+                <tr>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:1rem;">
+                            <div style="width:40px;height:40px;background:var(--icon-bg-purple);color:var(--icon-color-purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;">${(cust.name || 'G')[0].toUpperCase()}</div>
+                            <span style="font-weight:600;color:var(--admin-text-dark);">${cust.name || 'Guest'}</span>
+                        </div>
+                    </td>
+                    <td style="color:var(--admin-text-muted);">${cust.email || 'No email'}</td>
+                    <td style="color:var(--admin-text-muted);">${new Date(cust.created_at || Date.now()).toLocaleDateString()}</td>
+                    <td>
+                        <button style="background:transparent;border:1px solid var(--admin-border);padding:0.4rem 1rem;border-radius:20px;font-size:0.85rem;font-weight:600;color:var(--admin-text-dark);transition:all 0.2s;">View Profile</button>
+                    </td>
+                </tr>`).join('');
+        };
+        
+        Auth.syncAdminData().then(() => {
+            renderCustomers();
+        });
+    </script>
+</body>
+
+</html>

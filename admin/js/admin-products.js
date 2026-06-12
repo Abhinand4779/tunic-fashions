@@ -1,195 +1,112 @@
-/**
- * ASTRA - Admin Products Logic
- * Replaces AdminProducts.jsx
- */
+const API_URL = 'http://localhost:8085/api';
 
 const AdminProducts = {
-    showModal: false,
-    editingProduct: null,
-    newProduct: {
-        name: '', price: '', oldPrice: '', category: '', section: 'Women', description: '', images: ['', '', '', ''], details: ['Material: TBA', 'Weight: TBA']
+    products: [],
+
+    async init() {
+        if (!Auth.admin) {
+            window.location.href = 'login.html';
+            return;
+        }
+        await this.fetchProducts();
+        this.renderTable();
     },
 
-    init() {
-        if (!Auth.admin) { window.location.href = '../profile.html'; return; }
-        this.render();
-        window.addEventListener('siteDataLoaded', () => this.render());
-    },
-
-    render() {
-        const products = Site.products || [];
-        const wrap = document.getElementById('admin-content');
-        if (!wrap) return;
-
-        wrap.innerHTML = `
-            <div class="admin-products">
-                <div class="page-header d-flex justify-content-between align-items-center mb-4 px-4">
-                    <h2 class="page-title">Products</h2>
-                    <button class="btn btn-dark" onclick="AdminProducts.openAdd()">
-                        <i class="bi bi-plus-lg"></i> Add New Product
-                    </button>
-                </div>
-
-                <div class="products-table-card mx-4">
-                    <div class="table-responsive">
-                        <table class="admin-table custom-table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Section</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${products.map(p => `
-                                    <tr>
-                                        <td class="product-cell d-flex align-items-center">
-                                            <img src="${p.images?.[0] || '../assets/Logo/original.png'}" style="width:40px;height:40px;object-fit:cover;border-radius:4px" class="me-3">
-                                            <span>${p.name}</span>
-                                        </td>
-                                        <td><span class="badge ${p.section?.toLowerCase()}">${p.section}</span></td>
-                                        <td>${p.category}</td>
-                                        <td><strong>${p.price}</strong></td>
-                                        <td>
-                                            <button class="btn btn-sm text-primary" onclick="AdminProducts.openEdit('${p._id || p.id}')"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm text-danger" onclick="AdminProducts.handleDelete('${p._id || p.id}')"><i class="bi bi-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                ${this.showModal ? this.renderModal() : ''}
-            </div>`;
-    },
-
-    renderModal() {
-        const config = Site.config;
-        const currentSection = (this.newProduct.section || 'Women').toLowerCase();
-        const cats = config.sectionCategories[currentSection] || [];
-
-        return `
-            <div class="admin-modal-overlay">
-                <div class="admin-modal">
-                    <div class="modal-header">
-                        <h3>${this.editingProduct ? 'Edit Product' : 'Add New Product'}</h3>
-                        <button class="close-modal" onclick="AdminProducts.closeModal()">&times;</button>
-                    </div>
-                    <form class="admin-form p-4" onsubmit="AdminProducts.handleSave(event)">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label small fw-bold">Name</label>
-                                <input type="text" id="p-name" class="form-control" value="${this.newProduct.name || ''}" required>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label small fw-bold">Price</label>
-                                <input type="text" id="p-price" class="form-control" value="${this.newProduct.price || ''}" required>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label small fw-bold">Old Price</label>
-                                <input type="text" id="p-oldprice" class="form-control" value="${this.newProduct.oldPrice || ''}">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-bold">Section</label>
-                                <select id="p-section" class="form-select" onchange="AdminProducts.updateSectionSelect(this.value)">
-                                    <option value="Women" ${this.newProduct.section === 'Women' ? 'selected' : ''}>Women</option>
-                                    <option value="Men" ${this.newProduct.section === 'Men' ? 'selected' : ''}>Men</option>
-                                    <option value="Kids" ${this.newProduct.section === 'Kids' ? 'selected' : ''}>Kids</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-bold">Category</label>
-                                <select id="p-category" class="form-select">
-                                    <option value="">-- Select --</option>
-                                    ${cats.map(c => `<option value="${c.name}" ${this.newProduct.category === c.name ? 'selected' : ''}>${c.name}</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label small fw-bold">Images (Upload 4)</label>
-                                <div class="d-flex gap-2">
-                                    ${[0, 1, 2, 3].map(i => `
-                                        <div class="img-up bg-light border p-1 rounded" style="width:25%; text-align:center">
-                                            ${this.newProduct.images[i] ? `<img src="${this.newProduct.images[i]}" style="height:50px;display:block;margin:0 auto 5px">` : ''}
-                                            <input type="file" class="form-control form-control-sm" onchange="AdminProducts.handleFileChange(event, ${i})">
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer mt-4 pt-3 border-top">
-                            <button type="button" class="btn btn-light me-2" onclick="AdminProducts.closeModal()">Cancel</button>
-                            <button type="submit" class="btn btn-dark">Save Product</button>
-                        </div>
-                    </form>
-                </div>
-            </div>`;
-    },
-
-    openAdd() { this.showModal = true; this.editingProduct = null; this.newProduct = { name: '', price: '', oldPrice: '', category: '', section: 'Women', images: ['', '', '', ''], details: [] }; this.render(); },
-    openEdit(id) {
-        const p = Site.products.find(x => (x._id || x.id) === id);
-        this.editingProduct = p;
-        this.newProduct = { ...p, images: p.images || ['', '', '', ''] };
-        this.showModal = true;
-        this.render();
-    },
-    closeModal() { this.showModal = false; this.render(); },
-    updateSectionSelect(v) { this.newProduct.section = v; this.render(); },
-
-    handleFileChange(e, idx) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => { this.newProduct.images[idx] = reader.result; this.render(); };
-            reader.readAsDataURL(file);
+    async fetchProducts() {
+        try {
+            const res = await fetch(API_URL + '/products', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            if(res.ok) {
+                this.products = await res.json();
+            } else {
+                console.error('Failed to load products');
+            }
+        } catch(err) {
+            console.error('API Connection Error', err);
         }
     },
 
-    async handleSave(e) {
-        e.preventDefault();
-        const data = {
-            ...this.newProduct,
-            name: document.getElementById('p-name').value,
-            price: document.getElementById('p-price').value,
-            oldPrice: document.getElementById('p-oldprice').value,
-            section: document.getElementById('p-section').value,
-            category: document.getElementById('p-category').value,
-            discount: ''
-        };
+    renderTable() {
+        const tbody = document.getElementById('products-table-body');
+        if (!tbody) return;
 
-        // Calc discount
-        if (data.oldPrice) {
-            const cur = parseInt(data.price.replace(/[^\d]/g, ''));
-            const old = parseInt(data.oldPrice.replace(/[^\d]/g, ''));
-            if (old > cur) data.discount = `${Math.round((old - cur) / old * 100)}%`;
+        if (this.products.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="9" style="text-align: center;">No products found.</td></tr>';
+            return;
         }
 
-        const token = localStorage.getItem('adminToken');
-        const url = `${Site.API_BASE_URL}/products/${this.editingProduct ? (this.editingProduct._id || this.editingProduct.id) : ''}`;
-        const method = this.editingProduct ? 'PUT' : 'POST';
-
-        const res = await fetch(url, {
-            method,
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-            body: JSON.stringify(data)
-        });
-
-        if (res.ok) { alert("Saved!"); window.location.reload(); }
+        tbody.innerHTML = this.products.map(p => {
+            const id = p.id || p._id;
+            return \
+            <tr>
+                <td style="color: #64748b;">\</td>
+                <td>
+                    <div style="display: flex; align-items: center; color: #334155; font-weight: 500;">
+                        <img src="\" class="product-thumbnail" alt="\">
+                        \
+                    </div>
+                </td>
+                <td>
+                    <label class="toggle-switch">
+                        <input type="checkbox" \ onchange="AdminProducts.toggle('\', 'topSelling', this.checked)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </td>
+                <td>
+                    <label class="toggle-switch">
+                        <input type="checkbox" \ onchange="AdminProducts.toggle('\', 'buyTwoOneFree', this.checked)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </td>
+                <td>
+                    <select class="warehouse-select">
+                        <option>Choose...</option>
+                        <option selected>\</option>
+                    </select>
+                </td>
+                <td><i class="bi bi-layers" style="color:#64748b; font-size: 1.1rem;"></i></td>
+                <td><i class="bi bi-list-task" style="color:#64748b; font-size: 1.1rem; margin-right:5px;"></i><i class="bi bi-chevron-double-right" style="color:#64748b; font-size: 0.9rem;"></i></td>
+                <td><i class="bi bi-arrows-collapse" style="color:#64748b; font-size: 1.1rem;"></i></td>
+                <td>
+                    <div class="action-icons">
+                        <i class="bi bi-pencil-fill" onclick="window.location.href='product-create.html?id=\'" title="Edit"></i>
+                        <i class="bi bi-trash-fill" onclick="AdminProducts.deleteProduct('\')" title="Delete"></i>
+                    </div>
+                </td>
+            </tr>
+        \}).join('');
     },
 
-    async handleDelete(id) {
-        if (!confirm("Delete product?")) return;
-        const res = await fetch(`${Site.API_BASE_URL}/products/${id}`, {
-            method: 'DELETE',
-            headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
-        });
-        if (res.ok) window.location.reload();
+    async toggle(id, field, value) {
+        console.log(\Product \: \ changed to \\);
+        // Normally we'd fire a PUT request here to update the DB flag
+    },
+
+    async deleteProduct(id) {
+        if (confirm('Are you sure you want to delete this product?')) {
+            try {
+                const res = await fetch(API_URL + '/products/' + id, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem('adminToken') }
+                });
+                if(res.ok) {
+                    this.products = this.products.filter(p => (p.id || p._id) !== id);
+                    this.renderTable();
+                } else {
+                    alert('Failed to delete product from database.');
+                }
+            } catch(err) {
+                console.error(err);
+            }
+        }
     }
 };
 
-AdminProducts.init();
-Components.renderAdminSidebar();
+document.addEventListener('DOMContentLoaded', () => {
+    AdminProducts.init();
+});
+
+

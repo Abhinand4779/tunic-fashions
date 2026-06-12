@@ -1,26 +1,26 @@
 /**
- * ASTRA - Site Configuration
+ * HUE - Site Configuration
  * Replaces defaultConfig in SiteContext.jsx
  */
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = 'http://127.0.0.1:8085/api';
 
 const DEFAULT_CONFIG = {
     hero: {
         bannerImg: 'assets/About/Banner.jpg',
         title: 'Elegance in Every Detail',
-        subtitle: 'Explore the exclusive collection from Astra by Ash.',
+        subtitle: 'Explore the exclusive collection from HUE.',
         btnText: 'Shop Collection',
         btnLink: 'shop.html'
     },
     heroSliders: [
-        { id: 1, image: 'assets/About/Banner.jpg', title: 'Elegance in Every Detail', subtitle: 'Explore the exclusive collection from Astra by Ash.' }
+        { id: 1, image: 'assets/About/Banner.jpg', title: 'Elegance in Every Detail', subtitle: 'Explore the exclusive collection from HUE.' }
     ],
     coupon: {
         label: 'Special Offer',
         discount: '15% OFF',
         text: 'On your first order above ₹1999',
-        code: 'ASTRA15'
+        code: 'HUE15'
     },
     highlights: [
         { id: 1, title: 'Summer Sale', image: 'assets/Ornaments_Categories/bangle.jpg', subtitle: 'Flat 20% Off', link: 'shop.html' },
@@ -60,61 +60,49 @@ const DEFAULT_CONFIG = {
         }
     ],
     testimonials: [
-        { id: 1, name: "Anjali Sharma", handle: "@anjali_styles", text: "The gold plating is so authentic! I wore the bangles to a wedding and everyone thought they were real gold. Amazing quality from Astra.", rating: 5 },
+        { id: 1, name: "Anjali Sharma", handle: "@anjali_styles", text: "The gold plating is so authentic! I wore the bangles to a wedding and everyone thought they were real gold. Amazing quality from HUE.", rating: 5 },
         { id: 2, name: "Rahul Verma", handle: "@rahul_v", text: "Bought the layered chain set for my wife. The packaging and the finish of the product exceeded my expectations. Highly recommend!", rating: 5 },
-        { id: 3, name: "Priya Iyer", handle: "@priya_jewels", text: "Finding traditional designs that don't feel heavy is hard. Astra's signature earrings are my new favorites for daily wear.", rating: 5 }
+        { id: 3, name: "Priya Iyer", handle: "@priya_jewels", text: "Finding traditional designs that don't feel heavy is hard. HUE's signature earrings are my new favorites for daily wear.", rating: 5 }
     ],
     homeCategories: [
-        { id: 1, name: 'Women', image: 'assets/Main_Categories/women.png', path: 'shop.html?section=women' },
-        { id: 2, name: 'Men', image: 'assets/Main_Categories/men.png', path: 'shop.html?section=men' },
-        { id: 3, name: 'Kids', image: 'assets/Main_Categories/kids.png', path: 'shop.html?section=kids' },
-        { id: 4, name: 'Traditional', image: 'assets/Main_Categories/traditional.png', path: 'shop.html?category=traditional' },
+        { id: 1, name: 'Necklaces', image: 'https://images.unsplash.com/photo-1599643478524-fb66f7ca265b?auto=format&fit=crop&w=300&q=80', path: 'shop.html?category=necklaces' },
+        { id: 2, name: 'Bridal Sets', image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=300&q=80', path: 'shop.html?category=bridal' },
+        { id: 3, name: 'Bangles', image: 'https://images.unsplash.com/photo-1610030469983-98e550d61dc9?auto=format&fit=crop&w=300&q=80', path: 'shop.html?category=bangles' },
+        { id: 4, name: 'Earrings', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=300&q=80', path: 'shop.html?category=earrings' },
     ],
     footer: {
         storeName: 'Our Store',
-        description: 'Astra by Ash was started in 2022 to bring elegance and tradition to your everyday style.',
+        description: 'HUE was started in 2022 to bring elegance and tradition to your everyday style.',
         newsletterText: 'Sign up for our newsletter and receive 10% off your',
-        copyright: '©2026 Astra by Ash. All Rights Reserved.',
+        copyright: '©2026 HUE. All Rights Reserved.',
         credit: 'Designed By RDR Technology',
         instagram: 'https://www.instagram.com/rdr.technology?igsh=eTc5NWUwOWN0eHBs'
     },
     navCategories: [
-        { name: 'Women', path: 'shop.html?section=women', dropdown: [] },
-        { name: 'Men', path: 'shop.html?section=men', dropdown: [] },
-        { name: 'Kids', path: 'shop.html?section=kids', dropdown: [] },
-        { name: 'Offer Zone', path: 'shop.html', dropdown: [] },
-        { name: 'About Us', path: 'about.html', dropdown: [] },
-        { name: 'Contact Us', path: 'contact.html', dropdown: [] }
+        { name: 'Necklaces', path: 'shop.html?category=necklaces', dropdown: ['Stone Necklace', 'Choker', 'Long Haram', 'Short Haram'] },
+        { name: 'Bridal Sets', path: 'shop.html?category=bridal', dropdown: ['Antique Bridal', 'Nakshi Bridal'] },
+        { name: 'Bangles', path: 'shop.html?category=bangles', dropdown: [] },
+        { name: 'Earrings', path: 'shop.html?category=earrings', dropdown: [] },
+        { name: 'Offer Zone', path: 'shop.html?category=offers', dropdown: [] }
     ],
     sectionCategories: {
-        women: [
-            { name: "Anklets", count: 42 },
-            { name: "Adjustable Bangle", count: 25 },
-            { name: "Diamond Replica", count: 18 },
-            { name: "Bracelet", count: 64 },
-            { name: "Earrings", count: 210 },
-            { name: "Hindu God Chains", count: 12 },
-            { name: "Rings", count: 56 },
-            { name: "Traditional", count: 42 },
-            { name: "Hip Chain", count: 15 },
-            { name: "Jumkhas", count: 32 },
-            { name: "Bangles", count: 85 },
-            { name: "Chains", count: 120 },
-            { name: "Neckpiece", count: 124 },
-            { name: "Hindu Thali chains", count: 8 },
-            { name: "Toe Ring", count: 14 }
+        necklaces: [
+            { name: "Stone Necklace", count: 42 },
+            { name: "Choker", count: 25 },
+            { name: "Long Haram", count: 18 },
+            { name: "Short Haram", count: 64 },
+            { name: "Layered Chains", count: 12 }
         ],
-        men: [
-            { name: 'Bracelets', count: 18 },
-            { name: 'Chains', count: 35 },
-            { name: 'Hindu God Chains', count: 12 },
-            { name: 'Cross Chains', count: 8 }
+        bridal: [
+            { name: 'Antique Bridal', count: 18 },
+            { name: 'Nakshi Bridal', count: 35 },
+            { name: 'Temple Jewelry', count: 12 }
         ],
-        kids: [
-            { name: 'Earrings', count: 24 },
-            { name: 'Neckpiece', count: 15 },
-            { name: 'Bracelets', count: 12 },
-            { name: 'Chains', count: 10 }
+        bangles: [
+            { name: 'Gold Bangles', count: 24 },
+            { name: 'Stone Bangles', count: 15 },
+            { name: 'Ruby Studded', count: 12 }
         ]
     }
 };
+

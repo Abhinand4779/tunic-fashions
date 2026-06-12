@@ -1,5 +1,5 @@
 /**
- * ASTRA - Home Page Logic
+ * HUE - Home Page Logic
  * Replaces Home.jsx logic
  */
 
@@ -132,7 +132,7 @@ const HomeHandler = {
                             <span class="promo-slide__badge">${slide.badge}</span>
                         </div>
                         <div class="promo-slide__content">
-                            <p class="promo-slide__eyebrow">Astra by Ash — Featured</p>
+                            <p class="promo-slide__eyebrow">HUE — Featured</p>
                             <h2 class="promo-slide__title">${slide.title}</h2>
                             <p class="promo-slide__subtitle">${slide.subtitle}</p>
                             <a href="${slide.link}" class="promo-slide__btn">${slide.btnText}</a>
@@ -248,3 +248,4 @@ const HomeHandler = {
 };
 
 HomeHandler.init();
+

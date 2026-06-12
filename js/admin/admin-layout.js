@@ -1,5 +1,5 @@
 /**
- * ASTRA - Admin Layout Logic
+ * HUE - Admin Layout Logic
  * Handles sidebar toggling and authentication checks
  */
 
@@ -33,8 +33,8 @@ const AdminLayout = {
 
         sidebar.innerHTML = `
             <div class="sidebar-brand">
-                <img src="../assets/Logo/original.png" alt="Astra Logo">
-                <h2>ASTRA UI</h2>
+                <img src="../assets/Logo/original.png" alt="HUE Logo">
+                <h2>HUE UI</h2>
             </div>
 
             <nav class="sidebar-nav">
@@ -84,3 +84,4 @@ const AdminLayout = {
 };
 
 AdminLayout.init();
+

@@ -1,5 +1,5 @@
 /**
- * ASTRA - Cart Page Logic
+ * HUE - Cart Page Logic
  * Replaces Cart.jsx logic
  */
 
@@ -113,3 +113,4 @@ window.addEventListener('cartUpdated', () => CartHandler.render());
 window.addEventListener('siteDataLoaded', () => CartHandler.render());
 if (!Site.loading) CartHandler.render();
 else setTimeout(() => CartHandler.render(), 500); // Fallback
+
