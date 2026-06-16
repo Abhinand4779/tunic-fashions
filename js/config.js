@@ -3,7 +3,7 @@
  * Replaces defaultConfig in SiteContext.jsx
  */
 
-const API_BASE_URL = 'http://127.0.0.1:8085/api';
+const API_BASE_URL = 'https://huestorybyreshma.com/api';
 
 const DEFAULT_CONFIG = {
     hero: {
