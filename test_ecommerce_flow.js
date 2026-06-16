@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 async function testEcommerceFlow() {
-    const API_URL = 'http://localhost:8085/api';
+    const API_URL = 'https://huestorybyreshma.com/api';
     let adminToken = '';
     let categoryId = '';
     let productId = '';
@@ -135,3 +135,4 @@ async function testEcommerceFlow() {
 }
 
 testEcommerceFlow();
+

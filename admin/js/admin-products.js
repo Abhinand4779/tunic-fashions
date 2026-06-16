@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8085/api';
+const API_URL = 'https://huestorybyreshma.com/api';
 
 const AdminProducts = {
     products: [],
@@ -108,5 +108,6 @@ const AdminProducts = {
 document.addEventListener('DOMContentLoaded', () => {
     AdminProducts.init();
 });
+
 
 
