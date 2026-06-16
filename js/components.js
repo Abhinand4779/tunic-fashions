@@ -102,6 +102,12 @@ const Components = {
             "Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"
         ];
         
+                                                const countrySelector = document.querySelector('.country-selector');
+        if (countrySelector) {
+            const dropdown = countrySelector.querySelector('.dropdown');
+            countrySelector.addEventListener('mouseleave', () => { if (dropdown) dropdown.style.display = ''; });
+        }
+
         const countryListEls = document.querySelectorAll('.country-dropdown-list');
         const searchInputs = document.querySelectorAll('.country-search-input');
         
@@ -118,8 +124,12 @@ const Components = {
                 listEl.querySelectorAll('.country-link').forEach(link => {
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
-                        if (window.Currency) {
+                        if (typeof Currency !== "undefined") {
                             Currency.setCountry(e.target.getAttribute('data-country'));
+                            const dropdown = e.target.closest('.dropdown');
+                            if (dropdown) {
+                                dropdown.style.setProperty('display', 'none', 'important');
+                            }
                         }
                     });
                 });
@@ -147,7 +157,6 @@ const Components = {
     }
 };
 
-// Listen for updates and initial load
 window.addEventListener('siteDataLoaded', () => {
     Components.renderNavbar();
     Components.renderFooter();
@@ -158,8 +167,7 @@ window.addEventListener('siteDataLoaded', () => {
 window.addEventListener('cartUpdated', () => Components.renderNavbar());
 window.addEventListener('wishlistUpdated', () => Components.renderNavbar());
 
-// Fallback if data is already loaded
-if (!Site.loading) {
+if (typeof Site !== 'undefined' && !Site.loading) {
     Components.renderNavbar();
     Components.renderFooter();
     Components.attachNavbarEvents();
