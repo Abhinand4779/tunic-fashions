@@ -117,39 +117,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-// Dynamic Site Settings Initialization
-document.addEventListener('DOMContentLoaded', () => {
-    const configData = localStorage.getItem('hue_site_config');
-    const SiteConfig = configData ? JSON.parse(configData) : {
-        hero: {
-            subtitle: 'CRAFTING ELEGANCE.',
-            title: 'TELLING YOUR STORY.',
-            desc: 'Discover timeless sarees crafted with passion, designed to celebrate your unique journey. Because every story deserves to shine.'
-        },
-        nav: [
-            { label: 'HOME', url: 'index.html' },
-            { label: 'SHOP', url: 'shop.html' },
-            { label: 'CATEGORIES', url: 'shop.html' },
-            { label: 'PAGES', url: '#' },
-            { label: 'ABOUT US', url: 'about-us.html' }
-        ]
-    };
-
-    // 1. Render Navbar
-    const navContainer = document.getElementById('navbar-links');
-    if (navContainer) {
-        navContainer.innerHTML = SiteConfig.nav.map(link => 
-            <div class="nav-item"><a href="" class="nav-link"></a></div>
-        ).join('');
-    }
-
-    // 2. Render Hero (only on index.html)
-    const heroSubtitle = document.getElementById('hero-dynamic-subtitle');
-    const heroTitle = document.getElementById('hero-dynamic-title');
-    const heroDesc = document.getElementById('hero-dynamic-desc');
-
-    if (heroSubtitle) heroSubtitle.innerText = SiteConfig.hero.subtitle;
-    if (heroTitle) heroTitle.innerText = SiteConfig.hero.title;
-    if (heroDesc) heroDesc.innerText = SiteConfig.hero.desc;
-});
