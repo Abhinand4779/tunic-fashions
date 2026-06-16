@@ -1,6 +1,6 @@
 .footer {
-    background-color: #000000;
-    /* Black background as requested */
+    background-color: rgb(15, 34, 48);
+    /* Navy Blue background to match navbar */
     color: #ffffff;
     /* White text for contrast */
     padding: 4rem 5% 2rem;

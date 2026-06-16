@@ -192,7 +192,7 @@
     gap: 2rem;
 }
 
-.view-switcher {
+.view-switcher, .view-toggles {
     display: flex;
     gap: 12px;
     border-right: 1px solid #eee;

@@ -180,28 +180,25 @@ const Auth = {
         };
 
         try {
-            const rawToken = localStorage.getItem('astra_token');
-            const token = (rawToken && rawToken !== 'null' && rawToken !== 'undefined') ? rawToken : null;
+            // Mock backend locally for static deployment
+            const order = {
+                _id: 'ord_' + Date.now(),
+                shipping: shippingInfo,
+                total: finalTotal,
+                items: this.cart,
+                status: 'Processing',
+                createdAt: new Date().toISOString()
+            };
+            
+            this.userOrders.unshift(order);
+            
+            // Persist for admin dashboard
+            const allOrders = JSON.parse(localStorage.getItem('hue_orders') || '[]');
+            allOrders.unshift(order);
+            localStorage.setItem('hue_orders', JSON.stringify(allOrders));
 
-            const res = await fetch(`${API_BASE_URL}/orders/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-                },
-                body: JSON.stringify(orderData)
-            });
-
-            if (res.ok) {
-                const createdOrder = await res.json();
-                if (!createdOrder.checkout_url) {
-                    this.userOrders.unshift(createdOrder);
-                }
-                this.clearCart();
-                return createdOrder;
-            } else {
-                throw new Error("Failed to place order via backend.");
-            }
+            this.clearCart();
+            return order;
         } catch (err) {
             console.error("Place Order Failed", err);
             throw err;
@@ -237,4 +234,6 @@ const Auth = {
 // Initial Sync
 if (Auth.user) setTimeout(() => Auth.syncUserOrders(), 100);
 if (Auth.admin) setTimeout(() => Auth.syncAdminData(), 100);
+
+
 

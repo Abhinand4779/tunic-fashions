@@ -16,20 +16,52 @@
 <body>
     <div class="app-container">
         <!-- Static Navbar -->
-        <nav class="navbar-container" id="main-nav">
-            <div class="navbar-wrapper">
-                <div class="navbar-logo">
-                    <a href="index.html" class="navbar-logo-link">
-                        <img src="assets/Logo/hue%20logo.png" alt="HUE">
-                        <span class="logo-subtitle">HUE</span>
-                    </a>
+        <nav class="navbar-container" id="main-nav" style="padding: 0; background-color: rgb(15, 34, 48); box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+    <!-- TOP LOGO ROW -->
+    <div style="text-align: center; padding: 1rem 0; border-bottom: 1px solid rgba(212,175,55,0.15);">
+        <a href="index.html" style="display: inline-block; text-decoration: none;">
+            <img src="assets/Logo/hue logo.png" alt="HUE" style="height: 85px; max-width: 100%; object-fit: contain; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+    </div>
+    
+    <!-- BOTTOM NAV ROW -->
+    <div class="navbar-wrapper" style="padding: 0.5rem 5%; justify-content: space-between; max-width: 1400px; margin: 0 auto; display: flex; align-items: center;">
+        <div class="navbar-links" id="navbar-links">
+                    <div class="nav-item">
+                        <a href="shop.html?category=necklaces" class="nav-link">Necklaces <i
+                                class="bi bi-chevron-down ms-1" style="font-size:0.7rem;"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="shop.html?sub=stone-necklace" class="dropdown-link">Stone Necklace</a></li>
+                            <li><a href="shop.html?sub=choker" class="dropdown-link">Choker</a></li>
+                            <li><a href="shop.html?sub=long-haram" class="dropdown-link">Long Haram</a></li>
+                            <li><a href="shop.html?sub=short-haram" class="dropdown-link">Short Haram</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-item">
+                        <a href="shop.html?category=bridal" class="nav-link">Bridal Sets <i
+                                class="bi bi-chevron-down ms-1" style="font-size:0.7rem;"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="shop.html?sub=antique-bridal" class="dropdown-link">Antique Bridal</a></li>
+                            <li><a href="shop.html?sub=nakshi-bridal" class="dropdown-link">Nakshi Bridal</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-item"><a href="shop.html?category=bangles" class="nav-link">Bangles</a></div>
+                    <div class="nav-item"><a href="shop.html?category=earrings" class="nav-link">Earrings</a></div>
+                    <div class="nav-item"><a href="shop.html?category=offers" class="nav-link">Offer Zone</a></div>
                 </div>
-                <div class="navbar-links" id="navbar-links">
-                    <div class="nav-item"><a href="shop.html?slug=women" class="nav-link">Women</a></div>
-                    <div class="nav-item"><a href="shop.html?slug=men" class="nav-link">Men</a></div>
-                    <div class="nav-item"><a href="shop.html?slug=kids" class="nav-link">Kids</a></div>
-                </div>
-                <div class="navbar-icons">
+                <div class="navbar-icons"><style>@media (max-width: 992px) { .country-selector { display: none !important; } }</style>
+                    <div class="nav-item country-selector" style="position: relative; height: 100%; display: flex; align-items: center; margin-right: 15px;">
+                        <a href="#" class="nav-link" style="text-transform: none; letter-spacing: normal;">Sweden | INR
+                            ₹ <i class="bi bi-chevron-down ms-1" style="font-size:0.7rem;"></i></a>
+                        <ul class="dropdown" style="padding: 10px; width: 220px; left: -50px;">
+                            <li style="padding: 0 10px 10px 10px; border-bottom: 1px solid #eee; margin-bottom: 5px;">
+                                <div style="border: 1px solid #000; padding: 5px;">
+                                    <input type="text" class="country-search-input" placeholder="Search" style="border: none; outline: none; width: 100%; font-size: 0.9rem;">
+                                </div>
+                            </li>
+                            <li class="country-dropdown-list" style="max-height: 200px; overflow-y: auto;"></li>
+                        </ul>
+                    </div>
                     <a href="profile.html" class="icon-link"><i class="bi bi-person"></i></a>
                     <button class="icon-button" id="search-toggle"><i class="bi bi-search"></i></button>
                     <a href="wishlist.html" class="icon-link"><i class="bi bi-heart"></i></a>
@@ -38,6 +70,15 @@
                         <span class="cart-badge" id="cart-count">0</span>
                     </a>
                     <button class="mobile-toggle" id="mobile-toggle"><i class="bi bi-list"></i></button>
+                </div>
+            </div>
+            <div class="search-overlay" id="search-overlay">
+                <div class="search-container">
+                    <form class="search-form" id="search-form">
+                        <input type="text" placeholder="Search for products..." id="search-input">
+                        <button type="submit" class="search-submit"><i class="bi bi-search"></i></button>
+                    </form>
+                    <button class="search-close" id="search-close"><i class="bi bi-x-lg"></i></button>
                 </div>
             </div>
         </nav>
@@ -94,6 +135,9 @@
     <script src="js/site.js" defer></script>
     <script src="js/components.js" defer></script>
     <script src="js/profile.js" defer></script>
+<script src="js/currency.js"></script>
 </body>
 
 </html>
+
+

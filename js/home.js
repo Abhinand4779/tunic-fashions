@@ -249,3 +249,5 @@ const HomeHandler = {
 
 HomeHandler.init();
 
+
+window.addEventListener('currencyUpdated', () => { HomeHandler.renderHero(); HomeHandler.renderPromo(); });

@@ -46,6 +46,20 @@
                     <div class="nav-item"><a href="shop.html?slug=kids" class="nav-link">Kids</a></div>
                 </div>
                 <div class="navbar-icons">
+<style>@media (max-width: 992px) { .country-selector { display: none !important; } }</style>
+                    <div class="nav-item country-selector" style="position: relative; height: 100%; display: flex; align-items: center; margin-right: 15px;">
+                        <a href="#" class="nav-link country-nav-label" style="text-transform: none; letter-spacing: normal;">Sweden | INR ? <i class="bi bi-chevron-down ms-1" style="font-size:0.7rem;"></i></a>
+                        <ul class="dropdown" style="padding: 10px; width: 220px; left: -50px; text-align: left;">
+                            <li style="padding: 0 10px 10px 10px; border-bottom: 1px solid #333; margin-bottom: 5px;">
+                                <div style="border: 1px solid #444; padding: 5px; background: #222;">
+                                    <input type="text" class="country-search-input" placeholder="Search" style="border: none; outline: none; width: 100%; font-size: 0.9rem; background: transparent; color: #fff;">
+                                </div>
+                            </li>
+                            <li class="country-dropdown-list" style="max-height: 200px; overflow-y: auto;">
+                                <!-- Populated by JS -->
+                            </li>
+                        </ul>
+                    </div>
                     <a href="profile.html" class="icon-link"><i class="bi bi-person"></i></a>
                     <button class="icon-button" id="search-toggle"><i class="bi bi-search"></i></button>
                     <a href="wishlist.html" class="icon-link"><i class="bi bi-heart"></i></a>
@@ -161,6 +175,8 @@
     <script src="js/auth.js" defer></script>
     <script src="js/site.js" defer></script>
     <script src="js/components.js" defer></script>
+<script src="js/currency.js"></script>
 </body>
 
 </html>
+

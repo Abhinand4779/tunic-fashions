@@ -4,24 +4,17 @@
 
 const AdminDashboard = {
     async init() {
-        if (!Auth.admin) {
-            window.location.href = 'login.html';
-            return;
-        }
-
         try {
-            // Fetch Analytics & Orders
-            const [analyticsRes, ordersRes] = await Promise.all([
-                fetch(`${API_BASE_URL}/admin/analytics`, {
-                    headers: { 'Authorization': `Bearer ${Auth.admin.token}` }
-                }),
-                fetch(`${API_BASE_URL}/admin/orders`, {
-                    headers: { 'Authorization': `Bearer ${Auth.admin.token}` }
-                })
-            ]);
-
-            const analytics = analyticsRes.ok ? await analyticsRes.json() : {};
-            const orders = ordersRes.ok ? await ordersRes.json() : [];
+            // Mock Analytics & Orders
+            const orders = JSON.parse(localStorage.getItem('hue_orders') || '[]');
+            const totalOrders = orders.length;
+            const totalRevenue = orders.reduce((sum, o) => sum + (parseFloat(o.total) || 0), 0);
+            
+            const analytics = {
+                total_revenue: totalRevenue,
+                total_orders: totalOrders,
+                total_visits: 1245
+            };
 
             this.render(analytics, orders);
         } catch (e) {
@@ -36,7 +29,7 @@ const AdminDashboard = {
 
         const totalRevenue = analytics.total_revenue || 0;
         const totalOrders = analytics.total_orders || 0;
-        const totalCustomers = (Auth.customers || []).length || 6; // Mock if no endpoint
+        const totalCustomers = 6; // Mock
         const totalVisitors = analytics.total_visits || 0;
         const todayVisitors = Math.round(totalVisitors * 0.1) || 0; // Mock breakdown
 
@@ -230,5 +223,19 @@ const AdminDashboard = {
 };
 
 AdminDashboard.init();
-Components.renderAdminSidebar();
+if (typeof Components !== 'undefined' && Components.renderAdminSidebar) {
+    Components.renderAdminSidebar();
+}
 
+
+
+
+// Mobile Sidebar Toggle Fix
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtns = document.querySelectorAll('.menu-toggle');
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('is-sidebar-open');
+        });
+    });
+});

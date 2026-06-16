@@ -47,7 +47,7 @@ const CartHandler = {
                                     <div class="cart-item-details">
                                         <div class="item-header">
                                             <h4>${item.name}</h4>
-                                            <p class="item-price">${item.price}</p>
+                                            <p class="item-price">${Currency.formatPrice(item.price)}</p>
                                         </div>
                                         <p class="item-meta">Category: ${item.category}</p>
 
@@ -113,4 +113,7 @@ window.addEventListener('cartUpdated', () => CartHandler.render());
 window.addEventListener('siteDataLoaded', () => CartHandler.render());
 if (!Site.loading) CartHandler.render();
 else setTimeout(() => CartHandler.render(), 500); // Fallback
+
+
+window.addEventListener('currencyUpdated', () => CartHandler.renderCart());
 

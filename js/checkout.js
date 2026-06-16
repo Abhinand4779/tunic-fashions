@@ -186,3 +186,6 @@ const CheckoutHandler = {
 
 CheckoutHandler.init();
 
+
+window.addEventListener('currencyUpdated', () => CheckoutHandler.renderSummary());
+

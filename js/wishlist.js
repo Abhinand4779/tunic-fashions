@@ -47,8 +47,8 @@ const WishlistHandler = {
                                     <p class="wishlist-category">${item.category}</p>
                                     <h3 class="wishlist-name" onclick="window.location.href='product.html?id=${item._id || item.id}'">${item.name}</h3>
                                     <div class="wishlist-price-row">
-                                        <span class="wishlist-price">${item.price}</span>
-                                        ${item.oldPrice ? `<span class="wishlist-old-price">${item.oldPrice}</span>` : ''}
+                                        <span class="wishlist-price">${Currency.formatPrice(item.price)}</span>
+                                        ${item.oldPrice ? `<span class="wishlist-old-price">${Currency.formatPrice(item.oldPrice)}</span>` : ''}
                                         ${item.discount ? `<span class="wishlist-discount">${item.discount} OFF</span>` : ''}
                                     </div>
                                     <div class="wishlist-actions">
@@ -82,3 +82,5 @@ window.addEventListener('siteDataLoaded', () => WishlistHandler.render());
 if (!Site.loading) WishlistHandler.render();
 else setTimeout(() => WishlistHandler.render(), 500);
 
+
+window.addEventListener('currencyUpdated', () => WishlistHandler.render());

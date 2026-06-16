@@ -13,44 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: '#ORD-8924', customer: 'Jane Smith', date: '12 Jun 2026', amount: '$45.50', status: 'Pending' }
     ];
 
-    async function fetchOrders() {
-        try {
-            const res = await fetch(`${API_BASE_URL}/orders/all`); // Matches backend logic
-            if (res.ok) {
-                const data = await res.json();
-                if (data && data.length > 0) {
-                    // Map backend data to local structure if needed
-                    orders = data.map(o => ({
-                        id: o._id || o.id,
-                        customer: o.customerName || o.userId || 'Guest',
-                        date: new Date(o.createdAt || Date.now()).toLocaleDateString(),
-                        amount: `₹${o.totalAmount || 0}`,
-                        status: o.status || 'Pending'
-                    }));
-                }
-            } else {
-                fallbackToLocal();
-            }
-        } catch (e) {
-            console.warn('Backend not reachable, using local storage fallback for orders.');
-            fallbackToLocal();
-        }
-        renderTable();
-    }
+    async function fetchOrders() { fallbackToLocal(); renderTable(); }
 
     function fallbackToLocal() {
-        const localOrders = localStorage.getItem('astra_orders');
+        const localOrders = localStorage.getItem('hue_orders');
         if (localOrders) {
             try {
                 const parsed = JSON.parse(localOrders);
                 orders = parsed.map(o => ({
                     id: o.id || o._id,
-                    customer: o.shipping_address?.firstName + ' ' + o.shipping_address?.lastName || 'Guest',
-                    date: o.date || new Date().toLocaleDateString(),
-                    amount: o.total_amount || '$0.00',
-                    status: o.status || 'Pending'
+                    customer: o.shipping?.firstName ? (o.shipping.firstName + ' ' + o.shipping.lastName) : 'Guest',
+                    date: o.createdAt ? new Date(o.createdAt).toLocaleDateString() : new Date().toLocaleDateString(),
+                    amount: o.total ? '$' + parseFloat(o.total).toFixed(2) : '$0.00',
+                    status: o.status || 'Processing'
                 }));
-            } catch(e) {}
+            } catch(e) { console.error(e); }
         }
     }
 
@@ -100,4 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Init
     fetchOrders();
 });
+
+
 

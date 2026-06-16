@@ -21,26 +21,17 @@ const ProductDetailHandler = {
     },
 
     async fetchProduct() {
-        try {
-            const res = await fetch('http://localhost:8085/api/products/' + this.productId);
-            if (res.ok) {
-                this.product = await res.json();
-            } else {
-                // Fallback to static config
-                if (window.Site) {
-                    this.product = window.Site.products.find(p => (p._id || p.id)?.toString() === this.productId);
-                }
-            }
-        } catch (err) {
-            console.error('Failed to fetch from DB', err);
-            if (window.Site) {
-                this.product = window.Site.products.find(p => (p._id || p.id)?.toString() === this.productId);
-            }
+        if (typeof LocalDB !== 'undefined') {
+            let all = LocalDB.getProducts();
+            this.product = all.find(p => (p._id || p.id)?.toString() === this.productId);
+        }
+        if (!this.product && window.Site) {
+            this.product = window.Site.products.find(p => (p._id || p.id)?.toString() === this.productId);
         }
     },
 
     render() {
-        const wrap = document.getElementById('product-detail-wrap');
+        const wrap = document.getElementById('product-page-wrap');
         if (!wrap) return;
 
         const product = this.product;
@@ -57,7 +48,7 @@ const ProductDetailHandler = {
         }
 
         const inWishlist = Auth.isInWishlist(product._id || product.id);
-        const images = product.images && product.images.length > 0 ? product.images : ['assets/Logo/hue%20logo.png'];
+        const images = product.image ? [product.image] : (product.images && product.images.length > 0 ? product.images : ['assets/Logo/hue%20logo.png']);
 
         wrap.innerHTML = `
             <div class="detail-container">
@@ -89,8 +80,8 @@ const ProductDetailHandler = {
                         <h1 class="detail-title">${product.name}</h1>
 
                         <div class="detail-price-wrapper">
-                            <span class="current-price">${product.price}</span>
-                            ${product.oldPrice ? `<span class="old-price">${product.oldPrice}</span>` : ''}
+                            <span class="current-price">${Currency.formatPrice(product.price)}</span>
+                            ${product.oldPrice ? `<span class="old-price">${Currency.formatPrice(product.oldPrice)}</span>` : ''}
                         </div>
 
                         <p class="detail-description">${product.description || ''}</p>
@@ -173,4 +164,9 @@ const ProductDetailHandler = {
 document.addEventListener('DOMContentLoaded', () => {
     ProductDetailHandler.init();
 });
+
+
+window.addEventListener('currencyUpdated', () => ProductDetailHandler.render());
+
+
 

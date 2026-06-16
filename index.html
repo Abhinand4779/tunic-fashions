@@ -18,38 +18,78 @@
 </head>
 
 <body>
+
+    <div id="futuristic-loader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgb(15, 34, 48); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease-out;">
+        <div style="position: relative; width: 100px; height: 100px;">
+            <div style="position: absolute; width: 100%; height: 100%; border: 3px solid transparent; border-top-color: #d4af37; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+            <div style="position: absolute; width: 80%; height: 80%; top: 10%; left: 10%; border: 3px solid transparent; border-top-color: #fff; border-radius: 50%; animation: spin 1.5s linear infinite reverse;"></div>
+            <div style="position: absolute; width: 60%; height: 60%; top: 20%; left: 20%; border: 3px solid transparent; border-top-color: #d4af37; border-radius: 50%; animation: spin 2s linear infinite;"></div>
+        </div>
+        <style>
+            @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+            
+            /* Add Mobile CSS for new-hero here too */
+            @media (max-width: 768px) {
+                .new-hero {
+                    flex-direction: column !important;
+                    padding: 3rem 5% !important;
+                    text-align: center;
+                }
+                .new-hero > div:first-child {
+                    padding-right: 0 !important;
+                    margin-bottom: 3rem;
+                }
+                .new-hero > div:last-child {
+                    width: 100%;
+                    text-align: center !important;
+                }
+                .new-hero h1 {
+                    font-size: 3rem !important;
+                }
+                .new-hero p {
+                    max-width: 100% !important;
+                }
+            }
+        </style>
+        <script>
+            window.addEventListener("load", () => {
+                setTimeout(() => {
+                    const loader = document.getElementById("futuristic-loader");
+                    if(loader) {
+                        loader.style.opacity = "0";
+                        setTimeout(() => loader.style.display = "none", 800);
+                    }
+                }, 1000); // Wait 1 sec for futuristic effect
+            });
+        </script>
+    </div>
+
     <div class="app-container">
         <!-- Static Navbar -->
-        <nav class="navbar-container" id="main-nav">
-            <div class="navbar-wrapper">
-                <div class="navbar-logo">
-                    <a href="index.html" class="navbar-logo-link">
-                        <img src="assets/Logo/hue%20logo.png" alt="HUE">
-                        <span class="logo-subtitle">HUE</span>
-                    </a>
-                </div>
-                <div class="navbar-links" id="navbar-links">
-                    <div class="nav-item">
-                        <a href="shop.html?category=necklaces" class="nav-link">Necklaces <i class="bi bi-chevron-down ms-1" style="font-size:0.7rem;"></i></a>
-                        <ul class="dropdown">
-                            <li><a href="shop.html?sub=stone-necklace" class="dropdown-link">Stone Necklace</a></li>
-                            <li><a href="shop.html?sub=choker" class="dropdown-link">Choker</a></li>
-                            <li><a href="shop.html?sub=long-haram" class="dropdown-link">Long Haram</a></li>
-                            <li><a href="shop.html?sub=short-haram" class="dropdown-link">Short Haram</a></li>
+        <nav class="navbar-container" id="main-nav" style="padding: 0; background-color: rgb(15, 34, 48); box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+    <!-- TOP LOGO ROW -->
+    <div style="text-align: center; padding: 1rem 0; border-bottom: 1px solid rgba(212,175,55,0.15);">
+        <a href="index.html" style="display: inline-block; text-decoration: none;">
+            <img src="assets/Logo/hue logo.png" alt="HUE" style="height: 85px; max-width: 100%; object-fit: contain; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+    </div>
+    
+    <!-- BOTTOM NAV ROW -->
+    <div class="navbar-wrapper" style="padding: 0.5rem 5%; justify-content: space-between; max-width: 1400px; margin: 0 auto; display: flex; align-items: center;">
+        <div class="navbar-links" id="navbar-links"></div>
+        <div class="navbar-icons"><style>@media (max-width: 992px) { .country-selector { display: none !important; } }</style>
+                    <div class="nav-item country-selector" style="position: relative; height: 100%; display: flex; align-items: center; margin-right: 15px;">
+                        <a href="#" class="nav-link" style="text-transform: none; letter-spacing: normal;">Sweden | INR
+                            ₹ <i class="bi bi-chevron-down ms-1" style="font-size:0.7rem;"></i></a>
+                        <ul class="dropdown" style="padding: 10px; width: 220px; left: -50px;">
+                            <li style="padding: 0 10px 10px 10px; border-bottom: 1px solid #eee; margin-bottom: 5px;">
+                                <div style="border: 1px solid #000; padding: 5px;">
+                                    <input type="text" class="country-search-input" placeholder="Search" style="border: none; outline: none; width: 100%; font-size: 0.9rem;">
+                                </div>
+                            </li>
+                            <li class="country-dropdown-list" style="max-height: 200px; overflow-y: auto;"></li>
                         </ul>
                     </div>
-                    <div class="nav-item">
-                        <a href="shop.html?category=bridal" class="nav-link">Bridal Sets <i class="bi bi-chevron-down ms-1" style="font-size:0.7rem;"></i></a>
-                        <ul class="dropdown">
-                            <li><a href="shop.html?sub=antique-bridal" class="dropdown-link">Antique Bridal</a></li>
-                            <li><a href="shop.html?sub=nakshi-bridal" class="dropdown-link">Nakshi Bridal</a></li>
-                        </ul>
-                    </div>
-                    <div class="nav-item"><a href="shop.html?category=bangles" class="nav-link">Bangles</a></div>
-                    <div class="nav-item"><a href="shop.html?category=earrings" class="nav-link">Earrings</a></div>
-                    <div class="nav-item"><a href="shop.html?category=offers" class="nav-link">Offer Zone</a></div>
-                </div>
-                <div class="navbar-icons">
                     <a href="profile.html" class="icon-link"><i class="bi bi-person"></i></a>
                     <button class="icon-button" id="search-toggle"><i class="bi bi-search"></i></button>
                     <a href="wishlist.html" class="icon-link"><i class="bi bi-heart"></i></a>
@@ -71,42 +111,119 @@
             </div>
         </nav>
 
-        <main class="home-container">
-            <!-- HERO -->
-            <section class="hero-section">
-                <div class="hero-banner" id="hero-slider-wrap">
-                    <!-- Loaded by home.js -->
-                </div>
-                <div class="coupon-area" id="coupon-wrap">
-                    <!-- Loaded by home.js -->
-                </div>
-            </section>
+        <main class="home-container" style="background-color: rgb(15, 34, 48); color: #fff; overflow-x: hidden;">
+    <!-- NEW HERO SECTION -->
+    <section class="new-hero" style="display: flex; align-items: center; justify-content: space-between; padding: 6rem 5%; background-color: rgb(15, 34, 48);">
+        <div style="flex: 1; padding-right: 4rem;">
+            <h4 id="hero-dynamic-subtitle" style="color: #d4af37; font-weight: 500; font-size: 1.2rem; margin-bottom: 1rem; letter-spacing: 2px;">CRAFTING ELEGANCE.</h4>
+            <h1 id="hero-dynamic-title" style="font-size: 4.5rem; font-family: 'Playfair Display', serif; margin-bottom: 2rem; line-height: 1.1;">TELLING YOUR STORY.</h1>
+            <p id="hero-dynamic-desc" style="color: #aaa; margin-bottom: 3rem; font-size: 1.1rem; line-height: 1.6; max-width: 80%;">Discover timeless sarees crafted with passion, designed to celebrate your unique journey. Because every story deserves to shine.</p>
+            <a href="shop.html" style="display: inline-block; padding: 15px 40px; background-color: #d4af37; color: #000; text-decoration: none; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">EXPLORE COLLECTIONS</a>
+        </div>
+        <div style="flex: 1; text-align: right;">
+            <img src="assets/hero_saree_navy.png" alt="Hero Saree" style="max-width: 100%; object-fit: contain; box-shadow: -20px 20px 0px rgba(212, 175, 55, 0.1);">
+        </div>
+    </section>
 
-            <!-- HIGHLIGHTS -->
-            <section class="highlights-section">
-                <div class="highlights-grid" id="highlights-wrap">
-                    <!-- Loaded by home.js -->
+    <!-- BROWSE CATEGORIES -->
+    <section style="padding: 5rem 5%; text-align: center; background-color: #fff; color: #000;">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 4rem; color: #000; display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <span style="height: 1px; width: 100px; background-color: #d4af37;"></span>
+            BROWSE CATEGORIES
+            <span style="height: 1px; width: 100px; background-color: #d4af37;"></span>
+        </h3>
+        
+        <div style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;">
+            <div style="text-align: center; cursor: pointer;">
+                <div style="width: 130px; height: 130px; border-radius: 50%; border: 1px solid #d4af37; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; transition: background 0.3s;" onmouseover="this.style.background='rgba(212,175,55,0.1)'" onmouseout="this.style.background='transparent'">
+                    <img src="assets/saree_product_1.png" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
                 </div>
-            </section>
-
-            <!-- PROMO CAROUSEL -->
-            <section class="promo-carousel-section" id="promo-carousel-wrap">
-                <!-- Loaded by home.js -->
-            </section>
-
-            <!-- SHOP BY CATEGORY -->
-            <section class="shop-by-category container">
-                <h2 class="section-title">Shop by Category</h2>
-                <div class="category-grid" id="home-categories-wrap">
-                    <!-- Loaded by home.js -->
+                <h5 style="font-size: 0.9rem; letter-spacing: 1px; font-weight: 600;">SILK SAREES</h5>
+            </div>
+            <div style="text-align: center; cursor: pointer;">
+                <div style="width: 130px; height: 130px; border-radius: 50%; border: 1px solid #d4af37; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; transition: background 0.3s;" onmouseover="this.style.background='rgba(212,175,55,0.1)'" onmouseout="this.style.background='transparent'">
+                    <img src="assets/saree_product_2.png" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
                 </div>
-            </section>
+                <h5 style="font-size: 0.9rem; letter-spacing: 1px; font-weight: 600;">BANARASI SAREES</h5>
+            </div>
+            <div style="text-align: center; cursor: pointer;">
+                <div style="width: 130px; height: 130px; border-radius: 50%; border: 1px solid #d4af37; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; transition: background 0.3s;" onmouseover="this.style.background='rgba(212,175,55,0.1)'" onmouseout="this.style.background='transparent'">
+                    <img src="assets/saree_product_3.png" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h5 style="font-size: 0.9rem; letter-spacing: 1px; font-weight: 600;">CHIFFON SAREES</h5>
+            </div>
+            <div style="text-align: center; cursor: pointer;">
+                <div style="width: 130px; height: 130px; border-radius: 50%; border: 1px solid #d4af37; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; transition: background 0.3s;" onmouseover="this.style.background='rgba(212,175,55,0.1)'" onmouseout="this.style.background='transparent'">
+                    <img src="assets/saree_product_4.png" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h5 style="font-size: 0.9rem; letter-spacing: 1px; font-weight: 600;">GEORGETTE SAREES</h5>
+            </div>
+            <div style="text-align: center; cursor: pointer;">
+                <div style="width: 130px; height: 130px; border-radius: 50%; border: 1px solid #d4af37; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; transition: background 0.3s;" onmouseover="this.style.background='rgba(212,175,55,0.1)'" onmouseout="this.style.background='transparent'">
+                    <img src="assets/saree_product_1.png" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h5 style="font-size: 0.9rem; letter-spacing: 1px; font-weight: 600;">ORGANZA SAREES</h5>
+            </div>
+            <div style="text-align: center; cursor: pointer;">
+                <div style="width: 130px; height: 130px; border-radius: 50%; border: 1px solid #d4af37; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; transition: background 0.3s;" onmouseover="this.style.background='rgba(212,175,55,0.1)'" onmouseout="this.style.background='transparent'">
+                    <img src="assets/saree_product_2.png" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h5 style="font-size: 0.9rem; letter-spacing: 1px; font-weight: 600;">FESTIVE SAREES</h5>
+            </div>
+        </div>
+    </section>
 
-            <!-- TESTIMONIALS -->
-            <section class="testimonials-section" id="testimonials-wrap">
-                <!-- Loaded by home.js -->
-            </section>
-        </main>
+    <!-- OUR SAREE COLLECTION -->
+    <section style="padding: 5rem 5%; text-align: center; background-color: #fcfcfc;">
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 4rem; color: #000; display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <span style="height: 1px; width: 100px; background-color: #d4af37;"></span>
+            OUR SAREE COLLECTION
+            <span style="height: 1px; width: 100px; background-color: #d4af37;"></span>
+        </h3>
+        
+        <div id="new-saree-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 4rem;">
+            <!-- Javascript will inject 8 cards here -->
+        </div>
+
+        <a href="shop.html" style="display: inline-block; padding: 15px 40px; background-color: rgb(15, 34, 48); color: #fff; text-decoration: none; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px; transition: background 0.3s;" onmouseover="this.style.background='#d4af37'; this.style.color='#000';" onmouseout="this.style.background='rgb(15, 34, 48)'; this.style.color='#fff';">VIEW ALL SAREES</a>
+    </section>
+
+    <!-- FEATURES -->
+    <section style="padding: 4rem 5%; background-color: #fff; display: flex; justify-content: space-around; flex-wrap: wrap; text-align: center;">
+        <div style="flex: 1; min-width: 200px; margin-bottom: 2rem;">
+            <i class="bi bi-gem" style="font-size: 2.5rem; color: #d4af37; margin-bottom: 1rem; display: block;"></i>
+            <h5 style="font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 1px; color: #000; font-weight: 600;">PREMIUM QUALITY</h5>
+            <p style="color: #666; font-size: 0.9rem;">Finest fabrics & craftsmanship</p>
+        </div>
+        <div style="flex: 1; min-width: 200px; margin-bottom: 2rem;">
+            <i class="bi bi-patch-check" style="font-size: 2.5rem; color: #d4af37; margin-bottom: 1rem; display: block;"></i>
+            <h5 style="font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 1px; color: #000; font-weight: 600;">AUTHENTIC WEAVES</h5>
+            <p style="color: #666; font-size: 0.9rem;">Handpicked & curated with love</p>
+        </div>
+        <div style="flex: 1; min-width: 200px; margin-bottom: 2rem;">
+            <i class="bi bi-truck" style="font-size: 2.5rem; color: #d4af37; margin-bottom: 1rem; display: block;"></i>
+            <h5 style="font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 1px; color: #000; font-weight: 600;">SECURE SHIPPING</h5>
+            <p style="color: #666; font-size: 0.9rem;">Safe & reliable delivery across India</p>
+        </div>
+        <div style="flex: 1; min-width: 200px; margin-bottom: 2rem;">
+            <i class="bi bi-headset" style="font-size: 2.5rem; color: #d4af37; margin-bottom: 1rem; display: block;"></i>
+            <h5 style="font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 1px; color: #000; font-weight: 600;">CUSTOMER SUPPORT</h5>
+            <p style="color: #666; font-size: 0.9rem;">We're here to help you always</p>
+        </div>
+    </section>
+
+    <!-- BOTTOM PROMO -->
+    <section style="padding: 0; background-color: rgb(10, 24, 35); display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(212,175,55,0.3);">
+        <div style="padding: 6rem 5%; flex: 1;">
+            <h4 style="color: #d4af37; font-weight: 500; font-size: 1rem; margin-bottom: 1rem; letter-spacing: 2px;">ELEGANCE IN EVERY DRAPE.</h4>
+            <h1 style="font-size: 3rem; font-family: 'Playfair Display', serif; margin-bottom: 2rem; line-height: 1.2;">MADE FOR YOUR<br>SPECIAL MOMENTS.</h1>
+            <a href="shop.html" style="display: inline-block; padding: 15px 40px; background-color: #d4af37; color: #000; text-decoration: none; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">SHOP NOW</a>
+        </div>
+        <div style="flex: 1; text-align: right; overflow: hidden;">
+            <img src="assets/floral_banner.png" alt="Floral Illustration" style="max-height: 500px; object-fit: contain; margin-right: 5%;">
+        </div>
+    </section>
+</main>
 
         <!-- Static Footer -->
         <footer class="footer" id="main-footer">
@@ -156,6 +273,49 @@
     <script src="js/site.js" defer></script>
     <script src="js/components.js" defer></script>
     <script src="js/home.js" defer></script>
+    <script src="js/local-db.js"></script>
+    <script src="js/currency.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById("new-saree-grid");
+    if (!grid) return;
+    
+    const sarees = (typeof LocalDB !== "undefined") ? LocalDB.getProducts() : [];
+    
+    grid.innerHTML = sarees.map(s => `
+          <div style="background: #fff; padding: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee;">
+              <div style="width: 100%; height: 350px; background-color: rgb(15, 34, 48); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                  <img src="${s.image}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div style="padding: 1.5rem;">
+                  <div style="font-size: 0.75rem; color: #777; font-weight: 500; letter-spacing: 1px; margin-bottom: 0.3rem; text-transform: uppercase;">${s.subcategory ? s.subcategory : s.category}</div>
+                  <h4 style="font-size: 1rem; color: #000; margin-bottom: 0.5rem; font-weight: 600;">${s.name}</h4>
+                <p style="font-size: 1.1rem; color: #000; font-weight: bold; margin-bottom: 1.5rem;">${(typeof Currency !== "undefined") ? Currency.formatPrice(s.price) : '?' + s.price}</p>
+                <a href="product.html?id=${s.id || s._id}" style="display: block; width: 100%; padding: 12px; background-color: rgb(15, 34, 48); color: #fff; text-decoration: none; font-size: 0.8rem; letter-spacing: 1px; font-weight: bold; transition: background 0.3s;" onmouseover="this.style.background='#000';" onmouseout="this.style.background='rgb(15, 34, 48)';">VIEW DETAILS</a>
+            </div>
+        </div>
+    `).join("");
+    
+    // Bind currency updates to re-render the grid
+    window.addEventListener('currencyUpdated', () => {
+        const pTags = grid.querySelectorAll('p');
+        sarees.forEach((s, idx) => {
+            if(pTags[idx]) pTags[idx].textContent = Currency.formatPrice(s.price);
+        });
+    });
+});
+</script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
