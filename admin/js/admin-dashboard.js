@@ -42,7 +42,7 @@ const AdminDashboard = {
             <div class="admin-dashboard-light">
                 
                 <!-- 4 TOP STAT CARDS -->
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
                     
                     <div class="premium-card stat-card-light">
                         <div class="stat-label">TOTAL ORDERS</div>
@@ -122,7 +122,7 @@ const AdminDashboard = {
                 .stat-icon {
                     font-size: 1.5rem;
                 }
-                .chart-card {
+                .chart-card { overflow: hidden;
                     padding: 2rem;
                 }
                 .chart-header {
@@ -239,3 +239,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
