@@ -31,19 +31,21 @@
             /* Add Mobile CSS for new-hero here too */
             @media (max-width: 768px) {
                 .new-hero {
-                    height: auto !important;
-                    min-height: 550px !important;
-                    padding: 4rem 5% 280px 5% !important; /* Extra padding at the bottom to hold the image */
+                    height: 70vh !important;
+                    min-height: 500px !important;
+                    padding: 2rem 5% !important;
                     text-align: center;
-                    align-items: flex-start !important; /* Pushes text to the top */
-                    justify-content: center !important;
-                    background: url('assets/hero_saree_navy.png') right bottom / auto 280px no-repeat rgb(15, 34, 48) !important;
+                    align-items: center !important; /* Center vertically */
+                    justify-content: center !important; /* Center horizontally */
+                    background: url('assets/hero_saree_navy.png') center/cover no-repeat !important;
                 }
                 .new-hero h1 {
-                    font-size: 3rem !important;
+                    font-size: 2.5rem !important;
                 }
                 .new-hero p {
                     max-width: 100% !important;
+                    margin-left: auto;
+                    margin-right: auto;
                 }
             }
         </style>
