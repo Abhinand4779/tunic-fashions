@@ -1,4 +1,4 @@
-const API_URL = 'https://huestorybyreshma.com/api';
+const API_URL = 'https://huestorybyreshma.com/server/api';
 
 const ShopHandler = {
     selectedCategories: [],
@@ -219,4 +219,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.addEventListener('currencyUpdated', () => ShopHandler.render());
+
 

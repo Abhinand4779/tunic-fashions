@@ -1,4 +1,4 @@
-const API_URL = 'https://huestorybyreshma.com/api';
+const API_URL = 'https://huestorybyreshma.com/server/api';
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Populate categories dynamically from API
@@ -68,4 +68,5 @@ async function saveProduct() {
         btn.innerText = 'Save Product';
     }
 }
+
 

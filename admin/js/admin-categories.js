@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.querySelector('.search-mini input');
     
     let categories = [];
-    const API_URL = 'https://huestorybyreshma.com/api';
+    const API_URL = 'https://huestorybyreshma.com/server/api';
 
     async function fetchCategories() {
         try {
@@ -122,4 +122,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Init
     fetchCategories();
 });
+
 

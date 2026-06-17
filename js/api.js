@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://huestorybyreshma.com/api';
+const API_BASE_URL = 'https://huestorybyreshma.com/server/api';
 
 /**
  * Helper function to fetch from the API.
@@ -55,4 +55,5 @@ async function trackVisit() {
 if (typeof window !== 'undefined') {
     window.addEventListener('DOMContentLoaded', trackVisit);
 }
+
 

@@ -3,7 +3,7 @@
  * Replaces defaultConfig in SiteContext.jsx
  */
 
-const API_BASE_URL = 'https://huestorybyreshma.com/api';
+const API_BASE_URL = 'https://huestorybyreshma.com/server/api';
 
 const DEFAULT_CONFIG = {
     hero: {
@@ -105,4 +105,5 @@ const DEFAULT_CONFIG = {
         ]
     }
 };
+
 
