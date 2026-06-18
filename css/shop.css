@@ -541,7 +541,8 @@
 
 @media (max-width: 576px) {
     .grid-view {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
     }
 
     .list-view .premium-product-card {
