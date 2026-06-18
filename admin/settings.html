@@ -2429,11 +2429,12 @@
 
 
                 
-                <div class="ads-header-row">
+                <div class="ads-header-row" style="display: flex; justify-content: space-between; align-items: center;">
                     <h2>Storefront Settings</h2>
+                    <button type="submit" form="settings-form" class="btn-apply" style="font-size: 1rem; padding: 0.6rem 2rem;">Save Changes</button>
                 </div>
 
-                <div class="ads-table-card" style="padding: 2rem;">
+                <div class="ads-table-card" style="padding: 2rem; padding-bottom: 10rem;">
                     <form id="settings-form" onsubmit="saveSettings(event)">
                         <h3 class="form-label" style="font-size: 1.1rem; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1.5rem;">Navbar Settings</h3>
                         <div class="form-group" style="margin-bottom: 1rem;">
