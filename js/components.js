@@ -175,6 +175,23 @@ window.addEventListener('siteDataLoaded', () => {
     Components.renderFooter();
     Components.attachNavbarEvents();
     Components.attachAdminNavbarEvents();
+
+    // Populate Promo Banner Marquee
+    const marqueeContainer = document.querySelector('.promo-banner-marquee');
+    const marqueeContent = document.querySelector('.marquee-content');
+    if (marqueeContainer && marqueeContent) {
+        if (window.Site && window.Site.config && window.Site.config.coupon && window.Site.config.coupon.text) {
+            const promoText = window.Site.config.coupon.text;
+            let spansHtml = '';
+            for (let i = 0; i < 15; i++) {
+                spansHtml += `<span>${promoText}</span>`;
+            }
+            marqueeContent.innerHTML = spansHtml;
+            marqueeContainer.style.display = 'flex';
+        } else {
+            marqueeContainer.style.display = 'none';
+        }
+    }
 });
 
 window.addEventListener('cartUpdated', () => Components.renderNavbar());

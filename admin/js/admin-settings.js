@@ -52,6 +52,7 @@ async function loadSettings() {
         }
     }
 
+    document.getElementById('promo-banner').value = backendSettings.announcement_bar || '';
     document.getElementById('hero-subtitle').value = config.hero.subtitle || '';
     document.getElementById('hero-title').value = config.hero.title || '';
     document.getElementById('hero-desc').value = config.hero.desc || '';
@@ -175,6 +176,7 @@ window.saveSettings = async function(e) {
             hero_subtitle: config.hero.subtitle,
             hero_title: config.hero.title,
             hero_desc: config.hero.desc,
+            announcement_bar: document.getElementById('promo-banner').value,
             main_nav_links: JSON.stringify(navLinks),
             navbar_categories: JSON.stringify(selectedNavCats)
         }
