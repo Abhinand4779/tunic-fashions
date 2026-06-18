@@ -107,7 +107,7 @@ const ShopHandler = {
 
         wrap.innerHTML = `
             <div class="shop-container">
-                <aside class="shop-sidebar ${this.isFilterOpen ? 'open' : ''}">
+                <aside class="shop-sidebar ${this.isFilterOpen ? 'mobile-active' : ''}">
                     <div class="filter-close" onclick="ShopHandler.toggleFilter(false)"><i class="bi bi-x-lg"></i></div>
                     
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -173,9 +173,9 @@ const ShopHandler = {
                 </aside>
                 
                 <main class="shop-main">
-                    <div class="shop-toolbar">
+                    <div class="content-toolbar">
                         <button class="mobile-filter-btn" onclick="ShopHandler.toggleFilter(true)"><i class="bi bi-funnel"></i> Filter</button>
-                        <div class="toolbar-right">
+                        <div class="toolbar-right" style="margin-left: auto;">
                             <span class="showing-results">Showing ${filteredProducts.length > 0 ? '1' : '0'}-${filteredProducts.length} results</span>
                             <div class="view-toggles">
                                 <button class="view-btn ${this.viewMode === 'grid' ? 'active' : ''}" onclick="ShopHandler.setView('grid')"><i class="bi bi-grid"></i></button>
