@@ -37,7 +37,6 @@
                     text-align: center;
                     align-items: center !important; /* Center vertically */
                     justify-content: center !important; /* Center horizontally */
-                    background: url('assets/hero_saree_navy.png') center/cover no-repeat !important;
                 }
                 .new-hero h1 {
                     font-size: 2.5rem !important;
@@ -146,7 +145,31 @@
 
         <main class="home-container" style="background-color: rgb(15, 34, 48); color: #fff; overflow-x: hidden;">
     <!-- NEW HERO SECTION -->
-    <section class="new-hero" style="position: relative; width: 100%; height: 75vh; min-height: 500px; background: url('assets/hero_saree_navy.png') center/cover no-repeat; display: flex; align-items: flex-end; padding: 3rem 5%;">
+    <style>
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 0;
+        }
+        .hero-slide.active-slide {
+            opacity: 1;
+        }
+    </style>
+    <section class="new-hero" style="position: relative; width: 100%; height: 75vh; min-height: 500px; display: flex; align-items: flex-end; padding: 3rem 5%; background-color: #0f2230; overflow: hidden;">
+        
+        <!-- SLIDER IMAGES -->
+        <div class="hero-slide active-slide" style="background-image: url('assets/hero_saree_navy.png');"></div>
+        <div class="hero-slide" style="background-image: url('assets/Banner.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('assets/floral_banner.png');"></div>
+
         <!-- Dark gradient overlay for text readability -->
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%); z-index: 1;"></div>
         
@@ -159,6 +182,18 @@
             </a>
         </div>
     </section>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active-slide');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active-slide');
+            }, 4000); // Change image every 4 seconds
+        });
+    </script>
 
     <!-- BROWSE CATEGORIES -->
     <section style="padding: 5rem 5%; text-align: center; background-color: #fafafa; color: #000;">
