@@ -17,6 +17,11 @@ const Components = {
 
         const navLinks = document.getElementById('navbar-links');
         if (navLinks) {
+            navLinks.style.display = 'flex';
+            navLinks.style.gap = '25px';
+            navLinks.style.alignItems = 'center';
+            navLinks.style.flexWrap = 'wrap';
+
             let categories = [];
             if (typeof LocalDB !== 'undefined') {
                 categories = LocalDB.getCategories();
@@ -24,7 +29,10 @@ const Components = {
                 categories = Site.config.navCategories.map(c => c.name);
             }
             
-            const newHtml = categories.map(cat => {
+            let displayCats = categories.slice(0, 5);
+            let moreCats = categories.slice(5);
+
+            let newHtml = displayCats.map(cat => {
                 let subs = [];
                 if (typeof LocalDB !== 'undefined') {
                     subs = LocalDB.getSubCategories(cat);
@@ -37,6 +45,11 @@ const Components = {
                 return `<div class="nav-item"><a href="shop.html?category=${encodeURIComponent(cat)}" class="nav-link" style="text-transform: uppercase;">${cat} ${hasDropdown ? '<i class="bi bi-chevron-down ms-1" style="font-size: 0.7em"></i>' : ''}</a>${dropdownHtml}</div>`;
             }).join('');
             
+            if (moreCats.length > 0) {
+                let moreDropdownHtml = `<ul class="dropdown">${moreCats.map(cat => `<li><a href="shop.html?category=${encodeURIComponent(cat)}" class="dropdown-link">${cat}</a></li>`).join('')}</ul>`;
+                newHtml += `<div class="nav-item"><a href="#" class="nav-link" style="text-transform: uppercase;">More <i class="bi bi-chevron-down ms-1" style="font-size: 0.7em"></i></a>${moreDropdownHtml}</div>`;
+            }
+
             if (navLinks.innerHTML !== newHtml) {
                 navLinks.innerHTML = newHtml;
             }

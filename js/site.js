@@ -51,10 +51,12 @@ const Site = {
                 this.products = prodData;
             }
 
-            // 4. Map Categories to Navbar
+            // 4. Map Categories to Navbar & Homepage
             if (catData && Array.isArray(catData)) {
                 // catData contains top-level categories with their 'children'
-                const dynamicNav = catData.filter(c => c.status !== 'inactive').map(cat => {
+                const activeCats = catData.filter(c => c.status !== 'inactive');
+                
+                const dynamicNav = activeCats.map(cat => {
                     const relatedSubCats = (cat.children || []).filter(sc => sc.status !== 'inactive').map(sc => sc.name);
                     return {
                         name: cat.name,
@@ -63,6 +65,18 @@ const Site = {
                     };
                 });
                 this.config.navCategories = dynamicNav;
+
+                const existingHomeCats = this.config.homeCategories || [];
+                const dynamicHomeCats = activeCats.map(cat => {
+                    // Try to reuse an existing image mapping if available, otherwise use a placeholder
+                    const existing = existingHomeCats.find(ec => ec.name.toLowerCase() === cat.name.toLowerCase());
+                    return {
+                        name: cat.name,
+                        path: `shop.html?category=${encodeURIComponent(cat.name.toLowerCase())}`,
+                        image: existing ? existing.image : (cat.image || 'assets/category_placeholder.jpg')
+                    };
+                });
+                this.config.homeCategories = dynamicHomeCats;
             }
 
         } catch (e) {
