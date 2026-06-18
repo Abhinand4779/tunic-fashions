@@ -83,10 +83,14 @@ const Site = {
                 const dynamicHomeCats = activeCats.map(cat => {
                     // Try to reuse an existing image mapping if available, otherwise use a placeholder
                     const existing = existingHomeCats.find(ec => ec.name.toLowerCase() === cat.name.toLowerCase());
+                    let finalImage = cat.image_url; // From live database API
+                    if (!finalImage && existing) finalImage = existing.image; // Fallback to hardcoded mapping
+                    if (!finalImage) finalImage = 'assets/category_placeholder.jpg'; // Ultimate fallback
+
                     return {
                         name: cat.name,
                         path: `shop.html?category=${encodeURIComponent(cat.name.toLowerCase())}`,
-                        image: existing ? existing.image : (cat.image || 'assets/category_placeholder.jpg')
+                        image: finalImage
                     };
                 });
                 this.config.homeCategories = dynamicHomeCats;
