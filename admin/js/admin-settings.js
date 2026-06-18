@@ -188,7 +188,10 @@ window.saveSettings = async function(e) {
     try {
         const res = await fetch(`${API_URL}/admin/settings`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('adminToken')
+            },
             body: JSON.stringify(payload)
         });
 
