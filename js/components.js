@@ -41,7 +41,8 @@ const Components = {
             }
 
             let newHtml = navLinksData.map(link => {
-                let isCategoryLink = link.label.toUpperCase() === 'CATEGORIES';
+                let linkLabel = link && link.label ? String(link.label) : '';
+                let isCategoryLink = linkLabel.toUpperCase() === 'CATEGORIES';
                 let dropdownHtml = '';
                 
                 if (isCategoryLink && categories.length > 0) {

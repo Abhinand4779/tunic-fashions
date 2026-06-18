@@ -34,7 +34,7 @@ const Site = {
             // 2. Map Settings
             if (data) {
                 const mappedData = {};
-                if (data.announcement_bar) {
+                if (data.announcement_bar !== undefined && data.announcement_bar !== null) {
                     try { mappedData.coupon = { label: 'OFFER', discount: '', text: JSON.parse(data.announcement_bar), code: 'HUE10' }; } 
                     catch(e) { mappedData.coupon = { label: 'OFFER', discount: '', text: data.announcement_bar, code: 'HUE10' }; }
                 }
