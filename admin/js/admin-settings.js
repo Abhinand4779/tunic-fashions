@@ -141,10 +141,13 @@ window.addNavLink = function() {
 window.saveSettings = async function(e) {
     e.preventDefault();
 
-    const submitBtn = e.target.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerText;
-    submitBtn.innerText = 'Saving to Live Database...';
-    submitBtn.disabled = true;
+    const submitBtn = e.target.querySelector('button[type="submit"]') || document.getElementById('floating-save-btn');
+    let originalText = 'Save Changes';
+    if (submitBtn) {
+        originalText = submitBtn.innerText;
+        submitBtn.innerText = 'Saving...';
+        submitBtn.disabled = true;
+    }
 
     const navRows = document.querySelectorAll('#nav-links-container > div');
     let navLinks = [];
@@ -198,7 +201,9 @@ window.saveSettings = async function(e) {
         console.error("API error", err);
         alert("Settings saved locally. API connection failed.");
     } finally {
-        submitBtn.innerText = originalText;
-        submitBtn.disabled = false;
+        if (submitBtn) {
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+        }
     }
 };
