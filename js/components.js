@@ -45,7 +45,28 @@ const Components = {
                 let dropdownHtml = '';
                 
                 if (isCategoryLink && categories.length > 0) {
-                    dropdownHtml = `<ul class="dropdown">${categories.map(cat => `<li><a href="shop.html?category=${encodeURIComponent(cat)}" class="dropdown-link">${cat}</a></li>`).join('')}</ul>`;
+                    let megaMenuInnerHtml = categories.map(cat => {
+                        let subs = [];
+                        if (typeof LocalDB !== 'undefined') {
+                            subs = LocalDB.getSubCategories(cat);
+                        } else if (typeof Site !== 'undefined' && Site.config && Site.config.navCategories) {
+                            let catObj = Site.config.navCategories.find(c => c.name === cat);
+                            if (catObj && catObj.dropdown) subs = catObj.dropdown.map(d => d.name || d);
+                        }
+                        
+                        let subsHtml = subs.length > 0 
+                            ? `<ul style="list-style: none; padding: 0; margin-top: 10px;">
+                                ${subs.map(sub => `<li><a href="shop.html?category=${encodeURIComponent(cat)}&sub=${encodeURIComponent(sub)}" class="dropdown-link" style="padding: 5px 0; color: #aaa; text-transform: capitalize;">${sub}</a></li>`).join('')}
+                               </ul>` 
+                            : '';
+                            
+                        return `<div>
+                                    <a href="shop.html?category=${encodeURIComponent(cat)}" class="mega-menu-link" style="font-weight: bold; font-size: 14px; border-bottom: 1px solid #333; display: block; padding-bottom: 5px; margin-bottom: 5px;">${cat}</a>
+                                    ${subsHtml}
+                                </div>`;
+                    }).join('');
+                    
+                    dropdownHtml = `<div class="mega-menu"><div class="mega-menu-content">${megaMenuInnerHtml}</div></div>`;
                 }
 
                 return `<div class="nav-item"><a href="${link.url}" class="nav-link" style="text-transform: uppercase;">${link.label} ${isCategoryLink && categories.length > 0 ? '<i class="bi bi-chevron-down ms-1" style="font-size: 0.7em"></i>' : ''}</a>${dropdownHtml}</div>`;
