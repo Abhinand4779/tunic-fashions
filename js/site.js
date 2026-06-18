@@ -43,6 +43,12 @@ const Site = {
                     if (data.hero_title) mappedData.hero.title = data.hero_title;
                     if (data.hero_subtitle) mappedData.hero.subtitle = data.hero_subtitle;
                 }
+
+                if (data.navbar_categories) {
+                    try { mappedData.navbar_categories = JSON.parse(data.navbar_categories); }
+                    catch(e) { mappedData.navbar_categories = []; }
+                }
+
                 this.config = this.mergeConfig(this.config, { ...data, ...mappedData });
             }
 
@@ -56,7 +62,14 @@ const Site = {
                 // catData contains top-level categories with their 'children'
                 const activeCats = catData.filter(c => c.status !== 'inactive');
                 
-                const dynamicNav = activeCats.map(cat => {
+                let filteredNavCats = activeCats;
+                if (this.config.navbar_categories && Array.isArray(this.config.navbar_categories) && this.config.navbar_categories.length > 0) {
+                    filteredNavCats = activeCats.filter(c => this.config.navbar_categories.includes(c.name));
+                    // Sort to match the order saved by admin (optional but nice)
+                    filteredNavCats.sort((a, b) => this.config.navbar_categories.indexOf(a.name) - this.config.navbar_categories.indexOf(b.name));
+                }
+
+                const dynamicNav = filteredNavCats.map(cat => {
                     const relatedSubCats = (cat.children || []).filter(sc => sc.status !== 'inactive').map(sc => sc.name);
                     return {
                         name: cat.name,
