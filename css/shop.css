@@ -447,6 +447,10 @@
     }
 }
 
+.mobile-filter-btn {
+    display: none;
+}
+
 @media (max-width: 992px) {
     .shop-container {
         grid-template-columns: 1fr;
@@ -529,10 +533,6 @@
     .grid-view {
         grid-template-columns: repeat(2, 1fr);
     }
-}
-
-.mobile-filter-btn {
-    display: none;
 }
 
 .sidebar-mobile-header {
