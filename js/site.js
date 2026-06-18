@@ -49,6 +49,11 @@ const Site = {
                     catch(e) { mappedData.navbar_categories = []; }
                 }
 
+                if (data.main_nav_links) {
+                    try { mappedData.nav = JSON.parse(data.main_nav_links); }
+                    catch(e) {}
+                }
+
                 this.config = this.mergeConfig(this.config, { ...data, ...mappedData });
             }
 
