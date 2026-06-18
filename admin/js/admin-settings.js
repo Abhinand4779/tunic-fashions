@@ -21,6 +21,19 @@ const DEFAULT_SITE_CONFIG = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Create a floating Save button as a failsafe
+    if (!document.getElementById('floating-save-btn')) {
+        const btn = document.createElement('button');
+        btn.id = 'floating-save-btn';
+        btn.innerText = 'Save Changes (Failsafe)';
+        btn.style.cssText = 'position: fixed; bottom: 30px; right: 30px; z-index: 99999; padding: 15px 30px; background: #d4af37; color: #000; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: none; font-size: 1.2rem;';
+        btn.onclick = (e) => {
+            const form = document.getElementById('settings-form');
+            if (form) window.saveSettings({ preventDefault: () => {}, target: form });
+        };
+        document.body.appendChild(btn);
+    }
+
     loadSettings();
     loadCategoriesForNavbar();
 });
@@ -198,11 +211,11 @@ window.saveSettings = async function(e) {
         if (res.ok) {
             alert("Settings saved to live database! The website navbar will now reflect your selected categories.");
         } else {
-            alert("Settings saved locally, but failed to sync to live server.");
+            alert("Settings saved locally, but failed to sync to live server. Your admin session may have expired. Please try logging out and logging back in.");
         }
     } catch(err) {
         console.error("API error", err);
-        alert("Settings saved locally. API connection failed.");
+        alert("Settings saved locally. API connection failed. Your admin session may have expired. Please try logging out and logging back in.");
     } finally {
         if (submitBtn) {
             submitBtn.innerText = originalText;
