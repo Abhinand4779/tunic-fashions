@@ -11,6 +11,10 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AnalyticsController;
 
 // Public Routes
+Route::get('/migrate', function() {
+    \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    return response()->json(['message' => 'Database migration completed successfully!']);
+});
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::post('/orders', [OrderController::class, 'store']);
