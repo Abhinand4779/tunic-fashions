@@ -29,26 +29,27 @@ const Components = {
                 categories = Site.config.navCategories.map(c => c.name);
             }
             
-            let displayCats = categories.slice(0, 5);
-            let moreCats = categories.slice(5);
-
-            let newHtml = displayCats.map(cat => {
-                let subs = [];
-                if (typeof LocalDB !== 'undefined') {
-                    subs = LocalDB.getSubCategories(cat);
-                }
-                const hasDropdown = subs.length > 0;
-                let dropdownHtml = '';
-                if (hasDropdown) {
-                    dropdownHtml = `<ul class="dropdown">${subs.map(item => `<li><a href="shop.html?category=${encodeURIComponent(cat)}&sub=${encodeURIComponent(item)}" class="dropdown-link">${item}</a></li>`).join('')}</ul>`;
-                }
-                return `<div class="nav-item"><a href="shop.html?category=${encodeURIComponent(cat)}" class="nav-link" style="text-transform: uppercase;">${cat} ${hasDropdown ? '<i class="bi bi-chevron-down ms-1" style="font-size: 0.7em"></i>' : ''}</a>${dropdownHtml}</div>`;
-            }).join('');
-            
-            if (moreCats.length > 0) {
-                let moreDropdownHtml = `<ul class="dropdown">${moreCats.map(cat => `<li><a href="shop.html?category=${encodeURIComponent(cat)}" class="dropdown-link">${cat}</a></li>`).join('')}</ul>`;
-                newHtml += `<div class="nav-item"><a href="#" class="nav-link" style="text-transform: uppercase;">More <i class="bi bi-chevron-down ms-1" style="font-size: 0.7em"></i></a>${moreDropdownHtml}</div>`;
+            let navLinksData = [];
+            if (typeof Site !== 'undefined' && Site.config && Site.config.nav) {
+                navLinksData = Site.config.nav;
+            } else {
+                navLinksData = [
+                    { label: "HOME", url: "index.html" },
+                    { label: "SHOP", url: "shop.html" },
+                    { label: "CATEGORIES", url: "shop.html" }
+                ];
             }
+
+            let newHtml = navLinksData.map(link => {
+                let isCategoryLink = link.label.toUpperCase() === 'CATEGORIES';
+                let dropdownHtml = '';
+                
+                if (isCategoryLink && categories.length > 0) {
+                    dropdownHtml = `<ul class="dropdown">${categories.map(cat => `<li><a href="shop.html?category=${encodeURIComponent(cat)}" class="dropdown-link">${cat}</a></li>`).join('')}</ul>`;
+                }
+
+                return `<div class="nav-item"><a href="${link.url}" class="nav-link" style="text-transform: uppercase;">${link.label} ${isCategoryLink && categories.length > 0 ? '<i class="bi bi-chevron-down ms-1" style="font-size: 0.7em"></i>' : ''}</a>${dropdownHtml}</div>`;
+            }).join('');
 
             if (navLinks.innerHTML !== newHtml) {
                 navLinks.innerHTML = newHtml;
