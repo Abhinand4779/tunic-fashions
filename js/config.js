@@ -83,7 +83,7 @@ const DEFAULT_CONFIG = {
         newsletterText: 'Sign up for our newsletter and receive 10% off your',
         copyright: '©2026 HUE. All Rights Reserved.',
         credit: 'Designed By RDR Technology',
-        instagram: 'https://www.instagram.com/rdr.technology?igsh=eTc5NWUwOWN0eHBs'
+        instagram: 'https://www.instagram.com/huestory_byreshma?igsh=MTYwcXhvb2Y2MjQybQ=='
     },
     navCategories: [
         { name: 'Necklaces', path: 'shop.html?category=necklaces', dropdown: ['Stone Necklace', 'Choker', 'Long Haram', 'Short Haram'] },
