@@ -4,13 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Account - HUE</title>
+    <title>Shipping Policy - HUE</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/about.css">
+    <style>
+        /* Loading Time & Image Optimization */
+        .about-banner {
+            height: 45vh;
+            /* Reduced from 60vh */
+            max-height: 400px;
+        }
+
+        .img-side img {
+            max-width: 300px;
+            /* Prevent oversized brand logo */
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -96,8 +112,48 @@
             </div>
         </nav>
 
-        <main id="profile-page-wrap">
-            <!-- Dynamic Content -->
+        <main class="policy-page" style="padding: 6rem 5% 4rem; background: #0f2230; color: #fff; font-family: 'Montserrat', sans-serif;">
+            <div class="policy-container" style="max-width: 900px; margin: 0 auto; line-height: 1.8;">
+                <h1 style="font-size: 2.5rem; margin-bottom: 2.5rem; border-bottom: 1.5px solid #d4af37; padding-bottom: 1rem; color: #d4af37;">Shipping Policy</h1>
+                
+                <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">At Hue Story by Reshma, we take great care in packing and dispatching your orders to ensure they arrive safely and beautifully.</p>
+
+                <h2 style="font-size: 1.5rem; margin: 2rem 0 1rem; color: #d4af37;">Processing Time</h2>
+                <ul style="margin-bottom: 1.5rem; padding-left: 2rem;">
+                    <li style="margin-bottom: 0.8rem;">Ready-stock items are dispatched within 1–2 business days after payment received.</li>
+                    <li style="margin-bottom: 0.8rem;">Pre-order and custom-made items will have individual processing times depends on the product.</li>
+                </ul>
+                <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">During peak periods, dispatch times may be slightly longer.</p>
+
+                <h2 style="font-size: 1.5rem; margin: 2rem 0 1rem; color: #d4af37;">Delivery Timeframes</h2>
+                <ul style="margin-bottom: 1.5rem; padding-left: 2rem;">
+                    <li style="margin-bottom: 0.8rem;">Standard Shipping: 3–7 business days</li>
+                    <li style="margin-bottom: 0.8rem;">Express Shipping: 1–4 business days</li>
+                </ul>
+                <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">Please note that delivery times are estimates and may vary depending on your location and carrier delays.</p>
+
+                <h2 style="font-size: 1.5rem; margin: 2rem 0 1rem; color: #d4af37;">Tracking</h2>
+                <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">Once your order has been dispatched, you will receive a tracking number via email or SMS to monitor your shipment.</p>
+
+                <h2 style="font-size: 1.5rem; margin: 2rem 0 1rem; color: #d4af37;">Incorrect Address Details</h2>
+                <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">Please ensure all shipping details is correct before placing your order. We are not responsible for delays or lost parcels resulting from incorrect address details provided by the customer.</p>
+
+                <h2 style="font-size: 1.5rem; margin: 2rem 0 1rem; color: #d4af37;">Lost or Damaged Parcels</h2>
+                <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">If your order arrives damaged or is lost in transit, please contact us within 7 days of the expected delivery date, and we will do our best to assist.</p>
+
+                <h2 style="font-size: 1.5rem; margin: 2rem 0 1rem; color: #d4af37;">Contact Us</h2>
+                <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">For any shipping enquiries, please contact us via:<br>
+                Email: <a href="mailto:huestorybyreshma@gmail.com" style="color: #fff; text-decoration: underline;">huestorybyreshma@gmail.com</a><br>
+                Instagram: <a href="https://www.instagram.com/huestory_byreshma?igsh=MTYwcXhvb2Y2MjQybQ==" target="_blank" style="color: #fff; text-decoration: underline;">@huestorybyreshma</a></p>
+
+                <div style="background: rgba(212,175,55,0.1); padding: 2rem; border-radius: 8px; border: 1px solid rgba(212,175,55,0.3); margin-top: 3rem;">
+                    <p style="margin-bottom: 1rem; font-size: 1.1rem;">✨ <strong>Free Standard Shipping on all orders over $150 AUD</strong></p>
+                    <p style="margin-bottom: 1rem; font-size: 1.1rem;">🚚  <strong>Standard Shipping:</strong> $15 AUD (with Tracking)</p>
+                    <p style="margin-bottom: 1rem; font-size: 1.1rem;">⚡ <strong>Express Shipping:</strong> $19 AUD (with Tracking)</p>
+                </div>
+
+                <p style="margin-top: 3rem; font-size: 1.1rem; text-align: center; font-style: italic;">Thank you for shopping with Hue Story by Reshma. We appreciate your support and look forward to being part of your style story. 💛</p>
+            </div>
         </main>
 
         <!-- Static Footer -->
@@ -144,14 +200,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="js/config.js" defer></script>
-    <script src="js/auth.js" defer></script>
-    <script src="js/site.js" defer></script>
-    <script src="js/components.js" defer></script>
-    <script src="js/profile.js" defer></script>
-<script src="js/currency.js"></script>
+    <script src="js/config.js?v=3" defer></script>
+    <script src="js/auth.js?v=3" defer></script>
+    <script src="js/site.js?v=3" defer></script>
+    <script src="js/components.js?v=3" defer></script>
+    <script src="js/currency.js?v=3"></script>
 </body>
 
 </html>
-
 
