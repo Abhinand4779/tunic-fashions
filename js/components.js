@@ -17,10 +17,10 @@ const Components = {
 
         const navLinks = document.getElementById('navbar-links');
         if (navLinks) {
-            navLinks.style.display = 'flex';
-            navLinks.style.gap = '25px';
-            navLinks.style.alignItems = 'center';
-            navLinks.style.flexWrap = 'wrap';
+            
+            
+            
+            
 
             let categories = [];
             if (typeof LocalDB !== 'undefined') {
@@ -224,7 +224,26 @@ if (typeof Site !== 'undefined' && !Site.loading) {
     Components.renderNavbar();
     Components.renderFooter();
     Components.attachNavbarEvents();
+    
+    const marqueeContainer2 = document.querySelector('.promo-banner-marquee');
+    const marqueeContent2 = document.querySelector('.marquee-content');
+    if (marqueeContainer2 && marqueeContent2) {
+        if (window.Site && window.Site.config && window.Site.config.coupon && window.Site.config.coupon.text) {
+            const promoText = window.Site.config.coupon.text;
+            let spansHtml = '';
+            for (let i = 0; i < 15; i++) {
+                spansHtml += "<span>" + promoText + "</span>";
+            }
+            marqueeContent2.innerHTML = spansHtml;
+            marqueeContainer2.style.display = 'flex';
+        } else {
+            marqueeContainer2.style.display = 'none';
+        }
+    }
+
     setTimeout(() => Components.attachAdminNavbarEvents(), 100);
 }
+
+
 
 
