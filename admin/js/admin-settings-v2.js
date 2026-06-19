@@ -21,6 +21,11 @@ const DEFAULT_SITE_CONFIG = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (!localStorage.getItem('astra_admin') || !localStorage.getItem('adminToken')) {
+        alert('You are not logged in. Redirecting to login page...');
+        window.location.href = 'login.html';
+        return;
+    }
     // Create a floating Save button as a failsafe
     if (!document.getElementById('floating-save-btn')) {
         const btn = document.createElement('button');
