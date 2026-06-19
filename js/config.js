@@ -6,6 +6,13 @@
 const API_BASE_URL = 'https://huestorybyreshma.com/server/api';
 
 const DEFAULT_CONFIG = {
+    nav: [
+        { label: "HOME", url: "index.html" },
+        { label: "SHOP", url: "shop.html" },
+        { label: "CATEGORIES", url: "shop.html" },
+        { label: "OUR STORY", url: "our-story.html" },
+        { label: "ABOUT US", url: "about.html" }
+    ],
     hero: {
         bannerImg: 'assets/About/hero_navy.png',
         title: 'ELEGANCE IN<br>EVERY DETAIL',

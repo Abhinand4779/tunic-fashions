@@ -36,7 +36,9 @@ const Components = {
                 navLinksData = [
                     { label: "HOME", url: "index.html" },
                     { label: "SHOP", url: "shop.html" },
-                    { label: "CATEGORIES", url: "shop.html" }
+                    { label: "CATEGORIES", url: "shop.html" },
+                    { label: "OUR STORY", url: "our-story.html" },
+                    { label: "ABOUT US", url: "about.html" }
                 ];
             }
 
