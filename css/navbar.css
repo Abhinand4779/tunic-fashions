@@ -175,11 +175,11 @@
         align-items: center;
     }
 
-    /* On mobile, make dropdowns visible inline */
+    /* On mobile, make dropdowns visible when clicked */
     .dropdown,
     .mega-menu {
         position: static;
-        display: block;
+        display: none;
         background: #111;
         box-shadow: none;
         max-height: none;
@@ -192,6 +192,11 @@
         border-top: none;
         border-left: 3px solid #d4af37;
         margin: 0 0 0.5rem;
+    }
+
+    .dropdown.active,
+    .mega-menu.active {
+        display: block;
     }
 
     .mega-menu-content {

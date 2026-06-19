@@ -24,10 +24,11 @@ const Site = {
 
     async fetchAll() {
         try {
-            // 1. Fetch data from backend concurrently
-            const configReq = fetch(`${API_BASE_URL}/settings`).then(r => r.ok ? r.json() : null).catch(() => null);
-            const prodReq = fetch(`${API_BASE_URL}/products`).then(r => r.ok ? r.json() : null).catch(() => null);
-            const catReq = fetch(`${API_BASE_URL}/categories`).then(r => r.ok ? r.json() : null).catch(() => null);
+            const ts = new Date().getTime();
+            // 1. Fetch data from backend concurrently (with cache busting)
+            const configReq = fetch(`${API_BASE_URL}/settings?t=${ts}`).then(r => r.ok ? r.json() : null).catch(() => null);
+            const prodReq = fetch(`${API_BASE_URL}/products?t=${ts}`).then(r => r.ok ? r.json() : null).catch(() => null);
+            const catReq = fetch(`${API_BASE_URL}/categories?t=${ts}`).then(r => r.ok ? r.json() : null).catch(() => null);
 
             const [data, prodData, catData] = await Promise.all([configReq, prodReq, catReq]);
 
