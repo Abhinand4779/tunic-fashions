@@ -142,6 +142,7 @@ const Site = {
 };
 
 // Start Fetching on Load
+window.Site = Site;
 Site.fetchAll();
 
 
