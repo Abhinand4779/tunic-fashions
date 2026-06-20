@@ -166,9 +166,7 @@
     <section class="new-hero" style="position: relative; width: 100%; height: 75vh; min-height: 500px; display: flex; align-items: flex-end; padding: 3rem 5%; background-color: #0f2230; overflow: hidden;">
         
         <!-- SLIDER IMAGES -->
-        <div class="hero-slide active-slide" style="background-image: url('assets/hero_saree_navy.png');"></div>
-        <div class="hero-slide" style="background-image: url('assets/Banner.jpg');"></div>
-        <div class="hero-slide" style="background-image: url('assets/floral_banner.png');"></div>
+        <div id="dynamic-hero-sliders"></div>
 
         <!-- Dark gradient overlay for text readability -->
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%); z-index: 1;"></div>
@@ -197,14 +195,21 @@
     </section>
     
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('siteDataLoaded', () => {
+            const container = document.getElementById('dynamic-hero-sliders');
+            const sliders = window.Site.config.heroSliders || [];
+            if (sliders.length > 0) {
+                container.innerHTML = sliders.map((s, idx) => `<div class="hero-slide ${idx === 0 ? 'active-slide' : ''}" style="background-image: url('${s.image}');"></div>`).join('');
+            }
             const slides = document.querySelectorAll('.hero-slide');
-            let currentSlide = 0;
-            setInterval(() => {
-                slides[currentSlide].classList.remove('active-slide');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active-slide');
-            }, 4000); // Change image every 4 seconds
+            if (slides.length > 0) {
+                let currentSlide = 0;
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active-slide');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active-slide');
+                }, 4000);
+            }
         });
     </script>
 

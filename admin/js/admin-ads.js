@@ -25,6 +25,10 @@ const AdminHeroSliders = {
                         console.error('Failed to parse hero_sliders', e);
                     }
                 }
+                
+                if (this.sliders.length === 0 && window.DEFAULT_CONFIG && window.DEFAULT_CONFIG.heroSliders) {
+                    this.sliders = [...window.DEFAULT_CONFIG.heroSliders];
+                }
             }
         } catch (err) {
             console.error('Error fetching settings', err);
