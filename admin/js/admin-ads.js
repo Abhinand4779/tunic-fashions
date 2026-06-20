@@ -74,20 +74,20 @@ const AdminAds = {
             if (!imgSrc.startsWith('http') && !imgSrc.startsWith('data:')) {
                 imgSrc = '../' + imgSrc;
             }
-            return \
+            return `
                 <tr>
-                    <td>\</td>
-                    <td style="color: #64748b;">\</td>
+                    <td>${idx + 1}</td>
+                    <td style="color: #64748b;">${ad.title || 'Hero Banner'}</td>
                     <td>
-                        <img src="\" class="ad-thumbnail" alt="Ad" style="max-height: 60px; object-fit: contain; background: #0f2230; padding: 2px;">
+                        <img src="${imgSrc}" class="ad-thumbnail" alt="Ad" style="max-height: 60px; object-fit: contain; background: #0f2230; padding: 2px;">
                     </td>
                     <td>
                         <div class="action-icons">
-                            <i class="bi bi-trash-fill" onclick="AdminAds.deleteAd(\)" title="Delete"></i>
+                            <i class="bi bi-trash-fill" onclick="AdminAds.deleteAd(${ad.id})" title="Delete"></i>
                         </div>
                     </td>
                 </tr>
-            \;
+            `;
         }).join('');
     },
 
