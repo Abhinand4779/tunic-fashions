@@ -21,7 +21,9 @@ const DEFAULT_CONFIG = {
         btnLink: 'shop.html'
     },
     heroSliders: [
-        { id: 1, image: 'assets/About/hero_navy.png', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.' }
+        { id: 1, image: 'assets/hero_saree_navy.png', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.' },
+        { id: 2, image: 'assets/Banner.jpg', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.' },
+        { id: 3, image: 'assets/floral_banner.png', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.' }
     ],
     coupon: {
         label: 'Special Offer',

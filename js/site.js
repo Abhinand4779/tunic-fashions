@@ -45,6 +45,17 @@ const Site = {
                     if (data.hero_subtitle) mappedData.hero.subtitle = data.hero_subtitle;
                 }
 
+                if (data.hero_sliders) {
+                    try {
+                        const parsedSliders = JSON.parse(data.hero_sliders);
+                        if (Array.isArray(parsedSliders) && parsedSliders.length > 0) {
+                            mappedData.heroSliders = parsedSliders;
+                        }
+                    } catch(e) {
+                        console.error('Failed to parse hero_sliders from backend', e);
+                    }
+                }
+
                 if (data.navbar_categories) {
                     try { mappedData.navbar_categories = JSON.parse(data.navbar_categories); }
                     catch(e) { mappedData.navbar_categories = []; }
