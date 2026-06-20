@@ -6,13 +6,6 @@
 const API_BASE_URL = 'https://huestorybyreshma.com/server/api';
 
 const DEFAULT_CONFIG = {
-    nav: [
-        { label: "HOME", url: "index.html" },
-        { label: "SHOP", url: "shop.html" },
-        { label: "CATEGORIES", url: "shop.html" },
-        { label: "OUR STORY", url: "our-story.html" },
-        { label: "ABOUT US", url: "about.html" }
-    ],
     hero: {
         bannerImg: 'assets/About/hero_navy.png',
         title: 'ELEGANCE IN<br>EVERY DETAIL',
@@ -21,9 +14,7 @@ const DEFAULT_CONFIG = {
         btnLink: 'shop.html'
     },
     heroSliders: [
-        { id: 1, image: 'assets/hero_saree_navy.png', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.' },
-        { id: 2, image: 'assets/Banner.jpg', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.' },
-        { id: 3, image: 'assets/floral_banner.png', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.' }
+        { id: 1, image: 'assets/About/hero_navy.png', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.' }
     ],
     coupon: {
         label: 'Special Offer',
@@ -85,7 +76,7 @@ const DEFAULT_CONFIG = {
         newsletterText: 'Sign up for our newsletter and receive 10% off your',
         copyright: '©2026 HUE. All Rights Reserved.',
         credit: 'Designed By RDR Technology',
-        instagram: 'https://www.instagram.com/huestory_byreshma?igsh=MTYwcXhvb2Y2MjQybQ=='
+        instagram: 'https://www.instagram.com/rdr.technology?igsh=eTc5NWUwOWN0eHBs'
     },
     navCategories: [
         { name: 'Necklaces', path: 'shop.html?category=necklaces', dropdown: ['Stone Necklace', 'Choker', 'Long Haram', 'Short Haram'] },

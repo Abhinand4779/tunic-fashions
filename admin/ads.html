@@ -2462,31 +2462,8 @@
 
 
                 
-                <!-- HERO SLIDERS SECTION -->
-                <div class="ads-header-row" style="margin-top: 1rem;">
-                    <h2>Hero Slider Images</h2>
-                    <div class="ads-actions">
-                        <button class="btn-plus" onclick="document.getElementById('heroModalOverlay').style.display='flex'"><i class="fa fa-plus"></i> Add Slider</button>
-                    </div>
-                </div>
-
-                <div class="ads-table-card" style="margin-bottom: 2rem;">
-                    <table class="custom-table" style="width: 100%;">
-                        <thead>
-                            <tr>
-                                <th style="width: 5%;">#</th>
-                                <th style="width: 50%;">IMAGE PREVIEW</th>
-                                <th style="width: 45%;">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody id="hero-table-body">
-                            <!-- Populated by JS -->
-                        </tbody>
-                    </table>
-                </div>
-
                 <div class="ads-header-row">
-                    <h2>Ads List</h2>
+                    <h2>Hero Section Images</h2>
                     <div class="ads-actions">
                         <div class="search-mini">
                             <input type="text" placeholder="Search here...">
@@ -2527,25 +2504,6 @@
 
 
 
-<!-- AD MODAL OVERLAY -->
-<div id="adModalOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
-    <div style="background: #fff; padding: 2rem; border-radius: 8px; width: 400px; max-width: 90%;">
-        <h3 style="margin-top: 0;">Add Ad</h3>
-        <form id="adForm">
-            <input type="text" id="adTitle" placeholder="Ad Title" style="display: block; width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 1rem;" required>
-            <div id="imageDropArea" style="border: 2px dashed #cbd5e1; border-radius: 8px; padding: 2rem; text-align: center; cursor: pointer; margin-bottom: 1rem;">
-                <p>Drag & Drop Image Here or Click to Browse</p>
-                <input type="file" id="adImageInput" accept="image/*" style="display: none;">
-            </div>
-            <img id="imagePreview" style="display: none; max-width: 100%; margin-bottom: 1rem; border-radius: 4px;">
-            <div style="display: flex; justify-content: flex-end; gap: 1rem;">
-                <button type="button" onclick="document.getElementById('adModalOverlay').style.display='none'" style="padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; background: #fff; cursor: pointer;">Cancel</button>
-                <button type="submit" style="padding: 0.5rem 1rem; border: none; border-radius: 4px; background: #0f2230; color: #fff; cursor: pointer;">Save Ad</button>
-            </div>
-        </form>
-    </div>
-</div>
-
 <!-- HERO MODAL OVERLAY -->
 <div id="heroModalOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
     <div style="background: #fff; padding: 2rem; border-radius: 8px; width: 400px; max-width: 90%;">
@@ -2561,6 +2519,24 @@
     </div>
 </div>
 
+<!-- AD MODAL OVERLAY -->
+<div id="adModalOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div style="background: #fff; padding: 2rem; border-radius: 8px; width: 400px; max-width: 90%;">
+        <h3 style="margin-top: 0;">Add Hero Image</h3>
+        <form id="adForm">
+            <input type="text" id="adTitle" placeholder="Optional Title" style="display: block; width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 1rem;">
+            <div id="imageDropArea" style="border: 2px dashed #cbd5e1; border-radius: 8px; padding: 2rem; text-align: center; cursor: pointer; margin-bottom: 1rem;">
+                <p>Drag & Drop Image Here or Click to Browse</p>
+                <input type="file" id="adImageInput" accept="image/*" style="display: none;" required>
+            </div>
+            <img id="imagePreview" style="display: none; max-width: 100%; margin-bottom: 1rem; border-radius: 4px;">
+            <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                <button type="button" onclick="document.getElementById('adModalOverlay').style.display='none'" style="padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 4px; background: #fff; cursor: pointer;">Cancel</button>
+                <button type="submit" style="padding: 0.5rem 1rem; border: none; border-radius: 4px; background: #0f2230; color: #fff; cursor: pointer;">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
 <script src="js/admin-ads.js"></script>
           </main>
         </div>

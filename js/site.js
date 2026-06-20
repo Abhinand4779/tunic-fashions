@@ -36,8 +36,8 @@ const Site = {
             if (data) {
                 const mappedData = {};
                 if (data.announcement_bar !== undefined && data.announcement_bar !== null) {
-                    try { mappedData.coupon = { label: 'OFFER', discount: '', text: JSON.parse(data.announcement_bar), code: 'HUE10' }; } 
-                    catch(e) { mappedData.coupon = { label: 'OFFER', discount: '', text: data.announcement_bar, code: 'HUE10' }; }
+                    try { mappedData.coupon = { label: 'OFFER', discount: '', text: JSON.parse(data.announcement_bar), code: 'HUE10' }; }
+                    catch (e) { mappedData.coupon = { label: 'OFFER', discount: '', text: data.announcement_bar, code: 'HUE10' }; }
                 }
                 if (data.hero_title || data.hero_subtitle) {
                     mappedData.hero = { ...this.config.hero };
@@ -45,25 +45,14 @@ const Site = {
                     if (data.hero_subtitle) mappedData.hero.subtitle = data.hero_subtitle;
                 }
 
-                if (data.hero_sliders) {
-                    try {
-                        const parsedSliders = JSON.parse(data.hero_sliders);
-                        if (Array.isArray(parsedSliders) && parsedSliders.length > 0) {
-                            mappedData.heroSliders = parsedSliders;
-                        }
-                    } catch(e) {
-                        console.error('Failed to parse hero_sliders from backend', e);
-                    }
-                }
-
                 if (data.navbar_categories) {
                     try { mappedData.navbar_categories = JSON.parse(data.navbar_categories); }
-                    catch(e) { mappedData.navbar_categories = []; }
+                    catch (e) { mappedData.navbar_categories = []; }
                 }
 
                 if (data.main_nav_links) {
                     try { mappedData.nav = JSON.parse(data.main_nav_links); }
-                    catch(e) {}
+                    catch (e) { }
                 }
 
                 this.config = this.mergeConfig(this.config, { ...data, ...mappedData });
@@ -78,7 +67,7 @@ const Site = {
             if (catData && Array.isArray(catData)) {
                 // catData contains top-level categories with their 'children'
                 const activeCats = catData.filter(c => c.status !== 'inactive');
-                
+
                 let filteredNavCats = activeCats;
                 if (this.config.navbar_categories && Array.isArray(this.config.navbar_categories) && this.config.navbar_categories.length > 0) {
                     filteredNavCats = activeCats.filter(c => this.config.navbar_categories.includes(c.name));
@@ -153,7 +142,6 @@ const Site = {
 };
 
 // Start Fetching on Load
-window.Site = Site;
 Site.fetchAll();
 
 

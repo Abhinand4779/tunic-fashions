@@ -1,16 +1,17 @@
-/**
- * HUE - Ads/Banners Admin Logic
- */
-
 const API_URL = 'https://huestorybyreshma.com/server/api';
 
-const AdminHeroSliders = {
-    sliders: [],
-    
+const AdminAds = {
+    ads: [],
+
     async init() {
+        if (!Auth.admin) {
+            window.location.href = 'login.html';
+            return;
+        }
+
         await this.loadSettings();
         this.renderTable();
-        this.setupEvents();
+        this.setupModalEvents();
     },
 
     async loadSettings() {
@@ -20,15 +21,14 @@ const AdminHeroSliders = {
                 const data = await res.json();
                 if (data.hero_sliders) {
                     try {
-                        this.sliders = JSON.parse(data.hero_sliders);
+                        this.ads = JSON.parse(data.hero_sliders);
                     } catch(e) {
                         console.error('Failed to parse hero_sliders', e);
                     }
                 }
-                
-                if (this.sliders.length === 0 && window.DEFAULT_CONFIG && window.DEFAULT_CONFIG.heroSliders) {
-                    this.sliders = [...window.DEFAULT_CONFIG.heroSliders];
-                }
+            }
+            if (this.ads.length === 0 && window.DEFAULT_CONFIG && window.DEFAULT_CONFIG.heroSliders) {
+                this.ads = [...window.DEFAULT_CONFIG.heroSliders];
             }
         } catch (err) {
             console.error('Error fetching settings', err);
@@ -39,7 +39,7 @@ const AdminHeroSliders = {
         try {
             const payload = {
                 settings: {
-                    hero_sliders: JSON.stringify(this.sliders)
+                    hero_sliders: JSON.stringify(this.ads)
                 }
             };
             const token = localStorage.getItem('adminToken');
@@ -61,127 +61,41 @@ const AdminHeroSliders = {
     },
 
     renderTable() {
-        const tbody = document.getElementById('hero-table-body');
-        if (!tbody) return;
-
-        if (this.sliders.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="3" style="text-align: center;">No hero sliders found.</td></tr>';
-            return;
-        }
-
-        tbody.innerHTML = this.sliders.map((slider, index) => `
-            <tr>
-                <td>$({index + 1})</td>
-                <td>
-                    <img src="$({slider.image})" class="ad-thumbnail" alt="Slider" style="max-height: 80px; max-width: 200px; object-fit: contain; background: #0f2230;">
-                </td>
-                <td>
-                    <div class="action-icons">
-                        <i class="bi bi-trash-fill" onclick="AdminHeroSliders.deleteSlider($({slider.id}))" title="Delete"></i>
-                    </div>
-                </td>
-            </tr>
-        `).join('');
-    },
-
-    async deleteSlider(id) {
-        if (confirm('Are you sure you want to delete this slider?')) {
-            this.sliders = this.sliders.filter(s => s.id !== id);
-            this.renderTable();
-            await this.saveSettings();
-        }
-    },
-
-    setupEvents() {
-        const form = document.getElementById('heroForm');
-        if (!form) return;
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const fileInput = document.getElementById('heroImageInput');
-            if (fileInput.files.length === 0) return;
-
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            
-            // Read as Base64
-            reader.onload = async (event) => {
-                const base64Image = event.target.result;
-                
-                const newSlider = {
-                    id: Date.now(),
-                    image: base64Image
-                };
-                
-                this.sliders.push(newSlider);
-                this.renderTable();
-                await this.saveSettings();
-                
-                document.getElementById('heroModalOverlay').style.display = 'none';
-                form.reset();
-            };
-            
-            reader.readAsDataURL(file);
-        });
-    }
-};
-const AdminAds = {
-    ads: [
-        { id: 1, title: 'Australia', image: 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=100&q=80' },
-        { id: 2, title: 'Australia', image: 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=100&q=80' }
-    ],
-
-    init() {
-        if (!Auth.admin) {
-            window.location.href = 'login.html';
-            return;
-        }
-
-        this.renderTable();
-        this.setupModalEvents();
-    },
-
-    renderTable() {
         const tbody = document.getElementById('ads-table-body');
         if (!tbody) return;
 
         if (this.ads.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" style="text-align: center;">No ads found.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align: center;">No hero images found.</td></tr>';
             return;
         }
 
-        tbody.innerHTML = this.ads.map(ad => `
-            <tr>
-                <td>${ad.id}</td>
-                <td style="color: #64748b;">${ad.title}</td>
-                <td>
-                    <img src="${ad.image}" class="ad-thumbnail" alt="Ad">
-                </td>
-                <td>
-                    <div class="action-icons">
-                        <i class="bi bi-pencil-fill" onclick="AdminAds.editAd(${ad.id})" title="Edit"></i>
-                        <i class="bi bi-trash-fill" onclick="AdminAds.deleteAd(${ad.id})" title="Delete"></i>
-                    </div>
-                </td>
-            </tr>
-        `).join('');
+        tbody.innerHTML = this.ads.map((ad, idx) => {
+            let imgSrc = ad.image;
+            if (!imgSrc.startsWith('http') && !imgSrc.startsWith('data:')) {
+                imgSrc = '../' + imgSrc;
+            }
+            return \
+                <tr>
+                    <td>\</td>
+                    <td style="color: #64748b;">\</td>
+                    <td>
+                        <img src="\" class="ad-thumbnail" alt="Ad" style="max-height: 60px; object-fit: contain; background: #0f2230; padding: 2px;">
+                    </td>
+                    <td>
+                        <div class="action-icons">
+                            <i class="bi bi-trash-fill" onclick="AdminAds.deleteAd(\)" title="Delete"></i>
+                        </div>
+                    </td>
+                </tr>
+            \;
+        }).join('');
     },
 
-    editAd(id) {
-        const ad = this.ads.find(a => a.id === id);
-        if (!ad) return;
-
-        document.getElementById('adTitle').value = ad.title;
-        document.getElementById('imagePreview').src = ad.image;
-        document.getElementById('imagePreview').style.display = 'block';
-        
-        document.getElementById('adModalOverlay').style.display = 'flex';
-    },
-
-    deleteAd(id) {
-        if (confirm('Are you sure you want to delete this ad?')) {
+    async deleteAd(id) {
+        if (confirm('Are you sure you want to delete this hero image?')) {
             this.ads = this.ads.filter(a => a.id !== id);
             this.renderTable();
+            await this.saveSettings();
         }
     },
 
@@ -189,8 +103,9 @@ const AdminAds = {
         const dropArea = document.getElementById('imageDropArea');
         const fileInput = document.getElementById('adImageInput');
         const preview = document.getElementById('imagePreview');
+        const form = document.getElementById('adForm');
 
-        if (!dropArea) return;
+        if (!dropArea || !form) return;
 
         dropArea.addEventListener('click', () => fileInput.click());
 
@@ -218,14 +133,36 @@ const AdminAds = {
             }
         });
 
-        document.getElementById('adForm').addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            // Just close and fake save for now
-            document.getElementById('adModalOverlay').style.display = 'none';
-            alert('Ad saved successfully!');
-            // Reset form
-            e.target.reset();
-            preview.style.display = 'none';
+            const title = document.getElementById('adTitle').value;
+            
+            if (fileInput.files.length === 0) {
+                alert("Please select an image");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = async (event) => {
+                const base64Image = event.target.result;
+                const newAd = {
+                    id: Date.now(),
+                    title: title || 'Hero Banner',
+                    image: base64Image
+                };
+                
+                this.ads.push(newAd);
+                this.renderTable();
+                await this.saveSettings();
+                
+                document.getElementById('adModalOverlay').style.display = 'none';
+                form.reset();
+                preview.style.display = 'none';
+            };
+            
+            reader.readAsDataURL(file);
         });
     },
 
@@ -242,6 +179,4 @@ const AdminAds = {
 
 document.addEventListener('DOMContentLoaded', () => {
     AdminAds.init();
-    AdminHeroSliders.init();
 });
-
