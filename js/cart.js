@@ -1,5 +1,5 @@
 /**
- * HUE - Cart Page Logic
+ * TUNIC FASHIONS - Cart Page Logic
  * Replaces Cart.jsx logic
  */
 

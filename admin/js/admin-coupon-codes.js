@@ -1,5 +1,5 @@
 /**
- * HUE - Coupons Management Logic
+ * TUNIC FASHIONS - Coupons Management Logic
  */
 
 const AdminCoupons = {

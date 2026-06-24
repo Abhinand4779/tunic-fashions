@@ -1,5 +1,5 @@
 /**
- * HUE - Local Storage Database
+ * TUNIC FASHIONS - Local Storage Database
  * Bypasses the broken backend API to allow adding products locally.
  */
 
@@ -22,7 +22,11 @@ const LocalDB = {
     },
 
     getProducts() {
-        return JSON.parse(localStorage.getItem('hue_products')) || [];
+        try {
+            return JSON.parse(localStorage.getItem('hue_products')) || [];
+        } catch (e) {
+            return [];
+        }
     },
 
     addProduct(product) {
@@ -40,7 +44,11 @@ const LocalDB = {
     },
 
     getCategories() {
-        return JSON.parse(localStorage.getItem('hue_categories')) || ["Silk Sarees", "Banarasi Sarees", "Chiffon Sarees", "Georgette Sarees", "Organza Sarees", "Festive Sarees"];
+        try {
+            return JSON.parse(localStorage.getItem('hue_categories')) || ["Silk Sarees", "Banarasi Sarees", "Chiffon Sarees", "Georgette Sarees", "Organza Sarees", "Festive Sarees"];
+        } catch (e) {
+            return ["Silk Sarees", "Banarasi Sarees", "Chiffon Sarees", "Georgette Sarees", "Organza Sarees", "Festive Sarees"];
+        }
     },
 
     addCategory(catName) {
@@ -56,10 +64,37 @@ const LocalDB = {
         let cats = this.getCategories();
         cats = cats.filter(c => c !== catName);
         localStorage.setItem('hue_categories', JSON.stringify(cats));
+        
+        // Remove image
+        let images = this.getAllCategoryImages();
+        delete images[catName];
+        localStorage.setItem('hue_category_images', JSON.stringify(images));
+    },
+
+    getAllCategoryImages() {
+        try {
+            return JSON.parse(localStorage.getItem('hue_category_images')) || {};
+        } catch (e) {
+            return {};
+        }
+    },
+
+    getCategoryImage(catName) {
+        return this.getAllCategoryImages()[catName] || '';
+    },
+
+    setCategoryImage(catName, base64Image) {
+        let images = this.getAllCategoryImages();
+        images[catName] = base64Image;
+        localStorage.setItem('hue_category_images', JSON.stringify(images));
     },
 
     getAllSubCategories() {
-        return JSON.parse(localStorage.getItem('hue_subcategories')) || {};
+        try {
+            return JSON.parse(localStorage.getItem('hue_subcategories')) || {};
+        } catch (e) {
+            return {};
+        }
     },
 
     getSubCategories(catName) {

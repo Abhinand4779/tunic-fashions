@@ -17,6 +17,8 @@ class Order extends Model
         'customer_name',
         'customer_email',
         'status',
+        'tracking_provider',
+        'tracking_number',
     ];
 
     protected $casts = [

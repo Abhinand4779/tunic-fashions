@@ -16,6 +16,19 @@ class AdminOrderController extends Controller
         return response()->json($orders);
     }
 
+    public function updateStatus(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        
+        $validated = $request->validate([
+            'status' => 'required|string|max:255',
+        ]);
+
+        $order->update(['status' => $validated['status']]);
+
+        return response()->json(['message' => 'Status updated successfully', 'order' => $order]);
+    }
+
     public function updateTracking(Request $request, $id)
     {
         $order = Order::findOrFail($id);
@@ -28,7 +41,7 @@ class AdminOrderController extends Controller
         $order->update([
             'tracking_provider' => $validated['tracking_provider'],
             'tracking_number' => $validated['tracking_number'],
-            'status' => 'Shipped'
+            'status' => 'Shipped' // Automatically update status to Shipped when tracking is provided
         ]);
 
         return response()->json(['message' => 'Tracking updated successfully', 'order' => $order]);

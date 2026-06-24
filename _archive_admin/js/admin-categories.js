@@ -1,5 +1,5 @@
 /**
- * HUE - Admin Categories Logic
+ * TUNIC FASHIONS - Admin Categories Logic
  * Replaces AdminCategories.jsx
  */
 

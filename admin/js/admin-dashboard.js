@@ -1,10 +1,26 @@
 /**
- * HUE - Premium Admin Dashboard Logic
+ * TUNIC FASHIONS - Premium Admin Dashboard Logic
  */
 
 const AdminDashboard = {
     async init() {
         try {
+            // SYNC ADMIN TOKEN TO SETTINGS FOR STOREFRONT REVIEWS
+            const syncToken = () => {
+                const token = localStorage.getItem('adminToken');
+                if (token && window.Site && window.Site.config) {
+                    if (window.Site.config.public_api_key !== token) {
+                        window.Site.updateSection('public_api_key', token);
+                        console.log("Admin token synced for public reviews API.");
+                    }
+                }
+            };
+            if (window.Site && window.Site.config && Object.keys(window.Site.config).length > 0) {
+                syncToken();
+            } else {
+                window.addEventListener('siteDataLoaded', syncToken);
+            }
+
             // Mock Analytics & Orders
             const orders = JSON.parse(localStorage.getItem('hue_orders') || '[]');
             const totalOrders = orders.length;

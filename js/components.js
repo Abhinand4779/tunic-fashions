@@ -1,5 +1,5 @@
 /**
- * HUE - Shared Components Loader
+ * TUNIC FASHIONS - Shared Components Loader
  * Handles dynamic navigation and footer injection
  */
 
@@ -99,6 +99,9 @@ const Components = {
     },
 
     attachNavbarEvents() {
+        if (this._eventsAttached) return;
+        this._eventsAttached = true;
+        
         const mobileToggle = document.getElementById('mobile-toggle');
         const navLinks = document.getElementById('navbar-links');
         const searchToggle = document.getElementById('search-toggle');
@@ -140,7 +143,7 @@ const Components = {
             "Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"
         ];
         
-                                                const countrySelector = document.querySelector('.country-selector');
+        const countrySelector = document.querySelector('.country-selector');
         if (countrySelector) {
             const dropdown = countrySelector.querySelector('.dropdown');
             countrySelector.addEventListener('mouseleave', () => { if (dropdown) dropdown.style.display = ''; });
@@ -213,8 +216,6 @@ window.addEventListener('siteDataLoaded', () => {
             }
             marqueeContent.innerHTML = spansHtml;
             marqueeContainer.style.display = 'flex';
-        } else {
-            marqueeContainer.style.display = 'none';
         }
     }
 });
@@ -238,14 +239,10 @@ if (typeof Site !== 'undefined' && !Site.loading) {
             }
             marqueeContent2.innerHTML = spansHtml;
             marqueeContainer2.style.display = 'flex';
-        } else {
-            marqueeContainer2.style.display = 'none';
         }
     }
 
     setTimeout(() => Components.attachAdminNavbarEvents(), 100);
+
 }
-
-
-
 

@@ -8,7 +8,7 @@
     display: flex;
     width: 100%;
     min-height: 60vh;
-    background-color: rgb(15, 34, 48);
+    background-color: rgb(17, 17, 17);
     overflow: hidden;
 }
 
@@ -54,7 +54,7 @@
 .hero-btn {
     display: inline-block;
     padding: 1rem 2.5rem;
-    background-color: #d4af37;
+    background-color: #A60C37;
     color: #000;
     text-decoration: none;
     font-weight: 600;
@@ -70,7 +70,7 @@
 
 .coupon-area {
     flex: 1;
-    background: rgb(15, 34, 48);
+    background: rgb(17, 17, 17);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +80,7 @@
 
 .coupon-card {
     background-color: rgba(255, 255, 255, 0.05);
-    border: 1px dashed #d4af37;
+    border: 1px dashed #A60C37;
     padding: 2.5rem 1.5rem;
     text-align: center;
     border-radius: 8px;
@@ -94,7 +94,7 @@
 }
 
 .coupon-label {
-    color: #d4af37;
+    color: #A60C37;
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -241,11 +241,11 @@
 }
 
 .highlight-item:hover .highlight-overlay {
-    background: linear-gradient(to top, rgba(212, 175, 55, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+    background: linear-gradient(to top, rgba(166, 12, 55, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
 }
 
 .highlight-subtitle {
-    color: #d4af37;
+    color: #A60C37;
     text-transform: uppercase;
     font-size: 0.8rem;
     letter-spacing: 3px;
@@ -268,7 +268,7 @@
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 600;
-    border-bottom: 2px solid #d4af37;
+    border-bottom: 2px solid #A60C37;
     padding-bottom: 5px;
     align-self: flex-start;
     text-transform: uppercase;
@@ -326,7 +326,7 @@
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 2rem;
-    border: 1px solid #d4af37;
+    border: 1px solid #A60C37;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
     background-color: #fff;
     transition: all 0.3s ease;
@@ -793,7 +793,7 @@ font-size: 1.8rem;
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(166, 12, 55, 0.05) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -803,12 +803,12 @@ font-size: 1.8rem;
 }
 
 .testimonials-section.dark-theme .label-style {
-    color: #d4af37;
+    color: #A60C37;
 }
 
 .testimonials-section.dark-theme .testimonial-card {
     background: #112240;
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(166, 12, 55, 0.2);
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
     padding: 3rem;
 }
@@ -821,7 +821,7 @@ font-size: 1.8rem;
 }
 
 .testimonials-section.dark-theme .user-name {
-    color: #d4af37;
+    color: #A60C37;
     font-size: 1.1rem;
     font-weight: 600;
 }
@@ -831,7 +831,7 @@ font-size: 1.8rem;
 }
 
 .testimonials-section.dark-theme .rating i {
-    color: #d4af37;
+    color: #A60C37;
 }
 
 .testimonials-section.dark-theme .testi-dot {
@@ -839,11 +839,11 @@ font-size: 1.8rem;
 }
 
 .testimonials-section.dark-theme .testi-dot--active {
-    background-color: #d4af37;
+    background-color: #A60C37;
     transform: scale(1.3);
 }
 
-.testimonials-section.dark-theme .insta-icon { color: #d4af37; font-size: 1.5rem; }
+.testimonials-section.dark-theme .insta-icon { color: #A60C37; font-size: 1.5rem; }
 
 @media (max-width: 768px) {
     .testimonials-section.dark-theme .testimonial-card {

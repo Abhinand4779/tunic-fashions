@@ -1,5 +1,5 @@
 /**
- * HUE - Admin Sliders Logic
+ * TUNIC FASHIONS - Admin Sliders Logic
  * Replaces Hero Slider management
  */
 

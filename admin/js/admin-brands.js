@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Mock Data Fallback
     let brands = [
-        { id: 1, name: 'HUE Premium', image: '../assets/Logo/hue%20logo.png', status: 'active' }
+        { id: 1, name: 'TUNIC FASHIONS Premium', image: '../assets/Logo/tunic_logo.png', status: 'active' }
     ];
 
     async function fetchBrands() {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <tr>
                     <td>${index + 1}</td>
                     <td>${brand.name}</td>
-                    <td><img src="${brand.image || '../assets/Logo/hue%20logo.png'}" alt="${brand.name}" class="cat-thumbnail"></td>
+                    <td><img src="${brand.image || '../assets/Logo/tunic_logo.png'}" alt="${brand.name}" class="cat-thumbnail"></td>
                     <td><span class="badge-status ${badgeClass}">${statusText}</span></td>
                     <td>
                         <div class="action-icons">
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: Date.now(),
             name: name,
             status: status,
-            image: '../assets/Logo/hue%20logo.png' // Mock upload
+            image: '../assets/Logo/tunic_logo.png' // Mock upload
         };
 
         try {

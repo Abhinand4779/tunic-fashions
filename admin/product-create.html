@@ -3,10 +3,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="Bk7o0ejzbOlEt50wStpHzI86LqV9h018Wy0Nkttw">
 
-        <title>HUE.</title>
+        <title>TUNIC FASHIONS.</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
-        <meta name="author" content="HUE.">
+        <meta name="author" content="TUNIC FASHIONS.">
         <link rel="shortcut icon" href="https://azhakhi.com/images/brands/06FEA37KhlDHm59pyKs3sJAeSNKPMimDXX-1779173248.png">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -712,7 +712,7 @@
         <!-- Application Logo -->
         <div class="flex pt-4">
             <a href="dashboard.html">
-    <img class="mx-auto h-11 w-11 transition-transform duration-500 ease-in-out hover:rotate-[360deg]" src="../assets/Logo/hue%20logo.png" alt="logo">
+    <img class="mx-auto h-11 w-11 transition-transform duration-500 ease-in-out hover:rotate-[360deg]" src="../assets/Logo/tunic_logo.png" alt="logo">
 </a>
         </div>
 
@@ -777,7 +777,7 @@
           <!-- Profile -->
           <div x-data="usePopper({placement:'right-end',offset:12})" @click.outside="isShowPopper &amp;&amp; (isShowPopper = false)" class="flex">
             <button @click="isShowPopper = !isShowPopper" x-ref="popperRef" class="w-12 h-12 avatar">
-              <img class="rounded-full" src="https://ui-avatars.com/api/?name=A&amp;color=7F9CF5&amp;background=EBF4FF" alt="HUE">
+              <img class="rounded-full" src="https://ui-avatars.com/api/?name=A&amp;color=7F9CF5&amp;background=EBF4FF" alt="TUNIC FASHIONS">
               <span class="absolute right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-success dark:border-navy-700"></span>
             </button>
 
@@ -785,11 +785,11 @@
               <div class="w-64 bg-white border rounded-lg popper-box border-slate-150 shadow-soft dark:border-navy-600 dark:bg-navy-700">
                 <div class="flex items-center px-4 py-5 space-x-4 rounded-t-lg bg-slate-100 dark:bg-navy-800">
                   <div class="avatar h-14 w-14">
-                    <img class="rounded-full" src="https://ui-avatars.com/api/?name=A&amp;color=7F9CF5&amp;background=EBF4FF" alt="HUE">
+                    <img class="rounded-full" src="https://ui-avatars.com/api/?name=A&amp;color=7F9CF5&amp;background=EBF4FF" alt="TUNIC FASHIONS">
                   </div>
                   <div>
                     <a href="#" class="text-base font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">
-                        HUE
+                        TUNIC FASHIONS
                     </a>
                     <p class="text-xs text-slate-400 dark:text-navy-300">
                        admin
@@ -2498,6 +2498,10 @@
         <input type="number" id="p-price" required placeholder="e.g., 5000" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
     </div>
     <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Sizes Available (Comma separated, e.g., S, M, L)</label>
+        <input type="text" id="p-sizes" placeholder="e.g. S, M, L" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+    </div>
+    <div style="margin-bottom: 20px;">
     <label style="display: block; margin-bottom: 8px; font-weight: 500;">Category</label>
     <select id="p-cat" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></select>
 </div>
@@ -2508,14 +2512,13 @@
     </select>
 </div>
     <div style="margin-bottom: 20px;">
-        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Product Image</label>
-        <input type="file" id="p-image" accept="image/*" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-        <div style="width: 100%; height: 200px; border: 2px dashed #ddd; margin-top: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden;" id="preview-box">
-            <span id="preview-text" style="color: #888;">Image Preview</span>
-            <img id="preview-img" style="width: 100%; height: 100%; object-fit: contain; display: none;">
-        </div>
-    </div>
-    <button type="submit" style="background: #1a202c; color: #fff; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%;">Save Product</button>
+      <div style="margin-bottom: 20px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 500;">Product Image Variants (Add Colors)</label>
+          <div id="variants-container" style="display: flex; flex-direction: column; gap: 15px;">
+             <!-- Dynamic variants will be added here -->
+          </div>
+          <button type="button" onclick="addVariantField()" style="margin-top: 10px; padding: 8px 15px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">+ Add Color Variant</button>
+      </div><button type="submit" style="background: #1a202c; color: #fff; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%;">Save Product</button>
 </form>
                     <div class="table-footer">
                         Show 
@@ -2557,13 +2560,29 @@
         });
     });
 
-    let base64Image = '';
-    const imageInput = document.getElementById('p-image');
-    const previewImg = document.getElementById('preview-img');
-    const previewText = document.getElementById('preview-text');
+    let productVariants = [];
 
-    imageInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
+    function addVariantField() {
+        const container = document.getElementById('variants-container');
+        const variantId = Date.now();
+        const html = `
+            <div class="variant-item" id="variant-${variantId}" style="padding: 15px; border: 1px solid #eee; border-radius: 5px; background: #f9fafb;">
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" class="variant-color" placeholder="Color Name (e.g. Red, Gold)" required style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    <button type="button" onclick="document.getElementById('variant-${variantId}').remove()" style="padding: 10px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;"><i class="fa fa-trash"></i></button>
+                </div>
+                <input type="file" class="variant-image" accept="image/*" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" onchange="handleVariantImage(this, ${variantId})">
+                <img id="variant-preview-${variantId}" style="width: 100px; height: 100px; object-fit: contain; display: none; margin-top: 10px; border: 1px solid #ddd;">
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', html);
+    }
+
+    // Add first variant by default
+    addVariantField();
+
+    function handleVariantImage(input, id) {
+        const file = input.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(event) {
@@ -2571,52 +2590,96 @@
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
-                    
                     const MAX_WIDTH = 800;
                     const MAX_HEIGHT = 800;
                     let width = img.width;
                     let height = img.height;
-                    
+
                     if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
+                        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
                     } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-                        }
+                        if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
                     }
-                    
+
                     canvas.width = width;
                     canvas.height = height;
                     ctx.drawImage(img, 0, 0, width, height);
+
+                    const base64 = canvas.toDataURL('image/jpeg', 0.8);
+                    input.dataset.base64 = base64; // Store in dataset
                     
-                    base64Image = canvas.toDataURL('image/jpeg', 0.7);
-                    
-                    previewImg.src = base64Image;
-                    previewImg.style.display = 'block';
-                    previewText.style.display = 'none';
-                };
+                    const preview = document.getElementById(`variant-preview-${id}`);
+                    preview.src = base64;
+                    preview.style.display = 'block';
+                }
                 img.src = event.target.result;
-            };
+            }
             reader.readAsDataURL(file);
         }
-    });
+    }
 
-    document.getElementById('product-form').addEventListener('submit', function(e) {
+    document.getElementById('product-form').addEventListener('submit', async function(e) {
         e.preventDefault();
-        const product = {
+        
+        const variantItems = document.querySelectorAll('.variant-item');
+        let variantsData = [];
+
+        variantItems.forEach((item) => {
+            const color = item.querySelector('.variant-color').value;
+            const imgInput = item.querySelector('.variant-image');
+            const base64 = imgInput.dataset.base64;
+            
+            if(color && base64) {
+                variantsData.push({ color: color, image: base64 });
+            }
+        });
+
+        const data = {
             name: document.getElementById('p-name').value,
+            description: document.getElementById('p-desc') ? document.getElementById('p-desc').value : '',
             price: document.getElementById('p-price').value,
+            sizes: document.getElementById('p-sizes').value ? document.getElementById('p-sizes').value.split(',').map(s => s.trim()).filter(s => s) : [],
+            category_id: document.getElementById('p-cat').value,
             category: document.getElementById('p-cat').value,
-            subcategory: document.getElementById('p-subcat').value || '',
-            image: base64Image
+            subcategory: document.getElementById('p-subcat') ? document.getElementById('p-subcat').value : '',
+            variants: variantsData,
+            image_path: variantsData.length > 0 ? variantsData[0].image : '',
+            image: variantsData.length > 0 ? variantsData[0].image : ''
         };
-        LocalDB.addProduct(product);
-        alert('Product added successfully!');
-        window.location.href = 'products.html';
+
+        const token = localStorage.getItem('adminToken');
+        if (!token) {
+            alert('Not authenticated. Please login again.');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        try {
+            if (typeof LocalDB !== 'undefined') {
+                LocalDB.addProduct(data);
+                alert('Product added successfully!');
+                window.location.href = 'products.html';
+            } else {
+                const res = await fetch(`${API_BASE_URL}/admin/products`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (res.ok) {
+                    alert('Product added successfully!');
+                    window.location.href = 'products.html';
+                } else {
+                    alert('Failed to add product.');
+                }
+            }
+        } catch (e) {
+            console.error(e);
+            alert('Error creating product');
+        }
     });
 </script>
           

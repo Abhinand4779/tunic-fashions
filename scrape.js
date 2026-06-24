@@ -4,7 +4,7 @@ async function run() {
     try {
         console.log('Fetching login page...');
         // 1. Get login page to grab CSRF token and cookies
-        const initRes = await fetch('https://HUE.com/login');
+        const initRes = await fetch('https://TUNIC FASHIONS.com/login');
         const initHtml = await initRes.text();
         const cookies = initRes.headers.get('set-cookie');
         const tokenMatch = initHtml.match(/name=\"_token\" value=\"([^\"]+)\"/);
@@ -22,12 +22,12 @@ async function run() {
         loginParams.append('password', 'password');
         
         console.log('Logging in...');
-        const loginRes = await fetch('https://HUE.com/login', {
+        const loginRes = await fetch('https://TUNIC FASHIONS.com/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Cookie': cookies,
-                'Referer': 'https://HUE.com/login'
+                'Referer': 'https://TUNIC FASHIONS.com/login'
             },
             body: loginParams.toString(),
             redirect: 'manual'
@@ -38,21 +38,21 @@ async function run() {
         
         // 3. Get Dashboard
         console.log('Fetching dashboard...');
-        const dashRes = await fetch('https://HUE.com/admin/dashboard', {
+        const dashRes = await fetch('https://TUNIC FASHIONS.com/admin/dashboard', {
             headers: { 'Cookie': allCookies }
         });
         const dashHtml = await dashRes.text();
         
-        fs.writeFileSync('c:/Users/HP/OneDrive/Desktop/HUE_FRONTEND/scraped_dashboard.html', dashHtml);
+        fs.writeFileSync('c:/Users/HP/OneDrive/Desktop/TUNIC FASHIONS_FRONTEND/scraped_dashboard.html', dashHtml);
         console.log('Successfully saved to scraped_dashboard.html');
         
         // Let's also grab the Products page
         console.log('Fetching products page...');
-        const prodRes = await fetch('https://HUE.com/admin/products', {
+        const prodRes = await fetch('https://TUNIC FASHIONS.com/admin/products', {
             headers: { 'Cookie': allCookies }
         });
         const prodHtml = await prodRes.text();
-        fs.writeFileSync('c:/Users/HP/OneDrive/Desktop/HUE_FRONTEND/scraped_products.html', prodHtml);
+        fs.writeFileSync('c:/Users/HP/OneDrive/Desktop/TUNIC FASHIONS_FRONTEND/scraped_products.html', prodHtml);
         console.log('Successfully saved to scraped_products.html');
 
     } catch(e) { 

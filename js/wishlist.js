@@ -1,5 +1,5 @@
 /**
- * HUE - Wishlist Page Logic
+ * TUNIC FASHIONS - Wishlist Page Logic
  * Replaces Wishlist.jsx logic
  */
 

@@ -7,7 +7,7 @@ async function testEcommerceFlow() {
     let productId = '';
     let userToken = '';
 
-    console.log("=== HUE Ecommerce Flow Test ===");
+    console.log("=== TUNIC FASHIONS Ecommerce Flow Test ===");
 
     try {
         // 1. Admin Login

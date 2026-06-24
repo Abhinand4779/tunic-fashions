@@ -1,5 +1,5 @@
 /**
- * HUE - Authentication and State Management
+ * TUNIC FASHIONS - Authentication and State Management
  * Replaces AuthContext.jsx logic
  */
 

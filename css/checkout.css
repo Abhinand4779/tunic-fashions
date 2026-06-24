@@ -37,7 +37,7 @@
 }
 
 .step-item.active {
-    color: #d4af37;
+    color: #A60C37;
 }
 
 .step-num {
@@ -108,7 +108,7 @@
 
 .form-group input:focus {
     outline: none;
-    border-color: #d4af37;
+    border-color: #A60C37;
 }
 
 .proceed-btn,
@@ -195,7 +195,7 @@
 .edit-addr-btn {
     background: none;
     border: none;
-    color: #d4af37;
+    color: #A60C37;
     text-decoration: underline;
     font-size: 0.9rem;
     cursor: pointer;

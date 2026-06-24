@@ -5,25 +5,20 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-
     const tableBody = document.getElementById('shipping-table-body');
     const form = document.getElementById('shippingForm');
     const searchInput = document.querySelector('.search-mini input');
     
-    // Mock Data Fallback
-    let items = [
-        { id: 1, location: 'Domestic (India)', fee: 0, minAmount: 0 },
-        { id: 2, location: 'International', fee: 500, minAmount: 10000 }
-    ];
+    let items = [];
 
     async function fetchItems() {
         try {
-            const res = await fetch(`${API_BASE_URL}/shipping-charges`);
+            const res = await fetch(`${API_BASE_URL}/shipping`);
             if (res.ok) {
                 items = await res.json();
             }
         } catch (e) {
-            console.warn('Backend not reachable, using mock shipping charges.');
+            console.warn('Backend not reachable');
         }
         renderTable();
     }
@@ -32,27 +27,26 @@ document.addEventListener('DOMContentLoaded', () => {
         tableBody.innerHTML = '';
         const filterText = searchInput.value.toLowerCase();
         
-        const filtered = items.filter(c => c.location.toLowerCase().includes(filterText));
+        // Match API column 'country' instead of 'location'
+        const filtered = items.filter(c => c.country.toLowerCase().includes(filterText));
 
         if (filtered.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4">No shipping zones found.</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">No shipping zones found.</td></tr>`;
             return;
         }
 
         filtered.forEach((item, index) => {
-            const feeDisplay = item.fee > 0 ? `₹${item.fee}` : '<span style="color: #166534; font-weight: 600;">Free</span>';
-            const thresholdDisplay = item.minAmount > 0 ? `Free above ₹${item.minAmount}` : 'N/A';
+            const feeDisplay = item.rate > 0 ? `$${parseFloat(item.rate).toFixed(2)}` : '<span style="color: #166534; font-weight: 600;">Free</span>';
 
             tableBody.innerHTML += `
                 <tr>
                     <td>${index + 1}</td>
-                    <td style="font-weight: 600; color: #334155;">${item.location}</td>
+                    <td style="font-weight: 600; color: #334155;">${item.country}</td>
                     <td>${feeDisplay}</td>
-                    <td>${thresholdDisplay}</td>
+                    <td>N/A</td>
                     <td>
                         <div class="action-icons">
-                            <i class="fa fa-edit" onclick="editItem(${item.id})" title="Edit"></i>
-                            <i class="fa fa-trash" onclick="deleteItem(${item.id})" title="Delete"></i>
+                            <i class="fa fa-trash" onclick="deleteItem(${item.id})" title="Delete" style="cursor:pointer; color: #dc3545;"></i>
                         </div>
                     </td>
                 </tr>
@@ -61,63 +55,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.deleteItem = async function(id) {
-        if (!confirm('Are you sure you want to delete this Shipping Zone?')) return;
-        
+        if (!confirm('Are you sure you want to delete this Shipping Rate?')) return;
+        const token = localStorage.getItem('adminToken');
         try {
-            const res = await fetch(`${API_BASE_URL}/shipping-charges/${id}`, { method: 'DELETE' });
+            const res = await fetch(`${API_BASE_URL}/admin/shipping/${id}`, { 
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
             if (res.ok) {
-                items = items.filter(c => c.id !== id);
-                renderTable();
+                fetchItems();
             }
         } catch (e) {
-            items = items.filter(c => c.id !== id);
-            renderTable();
+            console.error(e);
         }
-    };
-
-    window.editItem = function(id) {
-        const item = items.find(c => c.id === id);
-        if(!item) return;
-        
-        document.getElementById('shippingModalOverlay').style.display = 'flex';
-        // In a real app, populate the form fields here
     };
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const location = form.querySelector('input[name="location"]').value;
-        const fee = form.querySelector('input[name="fee"]').value;
-        const minAmount = form.querySelector('input[name="minAmount"]').value;
-        
-        const newItem = {
-            id: Date.now(),
-            location: location,
-            fee: parseFloat(fee) || 0,
-            minAmount: parseFloat(minAmount) || 0
-        };
+        const country = form.querySelector('select[name="location"]').value;
+        const rate = form.querySelector('input[name="fee"]').value;
+        const token = localStorage.getItem('adminToken');
 
         try {
-            const res = await fetch(`${API_BASE_URL}/shipping-charges`, {
+            const res = await fetch(`${API_BASE_URL}/admin/shipping`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newItem)
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ country, rate })
             });
             if (res.ok) {
-                const saved = await res.json();
-                items.push(saved);
+                fetchItems();
             }
         } catch (e) {
-            items.push(newItem);
+            console.error(e);
         }
 
         document.getElementById('shippingModalOverlay').style.display = 'none';
         form.reset();
-        renderTable();
     });
 
     searchInput.addEventListener('input', renderTable);
 
-    // Init
     fetchItems();
 });
-

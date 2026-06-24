@@ -1,5 +1,5 @@
 /**
- * HUE - Contact Page Logic
+ * TUNIC FASHIONS - Contact Page Logic
  */
 
 document.getElementById('contact-form')?.addEventListener('submit', function (e) {
@@ -14,7 +14,7 @@ document.getElementById('contact-form')?.addEventListener('submit', function (e)
 
     // Simulate sending
     setTimeout(() => {
-        alert('Thank you for reaching out to HUE! Your message has been received and our team will get back to you shortly.');
+        alert('Thank you for reaching out to TUNIC FASHIONS! Your message has been received and our team will get back to you shortly.');
         this.reset();
         btn.textContent = originalText;
         submitBtn.style.opacity = '1';

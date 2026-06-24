@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Mock Data Fallback
     let subCategories = [
-        { id: 1, name: 'Women', image: '../assets/Logo/hue%20logo.png', status: 'active', parentName: 'Fashion' },
-        { id: 2, name: 'Men', image: '../assets/Logo/hue%20logo.png', status: 'active', parentName: 'Fashion' }
+        { id: 1, name: 'Women', image: '../assets/Logo/tunic_logo.png', status: 'active', parentName: 'Fashion' },
+        { id: 2, name: 'Men', image: '../assets/Logo/tunic_logo.png', status: 'active', parentName: 'Fashion' }
     ];
 
     let parentCategories = [];
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.innerHTML = `
                 <td style="padding: 1rem; border-bottom: 1px solid #e2e8f0;">${index + 1}</td>
                 <td style="padding: 1rem; border-bottom: 1px solid #e2e8f0; font-weight: 500;">
-                    <img src="${cat.image || '../assets/Logo/hue%20logo.png'}" alt="${cat.name}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px; margin-right: 0.5rem; vertical-align: middle;">
+                    <img src="${cat.image || '../assets/Logo/tunic_logo.png'}" alt="${cat.name}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px; margin-right: 0.5rem; vertical-align: middle;">
                     ${cat.name} <span style="font-size: 0.8rem; color: #64748b;">(${cat.parentName || 'No Parent'})</span>
                 </td>
                 <td style="padding: 1rem; border-bottom: 1px solid #e2e8f0;">
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: name,
             parentName: parentName,
             status: status,
-            image: '../assets/Logo/hue%20logo.png' // Mock upload
+            image: '../assets/Logo/tunic_logo.png' // Mock upload
         };
 
         try {

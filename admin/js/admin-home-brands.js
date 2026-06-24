@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Mock Data Fallback
     let items = [
-        { id: 1, image: '../assets/Logo/hue%20logo.png', link: 'https://example.com/brand1' }
+        { id: 1, image: '../assets/Logo/tunic_logo.png', link: 'https://example.com/brand1' }
     ];
 
     async function fetchItems() {
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const newItem = {
             id: Date.now(),
-            image: '../assets/Logo/hue%20logo.png', // Mock upload
+            image: '../assets/Logo/tunic_logo.png', // Mock upload
             link: link
         };
 

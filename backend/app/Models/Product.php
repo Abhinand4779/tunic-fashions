@@ -15,7 +15,13 @@ class Product extends Model
         'price',
         'image_path',
         'category_id',
-        'offer_id'
+        'offer_id',
+        'variants'
+    ];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+        'variants' => 'array'
     ];
 
     public function category()

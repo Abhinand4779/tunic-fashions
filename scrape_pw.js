@@ -9,7 +9,7 @@ async function scrapeAdmin() {
 
     try {
         console.log('Navigating to login...');
-        await page.goto('https://HUE.com/admin/dashboard');
+        await page.goto('https://TUNIC FASHIONS.com/admin/dashboard');
 
         // Fill login form
         console.log('Filling credentials...');
@@ -27,23 +27,23 @@ async function scrapeAdmin() {
 
         // Get Dashboard HTML
         const dashHtml = await page.evaluate(() => document.documentElement.outerHTML);
-        fs.writeFileSync('c:/Users/HP/OneDrive/Desktop/HUE_FRONTEND/admin/scraped_dashboard.html', dashHtml);
+        fs.writeFileSync('c:/Users/HP/OneDrive/Desktop/TUNIC FASHIONS_FRONTEND/admin/scraped_dashboard.html', dashHtml);
         console.log('Saved dashboard HTML.');
 
         // Navigate to Products
         console.log('Navigating to Products...');
-        await page.goto('https://HUE.com/admin/products');
+        await page.goto('https://TUNIC FASHIONS.com/admin/products');
         await page.waitForTimeout(2000);
 
         const prodHtml = await page.evaluate(() => document.documentElement.outerHTML);
-        fs.writeFileSync('c:/Users/HP/OneDrive/Desktop/HUE_FRONTEND/admin/scraped_products.html', prodHtml);
+        fs.writeFileSync('c:/Users/HP/OneDrive/Desktop/TUNIC FASHIONS_FRONTEND/admin/scraped_products.html', prodHtml);
         console.log('Saved products HTML.');
 
         // Grab the CSS files used by the page to save locally
         const stylesheets = await page.evaluate(() => {
             return Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
                 .map(link => link.href)
-                .filter(href => href.includes('HUE.com'));
+                .filter(href => href.includes('TUNIC FASHIONS.com'));
         });
 
         console.log('Downloading CSS files...', stylesheets);
@@ -60,7 +60,7 @@ async function scrapeAdmin() {
             }
         }
         
-        fs.writeFileSync('c:/Users/HP/OneDrive/Desktop/HUE_FRONTEND/css/scraped-admin.css', combinedCss);
+        fs.writeFileSync('c:/Users/HP/OneDrive/Desktop/TUNIC FASHIONS_FRONTEND/css/scraped-admin.css', combinedCss);
         console.log('Saved combined CSS.');
 
     } catch (e) {

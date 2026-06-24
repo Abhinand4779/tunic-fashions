@@ -8,6 +8,7 @@
 }
 
 .navbar-wrapper {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,7 +31,7 @@
 }
 
 .logo-subtitle {
-    color: #d4af37;
+    color: #A60C37;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 4px;
@@ -99,7 +100,7 @@
 
 .icon-link:hover,
 .icon-button:hover {
-    color: #d4af37;
+    color: #A60C37;
 }
 
 .cart-icon {
@@ -115,7 +116,7 @@
     right: -10px;
     font-size: 10px;
     font-weight: 700;
-    background-color: #d4af37;
+    background-color: #A60C37;
     color: #000;
     width: 16px;
     height: 16px;
@@ -151,6 +152,7 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         max-height: 80vh;
         overflow-y: auto;
+        z-index: 9999;
     }
 
     .navbar-links.active {
@@ -190,7 +192,7 @@
         min-width: 0;
         width: 100%;
         border-top: none;
-        border-left: 3px solid #d4af37;
+        border-left: 3px solid #A60C37;
         margin: 0 0 0.5rem;
     }
 
@@ -267,7 +269,7 @@
     transform: translateX(-50%) translateY(10px);
     background: #000000;
     list-style: none;
-    border-top: 2px solid #d4af37;
+    border-top: 2px solid #A60C37;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     z-index: 1001;
     transition: all 0.3s ease;
@@ -306,7 +308,7 @@
 }
 
 .dropdown-link:hover {
-    color: #d4af37;
+    color: #A60C37;
     background: #111;
 }
 
@@ -324,8 +326,8 @@
 }
 
 .mega-menu-link:hover {
-    color: #d4af37;
-    border-bottom-color: #d4af37;
+    color: #A60C37;
+    border-bottom-color: #A60C37;
     padding-left: 5px;
 }
 
@@ -424,7 +426,7 @@
 /* ========================================= */
 
 .promo-banner-marquee {
-    background-color: #d4af37;
+    background-color: #A60C37;
     color: #0d1b2a;
     padding: 4px 0;
     overflow: hidden;

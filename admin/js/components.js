@@ -1,5 +1,5 @@
 /**
- * HUE Admin Components
+ * TUNIC FASHIONS Admin Components
  * Handles the dual-sidebar and top navigation
  */
 
@@ -9,7 +9,7 @@
             <!-- Primary Icon Sidebar -->
             <aside class="admin-sidebar">
                 <div class="admin-sidebar-header">
-                    <img src="../assets/Logo/hue%20logo.png" alt="HUE">
+                    <img src="../assets/Logo/tunic_logo.png" alt="TUNIC FASHIONS">
                 </div>
                 
                 <nav class="admin-nav">

@@ -1,5 +1,5 @@
 /**
- * HUE - Admin Layout Logic
+ * TUNIC FASHIONS - Admin Layout Logic
  * Handles sidebar toggling and authentication checks
  */
 
@@ -33,8 +33,8 @@ const AdminLayout = {
 
         sidebar.innerHTML = `
             <div class="sidebar-brand">
-                <img src="../assets/Logo/hue%20logo.png" alt="HUE Logo">
-                <h2>HUE UI</h2>
+                <img src="../assets/Logo/tunic_logo.png" alt="TUNIC FASHIONS Logo">
+                <h2>TUNIC FASHIONS UI</h2>
             </div>
 
             <nav class="sidebar-nav">

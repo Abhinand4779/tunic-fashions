@@ -1,5 +1,5 @@
 /**
- * HUE - Site Configuration
+ * TUNIC FASHIONS - Site Configuration
  * Replaces defaultConfig in SiteContext.jsx
  */
 
@@ -9,18 +9,18 @@ const DEFAULT_CONFIG = {
     hero: {
         bannerImg: 'assets/About/hero_navy.png',
         title: 'ELEGANCE IN<br>EVERY DETAIL',
-        subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.',
+        subtitle: 'Explore the exclusive fashion & jewelry collection from TUNIC FASHIONS.',
         btnText: 'SHOP COLLECTION',
         btnLink: 'shop.html'
     },
     heroSliders: [
-        { id: 1, image: 'assets/About/hero_navy.png', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from HUE.' }
+        { id: 1, image: 'assets/About/hero_navy.png', title: 'ELEGANCE IN<br>EVERY DETAIL', subtitle: 'Explore the exclusive fashion & jewelry collection from TUNIC FASHIONS.' }
     ],
     coupon: {
         label: 'Special Offer',
         discount: '15% OFF',
         text: 'On your first order above ₹1999',
-        code: 'HUE15'
+        code: 'TUNIC FASHIONS15'
     },
     highlights: [
         { id: 1, title: 'Summer Sale', image: 'assets/Ornaments_Categories/dress_navy.png', subtitle: 'Designer Dresses', link: 'shop.html' },
@@ -60,21 +60,21 @@ const DEFAULT_CONFIG = {
         }
     ],
     testimonials: [
-        { id: 1, name: "Anjali Sharma", handle: "@anjali_styles", text: "The gold plating is so authentic! I wore the bangles to a wedding and everyone thought they were real gold. Amazing quality from HUE.", rating: 5 },
+        { id: 1, name: "Anjali Sharma", handle: "@anjali_styles", text: "The gold plating is so authentic! I wore the bangles to a wedding and everyone thought they were real gold. Amazing quality from TUNIC FASHIONS.", rating: 5 },
         { id: 2, name: "Rahul Verma", handle: "@rahul_v", text: "Bought the layered chain set for my wife. The packaging and the finish of the product exceeded my expectations. Highly recommend!", rating: 5 },
-        { id: 3, name: "Priya Iyer", handle: "@priya_jewels", text: "Finding traditional designs that don't feel heavy is hard. HUE's signature earrings are my new favorites for daily wear.", rating: 5 }
+        { id: 3, name: "Priya Iyer", handle: "@priya_jewels", text: "Finding traditional designs that don't feel heavy is hard. TUNIC FASHIONS's signature earrings are my new favorites for daily wear.", rating: 5 }
     ],
     homeCategories: [
-        { id: 1, name: 'Necklaces', image: 'https://images.unsplash.com/photo-1599643478524-fb66f7ca265b?auto=format&fit=crop&w=300&q=80', path: 'shop.html?category=necklaces' },
-        { id: 2, name: 'Bridal Sets', image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=300&q=80', path: 'shop.html?category=bridal' },
-        { id: 3, name: 'Bangles', image: 'https://images.unsplash.com/photo-1610030469983-98e550d61dc9?auto=format&fit=crop&w=300&q=80', path: 'shop.html?category=bangles' },
-        { id: 4, name: 'Earrings', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=300&q=80', path: 'shop.html?category=earrings' },
+        { id: 1, name: 'Necklaces', image: 'assets/Ornaments_Categories/chain_dark.png', path: 'shop.html?category=necklaces' },
+        { id: 2, name: 'Bridal Sets', image: 'assets/Ornaments_Categories/bridal_dark.png', path: 'shop.html?category=bridal' },
+        { id: 3, name: 'Bangles', image: 'assets/Ornaments_Categories/bangle_dark.png', path: 'shop.html?category=bangles' },
+        { id: 4, name: 'Earrings', image: 'assets/Ornaments_Categories/earring_dark.png', path: 'shop.html?category=earrings' },
     ],
     footer: {
         storeName: 'Our Store',
-        description: 'HUE was started in 2022 to bring elegance and tradition to your everyday style.',
+        description: 'TUNIC FASHIONS was started in 2022 to bring elegance and tradition to your everyday style.',
         newsletterText: 'Sign up for our newsletter and receive 10% off your',
-        copyright: '©2026 HUE. All Rights Reserved.',
+        copyright: '©2026 TUNIC FASHIONS. All Rights Reserved.',
         credit: 'Designed By RDR Technology',
         instagram: 'https://www.instagram.com/rdr.technology?igsh=eTc5NWUwOWN0eHBs'
     },

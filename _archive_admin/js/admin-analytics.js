@@ -1,5 +1,5 @@
 /**
- * HUE - Admin Analytics Dashboard
+ * TUNIC FASHIONS - Admin Analytics Dashboard
  */
 
 const AdminAnalytics = {

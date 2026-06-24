@@ -1,5 +1,5 @@
 /**
- * HUE - Home Page Logic
+ * TUNIC FASHIONS - Home Page Logic
  * Replaces Home.jsx logic
  */
 
@@ -61,7 +61,7 @@ const HomeHandler = {
                 `).join('')}
                 <div class="slider-dots" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: ${sliders.length > 1 ? 'flex' : 'none'}; gap: 10px; z-index: 10;">
                     ${sliders.map((_, index) => `
-                        <button style="width: 12px; height: 12px; border-radius: 50%; border: none; background-color: ${index === current ? '#d4af37' : 'rgba(255,255,255,0.5)'}; cursor: pointer; transition: all 0.3s;" onclick="HomeHandler.setHero(${index})"></button>
+                        <button style="width: 12px; height: 12px; border-radius: 50%; border: none; background-color: ${index === current ? '#A60C37' : 'rgba(255,255,255,0.5)'}; cursor: pointer; transition: all 0.3s;" onclick="HomeHandler.setHero(${index})"></button>
                     `).join('')}
                 </div>
             `;
@@ -132,7 +132,7 @@ const HomeHandler = {
                             <span class="promo-slide__badge">${slide.badge}</span>
                         </div>
                         <div class="promo-slide__content">
-                            <p class="promo-slide__eyebrow">HUE — Featured</p>
+                            <p class="promo-slide__eyebrow">TUNIC FASHIONS — Featured</p>
                             <h2 class="promo-slide__title">${slide.title}</h2>
                             <p class="promo-slide__subtitle">${slide.subtitle}</p>
                             <a href="${slide.link}" class="promo-slide__btn">${slide.btnText}</a>
@@ -154,15 +154,48 @@ const HomeHandler = {
 
     renderCategories(config) {
         const wrap = document.getElementById('home-categories-wrap');
-        if (!wrap || !config.homeCategories) return;
+        if (!wrap) return;
 
-        wrap.innerHTML = config.homeCategories.map(cat => `
-            <a href="${cat.path}" class="category-card">
-                <div class="category-image-wrapper">
-                    <img src="${cat.image}" alt="${cat.name}">
-                </div>
-                <h3 class="category-name">${cat.name}</h3>
-            </a>
+        let categoriesToRender = [];
+
+        // ALways use LocalDB if available to perfectly match the Navbar dropdown
+        if (typeof LocalDB !== 'undefined') {
+            const localCats = LocalDB.getCategories();
+            const fallbackImages = {
+                "silk sarees": "assets/saree_product_1.png",
+                "banarasi sarees": "assets/saree_product_2.png",
+                "chiffon sarees": "assets/saree_product_3.png",
+                "georgette sarees": "assets/saree_product_4.png",
+                "organza sarees": "assets/saree_product_1.png",
+                "festive sarees": "assets/saree_product_2.png",
+                "necklaces": "assets/Ornaments_Categories/chain_dark.png",
+                "bridal sets": "assets/Ornaments_Categories/bridal_dark.png",
+                "bangles": "assets/Ornaments_Categories/bangle_dark.png",
+                "earrings": "assets/Ornaments_Categories/earring_dark.png"
+            };
+
+            categoriesToRender = localCats.map(catName => {
+                let img = LocalDB.getCategoryImage(catName);
+                if (!img) {
+                    img = fallbackImages[catName.toLowerCase()] || "assets/Ornaments_Categories/jewelry_navy.png";
+                }
+                return {
+                    name: catName,
+                    path: `shop.html?category=${encodeURIComponent(catName.toLowerCase())}`,
+                    image: img
+                };
+            });
+        } else {
+            categoriesToRender = config.homeCategories;
+        }
+
+        if (!categoriesToRender || categoriesToRender.length === 0) return;
+
+        wrap.innerHTML = categoriesToRender.map(cat => `
+            <div class="futuristic-cat-card" onclick="window.location.href='${cat.path}'">
+                <img src="${cat.image}" alt="${cat.name}" style="width: 100%; height: 80%; object-fit: cover;">
+                <div class="futuristic-cat-content">${cat.name.toUpperCase()}</div>
+            </div>
         `).join('');
     },
 

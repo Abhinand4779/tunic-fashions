@@ -1,5 +1,5 @@
 /**
- * HUE - Admin CMS / Site Settings
+ * TUNIC FASHIONS - Admin CMS / Site Settings
  */
 
 const AdminCMS = {
@@ -270,7 +270,7 @@ const AdminCMS = {
     renderAboutTab() {
         const contentArea = document.getElementById('cms-content-area');
         
-        let storeName = this.config['about_store_name'] || 'HUE';
+        let storeName = this.config['about_store_name'] || 'TUNIC FASHIONS';
         let tagline = this.config['about_tagline'] || 'Timeless jewelry that tells your unique story.';
         let desc = this.config['about_description'] || 'Handcrafted with passion and precision.';
 

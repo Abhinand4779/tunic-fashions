@@ -112,7 +112,7 @@ const ShopHandler = {
                     
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <h3 style="margin:0; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.2rem;">FILTERS</h3>
-                        <button onclick="ShopHandler.clearFilters()" style="background:none; border:none; color:#d4af37; cursor:pointer; font-size:0.85rem; font-weight:bold;">Clear All</button>
+                        <button onclick="ShopHandler.clearFilters()" style="background:none; border:none; color:#A60C37; cursor:pointer; font-size:0.85rem; font-weight:bold;">Clear All</button>
                     </div>
 
                     <div class="filter-section">
@@ -155,7 +155,7 @@ const ShopHandler = {
                             <span>-</span>
                             <input type="number" id="filter-max-price" value="${this.maxPrice}" placeholder="Max" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; outline: none;">
                         </div>
-                        <button onclick="ShopHandler.updatePrice(document.getElementById('filter-min-price').value, document.getElementById('filter-max-price').value)" style="width: 100%; padding: 8px; background: #0f2230; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px;">APPLY</button>
+                        <button onclick="ShopHandler.updatePrice(document.getElementById('filter-min-price').value, document.getElementById('filter-max-price').value)" style="width: 100%; padding: 8px; background: #111111; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px;">APPLY</button>
                     </div>
 
                     ${allSizes.size > 0 ? `
@@ -164,7 +164,7 @@ const ShopHandler = {
                         <div style="display: flex; flex-wrap: wrap; gap: 10px;">
                             ${Array.from(allSizes).map(size => `
                                 <button onclick="ShopHandler.toggleFilterValue('selectedSizes', '${size}')" 
-                                        style="padding: 6px 12px; border: 1px solid ${this.selectedSizes.includes(size) ? '#d4af37' : '#ddd'}; background: ${this.selectedSizes.includes(size) ? '#fbf8f1' : '#fff'}; color: ${this.selectedSizes.includes(size) ? '#000' : '#555'}; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">
+                                        style="padding: 6px 12px; border: 1px solid ${this.selectedSizes.includes(size) ? '#A60C37' : '#ddd'}; background: ${this.selectedSizes.includes(size) ? '#fbf8f1' : '#fff'}; color: ${this.selectedSizes.includes(size) ? '#000' : '#555'}; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">
                                     ${size}
                                 </button>
                             `).join('')}
@@ -191,7 +191,7 @@ const ShopHandler = {
                             return `<div class="premium-product-card" onclick="window.location.href='product.html?id=${pid}'">
                                     <div class="p-card-image">
                                         ${p.discount ? `<span class="discount-badge">-${p.discount}</span>` : ''}
-                                        <img src="${p.image || p.images?.[0] || 'assets/Logo/hue%20logo.png'}" alt="${p.name}" loading="lazy">
+                                        <img src="${p.image || p.images?.[0] || 'assets/Logo/tunic_logo.png'}" alt="${p.name}" loading="lazy">
                                         <button class="quick-view">Quick View</button>
                                     </div>
                                     <div class="p-card-info">

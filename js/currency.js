@@ -1,5 +1,5 @@
 /**
- * HUE - Currency Conversion System
+ * TUNIC FASHIONS - Currency Conversion System
  */
 
 const Currency = {

@@ -99,7 +99,7 @@
 
 .filter-list li:hover,
 .filter-list li.active {
-    color: #d4af37;
+    color: #A60C37;
     padding-left: 8px;
 }
 
@@ -132,12 +132,12 @@
 }
 
 .material-checkbox:hover input~.checkmark {
-    border-color: #d4af37;
+    border-color: #A60C37;
 }
 
 .material-checkbox input:checked~.checkmark {
-    background-color: #d4af37;
-    border-color: #d4af37;
+    background-color: #A60C37;
+    border-color: #A60C37;
 }
 
 /* Slider Styling */
@@ -155,7 +155,7 @@
     -webkit-appearance: none;
     width: 15px;
     height: 15px;
-    background: #d4af37;
+    background: #A60C37;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -332,7 +332,7 @@
     left: 0;
     width: 100%;
     padding: 15px;
-    background-color: rgba(212, 175, 55, 0.9);
+    background-color: rgba(166, 12, 55, 0.9);
     color: #fff;
     border: none;
     text-transform: uppercase;
@@ -372,7 +372,7 @@
 }
 
 .p-price {
-    color: #d4af37;
+    color: #A60C37;
     font-weight: 700;
     letter-spacing: 1px;
 }
@@ -382,7 +382,7 @@
     position: absolute;
     top: 15px;
     left: 15px;
-    background-color: #d4af37;
+    background-color: #A60C37;
     color: #000;
     padding: 5px 12px;
     font-size: 0.75rem;
@@ -436,8 +436,8 @@
 
 .size-option:hover,
 .size-option.active {
-    border-color: #d4af37;
-    color: #d4af37;
+    border-color: #A60C37;
+    color: #A60C37;
     background-color: #fdfcf8;
 }
 

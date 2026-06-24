@@ -1,5 +1,5 @@
 /**
- * HUE - Admin Orders Logic
+ * TUNIC FASHIONS - Admin Orders Logic
  */
 
 const AdminOrders = {

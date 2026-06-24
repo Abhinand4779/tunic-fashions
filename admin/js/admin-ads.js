@@ -16,44 +16,20 @@ const AdminAds = {
 
     async loadSettings() {
         try {
-            const res = await fetch(API_URL + '/settings');
-            if (res.ok) {
-                const data = await res.json();
-                if (data.hero_sliders) {
-                    try {
-                        this.ads = JSON.parse(data.hero_sliders);
-                    } catch(e) {
-                        console.error('Failed to parse hero_sliders', e);
-                    }
-                }
-            }
-            if (this.ads.length === 0 && window.DEFAULT_CONFIG && window.DEFAULT_CONFIG.heroSliders) {
+            const saved = localStorage.getItem('hue_hero_sliders');
+            if (saved) {
+                this.ads = JSON.parse(saved);
+            } else if (window.DEFAULT_CONFIG && window.DEFAULT_CONFIG.heroSliders) {
                 this.ads = [...window.DEFAULT_CONFIG.heroSliders];
             }
         } catch (err) {
-            console.error('Error fetching settings', err);
+            console.error('Error loading settings', err);
         }
     },
 
     async saveSettings() {
         try {
-            const payload = {
-                settings: {
-                    hero_sliders: JSON.stringify(this.ads)
-                }
-            };
-            const token = localStorage.getItem('adminToken');
-            const res = await fetch(API_URL + '/admin/settings', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                },
-                body: JSON.stringify(payload)
-            });
-            if (!res.ok) {
-                alert('Failed to save Hero Sliders to database.');
-            }
+            localStorage.setItem('hue_hero_sliders', JSON.stringify(this.ads));
         } catch (err) {
             console.error('Error saving settings', err);
             alert('Error saving settings.');
@@ -79,7 +55,7 @@ const AdminAds = {
                     <td>${idx + 1}</td>
                     <td style="color: #64748b;">${ad.title || 'Hero Banner'}</td>
                     <td>
-                        <img src="${imgSrc}" class="ad-thumbnail" alt="Ad" style="max-height: 60px; object-fit: contain; background: #0f2230; padding: 2px;">
+                        <img src="${imgSrc}" class="ad-thumbnail" alt="Ad" style="max-height: 60px; object-fit: contain; background: #111111; padding: 2px;">
                     </td>
                     <td>
                         <div class="action-icons">

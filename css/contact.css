@@ -22,7 +22,7 @@
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 5px;
-    color: #d4af37;
+    color: #A60C37;
     margin-bottom: 1.5rem;
 }
 
@@ -73,7 +73,7 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 3px;
-    color: #d4af37;
+    color: #A60C37;
     margin: 3rem 0 1rem;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .social-icons a:hover {
-    color: #d4af37;
+    color: #A60C37;
 }
 
 /* Right side form */
@@ -139,7 +139,7 @@
 }
 
 .floating-group:focus-within {
-    border-color: #d4af37;
+    border-color: #A60C37;
 }
 
 /* Input/Textarea Styling */
@@ -175,7 +175,7 @@
 .floating-group textarea:not(:placeholder-shown)~label {
     top: 0;
     font-size: 0.7rem;
-    color: #d4af37;
+    color: #A60C37;
 }
 
 /* Submit Button */
@@ -198,7 +198,7 @@
 }
 
 .premium-submit:hover {
-    background: #d4af37;
+    background: #A60C37;
     color: #000;
     transform: translateX(10px);
 }
@@ -229,13 +229,13 @@
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 3px;
-    border-bottom: 2px solid #d4af37;
+    border-bottom: 2px solid #A60C37;
     padding-bottom: 8px;
     transition: all 0.3s;
 }
 
 .teaser-link:hover {
-    color: #d4af37;
+    color: #A60C37;
     border-bottom-color: #000;
 }
 

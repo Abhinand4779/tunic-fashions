@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = document.createElement('button');
         btn.id = 'floating-save-btn';
         btn.innerText = 'Save Changes (Failsafe)';
-        btn.style.cssText = 'position: fixed; bottom: 30px; right: 30px; z-index: 99999; padding: 15px 30px; background: #d4af37; color: #000; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: none; font-size: 1.2rem;';
+        btn.style.cssText = 'position: fixed; bottom: 30px; right: 30px; z-index: 99999; padding: 15px 30px; background: #A60C37; color: #000; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: none; font-size: 1.2rem;';
         btn.onclick = (e) => {
             const form = document.getElementById('settings-form');
             if (form) window.saveSettings({ preventDefault: () => {}, target: form });
