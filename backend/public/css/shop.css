@@ -25,7 +25,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    color: #333333;
 }
 
 .header-overlay h1 {
@@ -247,7 +247,7 @@
     align-items: center;
     text-align: left;
     padding: 1.5rem;
-    background-color: #fff;
+    background-color: #333333;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
     border: 1px solid #f0f0f0;
@@ -333,7 +333,7 @@
     width: 100%;
     padding: 15px;
     background-color: rgba(166, 12, 55, 0.9);
-    color: #fff;
+    color: #333333;
     border: none;
     text-transform: uppercase;
     font-weight: 600;
@@ -503,7 +503,7 @@
         align-items: center;
         gap: 8px;
         background: #000;
-        color: #fff;
+        color: #333333;
         border: none;
         padding: 8px 15px;
         border-radius: 4px;

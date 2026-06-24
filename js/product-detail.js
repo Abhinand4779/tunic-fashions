@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .reviews-section { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; }
     .reviews-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
     .reviews-header h3 { font-size: 1.5rem; color: #0f172a; margin: 0; }
-    .btn-write-review { background: #A60C37; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 500; transition: background 0.2s; }
+    .btn-write-review { background: #A60C37; color: #333333; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 500; transition: background 0.2s; }
     .btn-write-review:hover { background: #c29e2f; }
     .review-item { padding: 1.5rem; border: 1px solid #f1f5f9; border-radius: 8px; margin-bottom: 1rem; background: #fff; display: flex; gap: 1.5rem; }
     .review-img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; flex-shrink: 0; }

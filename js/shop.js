@@ -155,7 +155,7 @@ const ShopHandler = {
                             <span>-</span>
                             <input type="number" id="filter-max-price" value="${this.maxPrice}" placeholder="Max" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; outline: none;">
                         </div>
-                        <button onclick="ShopHandler.updatePrice(document.getElementById('filter-min-price').value, document.getElementById('filter-max-price').value)" style="width: 100%; padding: 8px; background: #111111; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px;">APPLY</button>
+                        <button onclick="ShopHandler.updatePrice(document.getElementById('filter-min-price').value, document.getElementById('filter-max-price').value)" style="width: 100%; padding: 8px; background: #f9f9f9; color: #333333; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px;">APPLY</button>
                     </div>
 
                     ${allSizes.size > 0 ? `

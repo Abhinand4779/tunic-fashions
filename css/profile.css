@@ -100,7 +100,7 @@
 
 .auth-btn {
     background-color: #000;
-    color: #fff;
+    color: #333333;
     padding: 1rem;
     border: none;
     border-radius: 12px;
@@ -171,7 +171,7 @@
 }
 
 .guest-btn {
-    background-color: #fff;
+    background-color: #333333;
     color: #555;
     padding: 0.875rem;
     border: 1.5px solid #eee;

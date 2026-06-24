@@ -159,7 +159,7 @@ const Components = {
             const renderList = (filter = "") => {
                 listEl.innerHTML = allCountries
                     .filter(c => c.toLowerCase().includes(filter.toLowerCase()))
-                    .map(c => `<a href="#" class="dropdown-link country-link" data-country="${c}" style="padding: 8px 10px; display: block; color: #fff;">${c}</a>`)
+                    .map(c => `<a href="#" class="dropdown-link country-link" data-country="${c}" style="padding: 8px 10px; display: block; color: #333333;">${c}</a>`)
                     .join("");
                     
                 listEl.querySelectorAll('.country-link').forEach(link => {

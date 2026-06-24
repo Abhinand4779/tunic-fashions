@@ -55,7 +55,7 @@ const AdminAds = {
                     <td>${idx + 1}</td>
                     <td style="color: #64748b;">${ad.title || 'Hero Banner'}</td>
                     <td>
-                        <img src="${imgSrc}" class="ad-thumbnail" alt="Ad" style="max-height: 60px; object-fit: contain; background: #111111; padding: 2px;">
+                        <img src="${imgSrc}" class="ad-thumbnail" alt="Ad" style="max-height: 60px; object-fit: contain; background: #f9f9f9; padding: 2px;">
                     </td>
                     <td>
                         <div class="action-icons">

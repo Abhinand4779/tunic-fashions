@@ -115,7 +115,7 @@
 .pay-now-btn {
     width: 100%;
     background: #000;
-    color: #fff;
+    color: #333333;
     border: none;
     padding: 18px;
     font-weight: 600;
@@ -300,7 +300,7 @@
 
 .coupon-input-group button {
     background: #111;
-    color: #fff;
+    color: #333333;
     border: none;
     padding: 0 20px;
     font-size: 0.8rem;

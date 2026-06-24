@@ -21,7 +21,7 @@ async function fetchShippingRates() {
                         <td style="font-weight: 500;">${rate.country}</td>
                         <td style="color: #334155; font-weight: 600;">$${parseFloat(rate.rate).toFixed(2)}</td>
                         <td>
-                            <button onclick="deleteShippingRate(${rate.id})" style="padding: 6px 12px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            <button onclick="deleteShippingRate(${rate.id})" style="padding: 6px 12px; background: #dc3545; color: #333333; border: none; border-radius: 4px; cursor: pointer;">
                                 <i class="fa fa-trash"></i> Delete
                             </button>
                         </td>

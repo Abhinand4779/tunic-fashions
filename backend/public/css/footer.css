@@ -1,7 +1,7 @@
 .footer {
-    background-color: #000000;
+    background-color: #ffffff;
     /* Black background as requested */
-    color: #ffffff;
+    color: #333333;
     /* White text for contrast */
     padding: 4rem 5% 2rem;
     font-family: 'Roboto', sans-serif;
@@ -25,7 +25,7 @@
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 2rem;
-    color: #ffffff;
+    color: #333333;
 }
 
 .footer-heading-large {
@@ -37,7 +37,7 @@
 .footer-description {
     font-size: 1rem;
     line-height: 1.6;
-    color: #ffffff;
+    color: #333333;
     max-width: 300px;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .footer-links a {
-    color: #ffffff;
+    color: #333333;
     text-decoration: none;
     font-size: 1rem;
     transition: opacity 0.3s ease;
@@ -66,7 +66,7 @@
     font-size: 1rem;
     margin-bottom: 2rem;
     line-height: 1.5;
-    color: #ffffff;
+    color: #333333;
 }
 
 .footer-email-form {
@@ -94,7 +94,7 @@
 .footer-email-btn {
     background: none;
     border: none;
-    color: #ffffff;
+    color: #333333;
     /* White arrow on black background */
     font-size: 2rem;
     cursor: pointer;
@@ -123,7 +123,7 @@
 
 .footer-copyright {
     font-size: 0.9rem;
-    color: #ffffff;
+    color: #333333;
 }
 
 .footer-instagram {
@@ -134,7 +134,7 @@
     height: 40px;
     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
     border-radius: 12px;
-    color: #ffffff;
+    color: #333333;
     text-decoration: none;
     font-size: 1.5rem;
     transition: transform 0.3s ease;
@@ -148,7 +148,7 @@
     font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.5px;
-    color: #ffffff;
+    color: #333333;
 }
 
 /* Responsive */

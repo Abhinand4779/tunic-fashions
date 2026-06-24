@@ -88,7 +88,7 @@ const AdminCMS = {
             }
             .cms-tab.active {
                 background: var(--admin-primary);
-                color: #fff;
+                color: #333333;
                 box-shadow: 0 4px 10px rgba(93, 95, 239, 0.3);
             }
             .cms-input-group {
@@ -120,7 +120,7 @@ const AdminCMS = {
             .cms-btn-submit {
                 width: 100%;
                 background: var(--admin-primary);
-                color: #fff;
+                color: #333333;
                 border: none;
                 padding: 1rem;
                 border-radius: 8px;

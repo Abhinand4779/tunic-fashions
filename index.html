@@ -20,13 +20,13 @@
 <body>
 
     <div id="futuristic-loader"
-        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgb(17, 17, 17); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease-out;">
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #ffffff; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease-out;">
         <div style="position: relative; width: 100px; height: 100px;">
             <div
                 style="position: absolute; width: 100%; height: 100%; border: 3px solid transparent; border-top-color: #A60C37; border-radius: 50%; animation: spin 1s linear infinite;">
             </div>
             <div
-                style="position: absolute; width: 80%; height: 80%; top: 10%; left: 10%; border: 3px solid transparent; border-top-color: #fff; border-radius: 50%; animation: spin 1.5s linear infinite reverse;">
+                style="position: absolute; width: 80%; height: 80%; top: 10%; left: 10%; border: 3px solid transparent; border-top-color: #333333; border-radius: 50%; animation: spin 1.5s linear infinite reverse;">
             </div>
             <div
                 style="position: absolute; width: 60%; height: 60%; top: 20%; left: 20%; border: 3px solid transparent; border-top-color: #A60C37; border-radius: 50%; animation: spin 2s linear infinite;">
@@ -83,7 +83,7 @@
     <div class="app-container">
         <!-- Static Navbar -->
         <nav class="navbar-container" id="main-nav"
-            style="padding: 0; background-color: rgb(17, 17, 17); box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            style="padding: 0; background-color: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
 
             <!-- PROMO BANNER MARQUEE -->
             <div class="promo-banner-marquee">
@@ -171,7 +171,7 @@
             </div>
         </nav>
 
-        <main class="home-container" style="background-color: rgb(17, 17, 17); color: #fff; overflow-x: hidden;">
+        <main class="home-container" style="background-color: #ffffff; color: #333333; overflow-x: hidden;">
             <!-- NEW HERO SECTION -->
             <style>
                 .hero-slide {
@@ -193,7 +193,7 @@
                 }
             </style>
             <section class="new-hero"
-                style="position: relative; width: 100%; height: 75vh; min-height: 500px; display: flex; align-items: flex-end; padding: 3rem 5%; background-color: #111111; overflow: hidden;">
+                style="position: relative; width: 100%; height: 75vh; min-height: 500px; display: flex; align-items: flex-end; padding: 3rem 5%; background-color: #f9f9f9; overflow: hidden;">
 
                 <!-- SLIDER IMAGES -->
                 <div class="hero-slide active-slide" style="background-image: url('assets/hero_saree_navy.png');"></div>
@@ -207,7 +207,7 @@
 
                 <div style="position: relative; z-index: 2; width: 100%; max-width: 1400px; margin: 0 auto;">
                     <h1 id="hero-dynamic-desc"
-                        style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-weight: 800; color: #fff; margin-bottom: 2rem; line-height: 1.2; max-width: 1000px; letter-spacing: 2px;">
+                        style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-weight: 800; color: #333333; margin-bottom: 2rem; line-height: 1.2; max-width: 1000px; letter-spacing: 2px;">
                         <span id="hero-dynamic-subtitle" style="color: #A60C37;">Where tradition meets
                             elegance,</span><br>
                         <span id="hero-dynamic-title">and every outfit tells a story</span>
@@ -278,7 +278,7 @@
                     .futuristic-cat-card {
                         position: relative;
                         height: 320px;
-                        background: #111111;
+                        background: #f9f9f9;
                         border: 1px solid rgba(166, 12, 55, 0.2);
                         border-radius: 12px;
                         overflow: hidden;
@@ -322,7 +322,7 @@
                     }
 
                     .futuristic-cat-card:hover .futuristic-cat-content {
-                        background: #111111;
+                        background: #f9f9f9;
                         color: #A60C37;
                     }
 
@@ -371,14 +371,14 @@
                 </div>
 
                 <a href="shop.html"
-                    style="display: inline-block; padding: 15px 40px; background-color: rgb(17, 17, 17); color: #fff; text-decoration: none; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px; transition: background 0.3s;"
+                    style="display: inline-block; padding: 15px 40px; background-color: #ffffff; color: #333333; text-decoration: none; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px; transition: background 0.3s;"
                     onmouseover="this.style.background='#A60C37'; this.style.color='#000';"
                     onmouseout="this.style.background='rgb(17, 17, 17)'; this.style.color='#fff';">VIEW ALL SAREES</a>
             </section>
 
             <!-- FEATURES -->
             <section
-                style="padding: 4rem 5%; background-color: #fff; display: flex; justify-content: space-around; flex-wrap: wrap; text-align: center;">
+                style="padding: 4rem 5%; background-color: #333333; display: flex; justify-content: space-around; flex-wrap: wrap; text-align: center;">
                 <div style="flex: 1; min-width: 250px; margin-bottom: 2rem;">
                     <i class="bi bi-gem"
                         style="font-size: 2.5rem; color: #A60C37; margin-bottom: 1rem; display: block;"></i>
@@ -503,7 +503,7 @@
                 <p style="font-size: 1.25rem; color: #111111; font-weight: 700; margin-bottom: 1.5rem;">${(typeof Currency !== "undefined") ? Currency.formatPrice(s.price) : '?' + s.price}</p>
             </div>
             
-            <a href="product.html?id=${s.id || s._id}" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; background-color: #111111; color: #fff; text-decoration: none; font-size: 0.85rem; letter-spacing: 1.5px; font-weight: 700; border-radius: 8px; transition: all 0.3s; border: 2px solid transparent; margin-top: auto;" onmouseover="this.style.background='transparent'; this.style.color='#111111'; this.style.borderColor='#111111';" onmouseout="this.style.background='#111111'; this.style.color='#fff'; this.style.borderColor='transparent';">
+            <a href="product.html?id=${s.id || s._id}" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; background-color: #f9f9f9; color: #333333; text-decoration: none; font-size: 0.85rem; letter-spacing: 1.5px; font-weight: 700; border-radius: 8px; transition: all 0.3s; border: 2px solid transparent; margin-top: auto;" onmouseover="this.style.background='transparent'; this.style.color='#111111'; this.style.borderColor='#111111';" onmouseout="this.style.background='#111111'; this.style.color='#fff'; this.style.borderColor='transparent';">
                 EXPLORE <i class="bi bi-arrow-right ms-2" style="font-size: 1rem;"></i>
             </a>
         </div>

@@ -1,6 +1,6 @@
 .navbar-container {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #333333;
     padding: 1.5rem 5%;
     position: sticky;
     top: 0;
@@ -51,7 +51,7 @@
 }
 
 .nav-link {
-    color: #ffffff !important;
+    color: #333333 !important;
     text-decoration: none !important;
     font-size: 14px;
     font-weight: 400;
@@ -75,7 +75,7 @@
 
 .icon-link,
 .icon-button {
-    color: #ffffff;
+    color: #333333;
     text-decoration: none;
     background: none;
     border: none;
@@ -129,7 +129,7 @@
 /* Mobile Toggle */
 .mobile-toggle {
     display: none;
-    color: white;
+    color: #333333;
     background: none;
     border: none;
     font-size: 1.5rem;
@@ -144,7 +144,7 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: #000000;
+        background-color: #ffffff;
         flex-direction: column;
         padding: 1rem 0 2rem;
         gap: 0;
@@ -260,7 +260,7 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #000000;
+    background: #ffffff;
     list-style: none;
     border-top: 2px solid #A60C37;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
@@ -289,7 +289,7 @@
 
 /* Links inside regular dropdown */
 .dropdown-link {
-    color: #ffffff;
+    color: #333333;
     text-decoration: none;
     display: block;
     padding: 0.8rem 2rem;
@@ -307,7 +307,7 @@
 
 /* Links inside mega menu */
 .mega-menu-link {
-    color: #ffffff;
+    color: #333333;
     text-decoration: none;
     font-size: 12px;
     font-weight: 500;
@@ -368,7 +368,7 @@
     flex: 1;
     background: none;
     border: none;
-    color: #fff;
+    color: #333333;
     font-size: 2rem;
     font-family: inherit;
     outline: none;
@@ -382,7 +382,7 @@
 .search-submit {
     background: none;
     border: none;
-    color: #fff;
+    color: #333333;
     font-size: 2rem;
     cursor: pointer;
 }
@@ -393,7 +393,7 @@
     right: 0;
     background: none;
     border: none;
-    color: #fff;
+    color: #333333;
     font-size: 2.5rem;
     cursor: pointer;
     transition: transform 0.3s ease;

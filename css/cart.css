@@ -191,7 +191,7 @@
 .start-shopping-btn,
 .checkout-btn {
     background-color: #000;
-    color: #fff;
+    color: #333333;
     border: none;
     padding: 18px 45px;
     font-weight: 600;
@@ -245,7 +245,7 @@
     top: -6px;
     right: -8px;
     background: #b59b5a;
-    color: #fff;
+    color: #333333;
     border-radius: 50%;
     font-size: 0.6rem;
     width: 16px;

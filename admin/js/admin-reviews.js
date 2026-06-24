@@ -127,14 +127,14 @@ const AdminReviews = {
                 <td>
                     <div class="action-btns" style="display:flex; gap:0.5rem;">
                         ${r.status === 'Pending' ? `
-                            <button class="btn-accept" onclick="AdminReviews.updateStatus(${r.id}, 'Accepted')" title="Accept" style="background:#22c55e; color:#fff; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">
+                            <button class="btn-accept" onclick="AdminReviews.updateStatus(${r.id}, 'Accepted')" title="Accept" style="background:#22c55e; color: #333333; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">
                                 <i class="bi bi-check-lg"></i>
                             </button>
-                            <button class="btn-reject" onclick="AdminReviews.updateStatus(${r.id}, 'Rejected')" title="Reject" style="background:#ef4444; color:#fff; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">
+                            <button class="btn-reject" onclick="AdminReviews.updateStatus(${r.id}, 'Rejected')" title="Reject" style="background:#ef4444; color: #333333; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         ` : `
-                            <span style="color:#94a3b8; font-size:0.8rem;"><button class="btn-reject" onclick="AdminReviews.deleteReview(${r.id})" title="Delete" style="background:#ef4444; color:#fff; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">
+                            <span style="color:#94a3b8; font-size:0.8rem;"><button class="btn-reject" onclick="AdminReviews.deleteReview(${r.id})" title="Delete" style="background:#ef4444; color: #333333; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">
                                 <i class="bi bi-trash"></i>
                             </button></span>
                         `}
