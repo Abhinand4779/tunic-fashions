@@ -1,11 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 :root {
-    --gold: #A60C37;
-    --black: #000000;
-    --off-white: #fdfcf8;
-    --text-main: #1a1a1a;
-    --gray-light: #f4f4f4;
+    --gold: #8A2BE2; /* Electric Purple as an accent, or sleek metallic */
+    --black: #0F172A;
+    --off-white: #F4F7FB; /* Icy Frost White */
+    --text-main: #1E293B;
+    --gray-light: #E2E8F0;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.08);
+    --gradient-accent: linear-gradient(135deg, #00F0FF 0%, #8A2BE2 100%);
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px;
 }
 
 * {
