@@ -342,6 +342,36 @@
                 </div>
             </section>
 
+            <!-- LATEST COLLECTION (PRE-BOOK) -->
+            <section style="padding: 5rem 5%; text-align: center; background-color: #fdfdfd; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                <h3
+                    style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 1rem; color: #000; display: flex; align-items: center; justify-content: center; gap: 20px;">
+                    <span style="height: 1px; width: 100px; background-color: #007BFF;"></span>
+                    LATEST COLLECTION
+                    <span style="height: 1px; width: 100px; background-color: #007BFF;"></span>
+                </h3>
+                <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: #666; margin-bottom: 3rem; letter-spacing: 1px; text-transform: uppercase;">Pre-Book Exclusive Designs</p>
+
+                <style>
+                    #prebook-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                        gap: 30px;
+                        margin-bottom: 2rem;
+                        justify-content: center;
+                    }
+
+                    @media (max-width: 576px) {
+                        #prebook-grid {
+                            gap: 20px;
+                        }
+                    }
+                </style>
+                <div id="prebook-grid">
+                    <!-- Javascript will inject cards here -->
+                </div>
+            </section>
+
             <!-- OUR SAREE COLLECTION -->
             <section style="padding: 5rem 5%; text-align: center; background-color: #fcfcfc;">
                 <h3
@@ -521,6 +551,48 @@
                     if (pTags[idx]) pTags[idx].textContent = Currency.formatPrice(s.price);
                 });
             });
+
+            // --- LATEST COLLECTION PRE-BOOK LOGIC ---
+            const prebookGrid = document.getElementById("prebook-grid");
+            if (prebookGrid) {
+                const prebookProducts = [
+                    { id: "pb1", name: "Midnight Blue Silk Saree", price: "9500", category: "Latest Collection", image: "assets/saree_product_4.png" },
+                    { id: "pb2", name: "Emerald Green Organza", price: "12000", category: "Latest Collection", image: "assets/saree_product_3.png" },
+                    { id: "pb3", name: "Ruby Red Festive Edition", price: "15500", category: "Latest Collection", image: "assets/saree_product_2.png" },
+                    { id: "pb4", name: "Ivory Handloom Saree", price: "8250", category: "Latest Collection", image: "assets/saree_product_1.png" }
+                ];
+
+                prebookGrid.innerHTML = prebookProducts.map(s => `
+        <div style="background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); transition: transform 0.4s, box-shadow 0.4s; position: relative; border: 1px solid rgba(0,123,255,0.15); display: flex; flex-direction: column;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(0,123,255,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 40px rgba(0,0,0,0.04)';">
+            
+            <div style="width: 100%; aspect-ratio: 4/5; background-color: #f8f9fa; border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 1.5rem;">
+                <img src="${s.image}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <div style="position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #111111; transition: all 0.3s;" onmouseover="this.style.background='#111111'; this.style.color='#fff';" onmouseout="this.style.background='rgba(255,255,255,0.9)'; this.style.color='#111111';">
+                    <i class="bi bi-heart"></i>
+                </div>
+                <div style="position: absolute; top: 10px; left: 10px; background: #007BFF; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; letter-spacing: 1px;">COMING SOON</div>
+            </div>
+            
+            <div style="text-align: left; flex-grow: 1;">
+                <div style="font-size: 0.7rem; color: #007BFF; font-weight: 800; letter-spacing: 2px; margin-bottom: 0.5rem; text-transform: uppercase;">${s.category}</div>
+                <h4 style="font-size: 1.1rem; color: #111111; margin-bottom: 0.5rem; font-weight: 800; font-family: 'Inter', sans-serif; line-height: 1.4;">${s.name}</h4>
+                <p style="font-size: 1.25rem; color: #111111; font-weight: 700; margin-bottom: 1.5rem;" class="pb-price">${(typeof Currency !== "undefined") ? Currency.formatPrice(s.price) : '?' + s.price}</p>
+            </div>
+            
+            <a href="product.html?id=${s.id}&prebook=true" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; background-color: #007BFF; color: #ffffff; text-decoration: none; font-size: 0.85rem; letter-spacing: 1.5px; font-weight: 700; border-radius: 8px; transition: all 0.3s; margin-top: auto; box-shadow: 0 4px 15px rgba(0,123,255,0.3);" onmouseover="this.style.background='#0056b3'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#007BFF'; this.style.transform='translateY(0)';">
+                PRE-BOOK NOW <i class="bi bi-calendar-check ms-2" style="font-size: 1rem;"></i>
+            </a>
+        </div>
+    `).join("");
+
+                // Update currency for prebook items too
+                window.addEventListener('currencyUpdated', () => {
+                    const pbTags = prebookGrid.querySelectorAll('.pb-price');
+                    prebookProducts.forEach((s, idx) => {
+                        if (pbTags[idx]) pbTags[idx].textContent = Currency.formatPrice(s.price);
+                    });
+                });
+            }
         });
     </script>
 </body>
